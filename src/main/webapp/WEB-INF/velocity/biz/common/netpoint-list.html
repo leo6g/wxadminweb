@@ -1,0 +1,401 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">网点信息管理</h4>
+         <form id="queryForm">
+			<div class="row query-box" style="margin-bottom: 10px; padding-bottom: 10px !important;">
+				<!-- <div class="col-xs-5 box-sm">
+					查询条件
+				</div> -->
+				<div class="col-xs-5 box-md" >
+					机构名称：
+					<input class="large" type="text" value=""  id="queryOrgShtName" name="orgShtName" placeholder="请输入机构名称" />	
+				</div>
+				<div class="col-xs-2" style="width: 15%;">
+                                                       地市：<select id="cityList" name="city" class="large" style="height: 26px !important;">
+                    	</select>
+                </div>
+                <div class="col-xs-2" style="width: 15%;">
+                                                       区县：<select id="townList" name="town" class="large" style="height: 26px !important; width: 80px;">
+                     	</select>
+                </div>
+				<div class="col-xs-2" style="width: 20%; margin-top: -11px ;">
+					<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查 询"/>
+           			 <span class="btn btn-primary" id="editNetPointBtn" data-toggle="modal" data-target="#myModal1">编辑</span> 
+					
+				</div>
+			</div>
+		</form>
+		<div class="row">
+		<!--
+			<span class="btn btn-primary" data-toggle="modal" data-target="#myModal">新增</span>
+			<span class="btn btn-primary" id="delNetPointBtn">删除</span>-->
+
+            
+		</div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            网点信息信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="netPointListTable" class="table border-table table-striped table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addNetPointForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加网点信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+							<td style="border: none;">
+								纬度：
+								<div class="input-wrap">
+									<input type="text" id="latitude" name="latitude" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								null：
+								<div class="input-wrap">
+									<input type="text" id="orgAblib" name="orgAblib" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								经度：
+								<div class="input-wrap">
+									<input type="text" id="longitude" name="longitude" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								null：
+								<div class="input-wrap">
+									<input type="text" id="agencySort" name="agencySort" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								null：
+								<div class="input-wrap">
+									<input type="text" id="orgAblia" name="orgAblia" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								城市：
+								<div class="input-wrap">
+									<input type="text" id="city" name="city" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								县区：
+								<div class="input-wrap">
+									<input type="text" id="town" name="town" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								行政区划：
+								<div class="input-wrap">
+									<input type="text" id="rglmCode" name="rglmCode" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								地域属性(1-城市；2-县城；3-县以下)：
+								<div class="input-wrap">
+									<input type="text" id="areaAttr" name="areaAttr" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								机构简称：
+								<div class="input-wrap">
+									<input type="text" id="orgShtName" name="orgShtName" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								图片路径：
+								<div class="input-wrap">
+									<input type="text" id="imagePath" name="imagePath" value="" class="fluid-input" />
+									<input type="hidden" id="oldImagePath" >
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								机构名称：
+								<div class="input-wrap">
+									<input type="text" id="orgName" name="orgName" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								直属标识(1-否；2-总行直属支行；3-一级分行直属支行；4-二级分行直属支行)：
+								<div class="input-wrap">
+									<input type="text" id="orgFlag" name="orgFlag" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								机构职能(1-全功能 ; 2-交易型 ; 3-多功能)：
+								<div class="input-wrap">
+									<input type="text" id="orgAbli" name="orgAbli" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								机构层级(1-总行；2-一级分行；3-二级分行；4-一级支行；5-网点)：
+								<div class="input-wrap">
+									<input type="text" id="orgLvl" name="orgLvl" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								老机构：
+								<div class="input-wrap">
+									<input type="text" id="oldOrgId" name="oldOrgId" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								上级机构：
+								<div class="input-wrap">
+									<input type="text" id="pagencyId" name="pagencyId" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								机构状态(1-待开业；2-已开业；3-已营业；4-临时停业;5-停业；6-待撤销;7-已撤销)：
+								<div class="input-wrap">
+									<input type="text" id="orgStat" name="orgStat" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								机构属性(1-一类；2-二类；3-代理。
+)：
+								<div class="input-wrap">
+									<input type="text" id="orgAttr" name="orgAttr" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveNetPointBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editNetPointForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑网点信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table">
+                         <tr>
+							<td style="border: none;">
+								经度：
+								<div class="input-wrap">
+									<input type="text" id="edit-longitude" name="longitude" value="" class="fluid-input" maxlength="18" required/>
+								</div>
+							</td>
+						</tr>
+                         <tr>
+							<td style="border: none;">
+								纬度：
+								<div class="input-wrap">
+									<input type="text" id="edit-latitude" name="latitude" value="" class="fluid-input" maxlength="18" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								地址：
+								<div class="input-wrap">
+									<input type="text" id="edit-addr" name="addr" value="" class="fluid-input"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								办理业务种类：
+								<div class="input-wrap">
+									<input type="text" id="edit-bizTypes" name="bizTypes" value="" class="fluid-input"/>
+								</div>
+							</td>
+						</tr>
+							<!-- 
+							<td style="border: none;">
+								图片路径：
+								<div class="input-wrap">
+									<input type="text" id="edit-imagePath" name="imagePath" value="" class="fluid-input" />
+									<input type="hidden" id="oldImagePath" >
+								</div>
+								<div class="info-item-box fl" id="edit-preview" style="width:350px;min-height: 200px;margin-left:23px;margin-top:5px;background-color:lightgray;">
+            					</div>
+							</td>
+							 -->
+						</tr>
+						
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-newOrgId" name="newOrgId" value="" />
+						<tr>
+							<td style="display: none;">
+								直属标识：
+								<div class="input-wrap">
+									<input type="text" id="edit-orgFlag" name="orgFlag" value="" class="fluid-input" readonly />
+								</div>
+							</td>
+						</tr>
+						
+						
+                            </table>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveNetPointBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="netPoint-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th>纬度</th>
+				<th style="display:none">null</th>
+				<th>经度</th>
+				<th style="display:none">null</th>
+				<th style="display:none">null</th>
+				<th>城市</th>
+				<th>县区</th>
+				<th style="display:none">行政区划</th>
+				<th style="display:none">地域属性</th>
+				<th>机构简称</th>
+				<th>图片路径</th>
+				<th style="display:none">机构名称</th>
+				<th style="display:none">新机构编码</th>
+				<th style="display:none">直属标识</th>
+				<th style="display:none">机构职能</th>
+				<th style="display:none">机构层级</th>
+				<th style="display:none">老机构</th>
+				<th style="display:none">上级机构</th>
+				<th style="display:none">机构状态</th>
+				<th style="display:none">机构属性</th>
+				<th>地址</th>
+				<th>电话</th>
+				<th>办理业务种类</th>
+			</thead>
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{latitude}}</td>
+			<td style="display:none">{{orgAblib}}</td>
+			<td>{{longitude}}</td>
+			<td style="display:none">{{agencySort}}</td>
+			<td style="display:none">{{orgAblia}}</td>
+			<td>{{city}}</td>
+			<td>{{town}}</td>
+			<td style="display:none">{{rglmCode}}</td>
+			<td style="display:none">{{areaAttr}}</td>
+			<td>{{orgShtName}}</td>
+			<td><img src="{{imagePath}}" style="width:100px;height: 70px;" alt="正在加载..."></td>
+			<td style="display:none">{{orgName}}</td>
+			<td style="display:none">{{newOrgId}}</td>
+			<td style="display:none">{{orgFlag}}</td>
+			<td style="display:none">{{orgAbli}}</td>
+			<td style="display:none">{{orgLvl}}</td>
+			<td style="display:none">{{oldOrgId}}</td>
+			<td style="display:none">{{pagencyId}}</td>
+			<td style="display:none">{{orgStat}}</td>
+			<td style="display:none">{{orgAttr}}</td>
+			<td>{{addr}}</td>
+			<td>{{phone}}</td>
+			<td>{{bizTypes}}</td>
+			
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<script id="city-list-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{city}}">{{city}}</option>
+	  {{/each}}
+</script>
+<script id="town-list-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{town}}">{{town}}</option>
+	  {{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 首先需要引入plupload的源代码 -->
+<script src="${req.contextPath}/assets/plupload/plupload.full.min.js"></script>
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/biz/common/netpoint-list.js"></script>
+

@@ -1,0 +1,172 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title"><a href="javascript:void(0)" onclick="backPageByNewsList()"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i></a> ${htmlHostTittle}管理</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                        ${htmlTittle}信息
+                        </div>
+                     <input type="hidden" id="htmlHostTittle" value="${htmlHostTittle}"/>
+                        <div class="info-item-content">
+                            <table id="wXNewsItemsListTable" class="table border-table table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                            <center>
+                           	 <span type="button" class="btn"><a href="javascript:void(0)" onclick="backPageByNewsList()"><font color="black">返回</font></a></span>
+                        	</center>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editWXNewsItemsForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑菜单内容</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table">
+                    	<tr>
+							<td style="border: none;">
+								标题：
+								<div class="input-wrap">
+									<input type="text" id="edit-title" name="title" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								创建人：
+								<div class="input-wrap">
+									<input type="text" id="edit-createUser" name="createUser" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							</td>
+							<td class="">图片链接：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-yanjing"></i>
+                                        <input type="text" id="edit-imagePath" name="file" onchange="previewImage(this)" placeholder="图片链接" >
+                                    </div>
+                            </td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								类型：
+								<div class="input-wrap">
+									<input type="text" id="edit-type" name="type" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								外部链接：
+								<div class="input-wrap">
+									<input type="text" id="edit-url" name="url" value=""  />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								正文：
+								<div>
+									<textarea id="edit-content" name="content" rows="2" style="width:550px;height:50px;"></textarea>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								顺序：
+								<div class="input-wrap">
+									<input type="text" id="edit-sort" name="sort" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏模板主键 -->
+						<input type="hidden" id="edit-newsTempId" name="newsTempId" value="$!{newsTempId}"/>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-itemId" name="itemId"/>
+                   </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveWXNewsItemsBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="wXNewsItems-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<tr>
+			<th>序号</th>
+			<th>标题</th>
+			<th>图片</th>
+			<th>显示广告</th>
+			<th>显示点赞浏览量</th>
+			<th>显示评论</th>
+
+			<th>链接URL</th>
+			<th style="display:none">创建时间</th>
+			<th style="display:none">类型</th>
+			<th style="display:none">主键ID</th>
+			<th style="display:none">排序</th>
+			<th style="display:none">创建人</th>
+			<th style="display:none">模板ID</th>
+			<th>操作</th>
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{title}}</td>
+			<td><img src="{{imagePath}}" style="width:300px;height: 200px;" alt="正在加载..."></td>
+			<td>{{transformat showAdver}}</td>
+			<td>{{transformat showPraise}}</td>
+			<td>{{transformat showRemark}}</td>
+			
+			<td style="width : 180px; word-break: break-all;">{{url}}</td>
+			<td style="display:none">{{createTime}}</td>
+			<td style="display:none">{{type}}</td>
+			<td style="display:none">{{itemId}}</td>
+			<td style="display:none">{{sort}}</td>
+			<td style="display:none">{{createUser}}</td>
+			<td style="display:none">{{newsTempId}}</td>
+    		<td>[<a href="javascript:void(0)" onclick="delWXNewsItems('{{itemId}}','{{newsTempId}}')">删除</a>
+			[<a href="javascript:void(0)" onclick="C.load('${req.contextPath}/wx/newsitems/newsItemEdit?itemId={{itemId}}&htmlTittle=${htmlTittle}&htmlHostTittle=${htmlHostTittle}')">编辑</a>]</td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/weixin/newsitems-list.js"></script>
+<!-- 引入公共底部     -->
+

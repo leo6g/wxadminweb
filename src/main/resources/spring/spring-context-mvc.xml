@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<description>Spring MVC Configuration</description>
+
+	<!-- 启用spring mvc 注解 -->
+	<context:annotation-config />
+	<!-- 使用Annotation自动注册Bean,只扫描@Controller -->
+	<context:component-scan
+		base-package="com.lfc.wxadminweb.common.web.*,com.lfc.wxadminweb.modules.*"
+		use-default-filters="false"><!-- base-package 如果多个，用“,”分隔 -->
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	<!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
+   <!-- <mvc:default-servlet-handler />
+	<mvc:interceptors>
+		<mvc:interceptor>
+			匹配的是url路径， 如果不配置或/**,将拦截所有的Controller
+			<mvc:mapping path="/**" />
+			<bean class="com.lfc.wxadminweb.common.interceptor.AuthInterceptor"></bean>
+		</mvc:interceptor>
+		当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法
+	</mvc:interceptors> -->
+
+	<!-- 对静态资源文件的访问 restful -->
+	<mvc:resources mapping="/static/**" location="/static/" />
+	<mvc:resources mapping="/assets/**" location="/assets/" />
+	<mvc:resources mapping="/upload/**" location="/upload/" />
+	
+	<!-- 上传拦截，如最大上传值及最小上传值 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize">
+			<value>104857600</value>
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+		<property name="defaultEncoding">
+			<value>utf-8</value>
+		</property>
+	</bean>
+
+	<!-- 会自动注册RequestMappingHandlerMapping与RequestMappingHandlerAdapter 两个bean,是spring 
+		MVC为@Controllers分发请求所必须的。 并提供了：数据绑定支持，@NumberFormatannotation支持，@DateTimeFormat支持，@Valid支持，读写XML的支持（JAXB），读写JSON的支持（Jackson） -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html; charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html; charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+				<property name="objectMapper">
+					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+						<property name="dateFormat">
+							<bean class="java.text.SimpleDateFormat">
+								<constructor-arg index="0" type="java.lang.String"
+									value="yyyy-MM-dd HH:mm:ss" />
+							</bean>
+						</property>
+					</bean>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- JSP视图配置 -->
+	<bean id="JSPviewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="order" value="1" />
+	</bean>
+	<!-- Velocity视图配置 -->
+	<bean id="velocityViewResolver"
+		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="order" value="0" />
+		<property name="cache" value="true" />
+		<property name="prefix" value="" />
+		<property name="suffix" value=".html" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="requestContextAttribute" value="req" />
+	</bean>
+	<!-- Velocity属性配置 -->
+	<bean id="velocityConfigurer"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF/velocity/" />
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">UTF-8</prop>
+				<prop key="output.encoding">UTF-8</prop>
+				<!-- <prop key="eventhandler.referenceinsertion.class">org.apache.velocity.app.event.implement.EscapeHtmlReference</prop> -->
+			</props>
+		</property>
+	</bean>
+	<bean id="contentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="ignoreAcceptHeader" value="true" />
+		<property name="favorPathExtension" value="true" />
+		<property name="defaultContentType" value="text/html" />
+		<property name="favorParameter" value="true" />
+		<property name="mediaTypes">
+			<map>
+				<entry key="xml" value="application/xml" />
+				<entry key="json" value="text/plain" />
+				<entry key="xls" value="application/vnd.ms-excel" />
+			</map>
+		</property>
+
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="contentNegotiationManager" ref="contentNegotiationManager" />
+		<property name="defaultViews">
+			<list>
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+					<property name="prettyPrint" value="true" />
+					<property name="contentType" value="text/plain" />
+				</bean>
+			</list>
+		</property>
+		<property name="viewResolvers">
+			<list>
+				<ref bean="velocityViewResolver" />
+				<ref bean="JSPviewResolver" />
+			</list>
+		</property>
+	</bean>
+	<!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> 
+		<property name="exceptionMappings"> <props> <prop key="java.lang.Throwable">error/500</prop> 
+		</props> </property> </bean> -->
+	<!-- 异常处理类 -->
+	<bean id="exceptionHandler" class="com.lfc.wxadminweb.common.exception.MyExceptionResolver" />
+	
+	
+	<aop:aspectj-autoproxy proxy-target-class="true"> 
+  		<aop:include name="check"/> 
+  	</aop:aspectj-autoproxy> 
+ 	<!-- AOP切点对应的类 -->
+ 	<bean id="check" class="com.lfc.wxadminweb.common.aop.MonitorUserOperation"/>
+	
+</beans>

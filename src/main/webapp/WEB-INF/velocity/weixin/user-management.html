@@ -1,0 +1,233 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<link rel="stylesheet" type="text/css" href="${req.contextPath}/assets/css/weixin/user-manager/user.css" />
+<link rel="stylesheet" type="text/css" href="${req.contextPath}/assets/css/weixin/user-manager/kuang.css" />
+<link rel="stylesheet" type="text/css" href="${req.contextPath}/assets/fonts/weixin/user-manager/iconfont.css" />
+<script src="${req.contextPath}/assets/js/weixin/user-management.js" type="text/javascript" charset="utf-8"></script>
+<!--用户管理部分-->
+<div class="content-wrapper">
+	<div class="container">
+		<h4 class="main-title">关注用户管理</h4>
+		<div class="user">
+			<ul class="user-sign">
+				<!--用户管理字体-->
+				<li></li>
+				<!--已关注和黑名单字体-->
+				<li><span class="guanzhu">已关注</span> <span class="blackname">黑名单</span> <span class="line"></span></li>
+				<!--用户昵称输入部分-->
+				<li class="userSign-name clear">
+					<div class="username-left">
+						<form id="queryForm">
+							<input type="text" id="nickNameInput" placeholder="用户昵称" name="nickName" autocomplete="off" />
+							<span id="queryBtn"><i class="icon iconfont icon-fangdajing icon2"></i></span>
+						</form>
+					</div> 
+					<span class="username-delete"> - 删除标签</span>
+					<span class="username-update">  编辑标签</span>
+					<span class="username-right"> + 新建标签</span>
+					#if($syncState == 1)
+					<span class="username-right2" id="syncUser" >同步用户</span>
+					#else
+					<span class="username-right2" style="background-color: #ccc;">正在同步..</span>
+					#end
+				</li>
+			</ul>
+
+			<!--已关注用户页面-->
+			<ul class="user-management-user ">
+				<li class="user-left user-guanzhu-list">
+					<div class="user-all">
+						<p>全部用户</p>
+						<div>
+							<input type="checkbox" name="" id="allSelect" value="" />
+							<label class="checkbox" for="allSelect">全选</label>
+							<input type="button" value="打标签" id="addTagBtn" class="label-label disableBtn" disabled="disabled"/>
+							<input type="button" value="加黑名单" id="addBlackBtn" class="blacklist disableBtn" disabled="disabled"/>
+						</div>
+					</div> <!--用户列表-->
+					<div id="userList" class="user-list user-list-allSelect">
+						
+					</div>
+					<!--分页器-->
+					<div class="page-box" style="width: 97%;margin:10px auto" >
+                        <span style="float:left" class="pagination" id="totalNum" ></span>
+                        <ul style="float: right;" id="pagination"></ul>
+                    </div>
+					<!-- <div style="height: 64px; width: 776px; position: absolute;">
+						<div class="pagination" style="margin-left: 525px; margin-top: 20px;">
+							<span>1</span> / <span>5</span> <input type="button" value=">" style="background: white; border: 1px solid #E0E3E8;" /> <input type="text"
+								style="width: 70px; text-align: center; border: 1px solid #E0E3E8;" /> <input type="button" value="跳转" style="background: white; border: 1px solid #E0E3E8;" />
+						</div>
+					</div> -->
+				</li>
+				<!--黑名单页面-->
+				<li class="user-left user-black-list ">
+					<div class="user-all">
+						<p>
+							黑名单(<span id="blackTotal"></span>)
+						</p>
+						<div>
+							<input type="checkbox" name="" id="allSelect1" value="" />
+							<label class="checkbox" for="allSelect1">全选</label>
+							<input type="button" value="移除黑名单" class="label-black disableBtn" disabled="disabled" id="removeBlackBtn"/>
+						</div>
+					</div> <!--用户列表-->
+					<div class="user-list user-list-allSelect1" id="blackUserList">
+						
+					</div>
+					<!--分页器-->
+					<div class="page-box" style="width: 97%;margin:10px auto" >
+                        <span style="float:left" class="pagination" id="totalNum2" ></span>
+                        <ul style="float: right;" id="pagination2"></ul>
+                    </div>
+					<!--分页器-->
+					<!-- <div style="height: 64px; border-top: 1px solid #E0E3E8; width: 776px; position: absolute; bottom: 145px;"></div> -->
+				</li>
+				<li class="user-right"  style="width: 200px;">
+					<p onclick="userAll(this)"class="selected" id="allUserP" >
+					全部用户（<span id="allUser">0</span>）
+					</p>
+					<div id="groupLi">
+					
+					</div>
+				</li>
+			</ul>
+		</div>
+
+
+		<!--用户详情弹窗-->
+		<ul class="remove-blacklist">
+			<img src="" id="dimg"/>
+			<li class="remove-blacklist-txt">
+				<p class="remove-blacklist-person" id="dname"></p>
+				<div class="remove-info">
+					<p>
+						备注 &nbsp;<span id="dremark"></span>
+					</p>
+					<p>
+						地区 &nbsp;<span id="darea"></span>
+					</p>
+				</div>
+			</li>
+			<p class="remove-data">
+				<span id="dtime"></span> 关注
+			</p>
+		</ul>
+
+		<!--备注弹出框-->
+		<div class="out01 .out-beizhu alert-beizhu">
+			<em class="circle"></em>
+			<div class="demo" style="border: 0px; text-align: left; font-weight: bold;">备注名称</div>
+			<div class="font" style="width: 200px; height: 35px; line-height: 35px; border: 1px solid #E0E3E8">
+				<input id="remark" type="text" maxlength="30" class="btn-beizhu" style="width: 145px; height: 30; line-height: 30px; outline: none; border-style: none; text-indent: 15px;" />
+				<span class="num">
+					<span class="fenzi">0</span>/<span class="fenmu">30</span>
+				</span>
+			</div>
+			<div class="btn-btn">
+				<input type="button" name="" id="setRemark" value="确定" />
+				<input type="button" name="" id="" value="取消" />
+			</div>
+		</div>
+
+		<div class="out01 .out-beizhu  alert-biaoqian">
+			<em class="circle"></em>
+			<div class="demo" style="border: 0px; text-align: left; font-weight: bold;">标签名称</div>
+			<input type="text" placeholder="输入名称" class="btn3" id="groupName"/>
+			<div class="btn-btn">
+				<input style="display: none;" type="button" name="" id="saveGroup" value="确定" /><input style="display: none;"  type="button" name="" id="updateGroup" value="确定" /> <input type="button" name="" id="" value="取消" />
+			</div>
+		</div>
+
+		<div class="out01 alert-blackname alert-blackname1">
+			<em class="circle"></em>
+			<div class="demo">确定移除黑名单？</div>
+			<div class="btn-btn">
+				<input type="button"  id="deleteBlackBtn" value="确定" />
+				<input type="button"  value="取消" />
+			</div>
+		</div>
+		<!--<div class="out01 alert-blackname1">
+			<em class="circle"></em>
+			<div class="demo">确定移除黑名单？</div>
+			<div class="btn">
+				<input type="button" name="" id="" value="确定" />
+				<input type="button" name="" id="" value="取消" />
+			</div>
+		</div>-->
+		<!-- 打标签  -->
+		<div class="out01 out02 alert-staruser">
+			<em class="circle"></em>
+			<div class="friends" id="wxUserTag">
+			
+			</div>
+			<div id="tagInfo" class="friends" style="color:red;display:none;">
+				<span>最多只能选择3个标签</span>
+			</div>
+			<div class="btn-btn">
+				<input type="button" id="saveTagBtn" value="确定" />
+				<input type="button" id="cancelTagBtn" value="取消" />
+			</div>
+		</div>
+
+		<div class="out01 out02 alert-staruser1">
+			<em class="circle"></em>
+			<div class="friends">
+				<input type="checkbox" name="" id="" value="" /><span>星标用户</span> <input type="checkbox" name="" id="" value="" /><span>第一批</span>
+
+			</div>
+			<span class="new">新建标签</span>
+			<div class="btn-btn">
+				<input type="button" name="" id="" value="确定" /> <input type="button" name="" id="" value="取消" />
+			</div>
+		</div>
+		<div class="out01 alert-addblackname">
+			<em class="circle"></em>
+			<div class="demo" style="text-align: left;">加入黑名单后，您将无法接受该用户发来的消息，且该用户无法接受公众号发出的消息，无法参与留言和赞赏，确认加入黑名单？</div>
+			<div class="btn-btn">
+				<input type="button" id="saveBlackBtn" value="确定" />
+				<input type="button" value="取消" />
+			</div>
+		</div>
+	</div>
+	<div id="mask" class="mask">
+		<div id="dialog" class="dialog">正在同步，请稍后...</div>
+	</div>
+</div>
+<script id="wXUser-list-template" type="text/x-handlebars-template">
+{{#each this}}
+	<div>
+		<input type="checkbox" class="cb" value="{{openId}}" tl="{{tag_list}}" />
+		<img onmouseover="showDetail(this);" onmouseout="hideDetail();" src="{{headerImage}}" nn="{{nickName}}" rm="{{remark}}" area="{{COUNTRY}}{{PROVINCE}}{{CITY}}" time="{{subscribeTime}}"/>
+		<span>{{nickName}}</span>
+		<span>{{parseTag tag_list}}</span>
+	</div>
+	<p class="modif-remark" wxid="{{wxUserId}}" oid="{{openId}}" rm="{{remark}}">修改备注</p>
+{{/each}}
+</script>
+<script id="wxUserTag-template" type="text/x-handlebars-template">
+{{#each this}}
+	<span style="margin-right:30px;">
+		<input type="checkbox" class="cb" name="tagId" value="{{id}}" />
+		<span>{{name}}</span>
+	</span>
+{{/each}}
+</script>
+<script id="wXUser-groupList-template" type="text/x-handlebars-template">
+{{#each this}}
+	<p onclick="selected({{id}},'{{name}}',this)">
+	{{name}}（<span>{{count}}</span>）
+	</p>
+{{/each}}
+</script>
+<script id="wXUser-blackList-template" type="text/x-handlebars-template">
+{{#each this}}
+	<div>
+		<input type="checkbox" class="cb" value="{{openid}}" />
+		<img onmouseover="showDetail(this);" onmouseout="hideDetail();" src="{{headimgurl}}" nn="{{nickname}}" rm="{{remark}}" area="{{country}}{{province}}{{city}}" time="{{parseDate subscribeTime}}"/>
+		<span>{{nickname}}</span>
+		<span></span>
+	</div>
+{{/each}}
+</script>

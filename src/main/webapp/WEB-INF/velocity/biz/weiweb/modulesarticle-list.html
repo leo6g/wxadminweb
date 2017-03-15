@@ -1,0 +1,255 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">微网站文章信息管理</h4>
+         <form id="queryForm">
+			<div class="row query-box">
+				<div class="col-xs-5 box-sm" style="width: 26%;">
+					标题：
+					<input class="large" type="text" value="" id="queryTitle" name="title" placeholder="请输入名称"style="width:200px;height: 27px;" />
+				</div>
+				<div class="col-xs-5 box-md" style="width: 30%;">
+					模块：<select id="queryModule" name="moduleId"  style="width:200px;height: 27px;"></select>
+				</div>
+				<div class="col-xs-2 box-bt" style="width: 10%;">
+					<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查 询" />
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<span class="btn btn-primary" id="addBizModulesArticleBtn" data-toggle="modal" data-target="#myModal">新增</span>
+            <span class="btn btn-primary" id="editBizModulesArticleBtn" data-toggle="modal" data-target="#myModal1">编辑</span>
+            <span class="btn btn-primary" id="delBizModulesArticleBtn">删除</span>
+		</div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            微网站文章信息信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="bizModulesArticleListTable" class="table border-table table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addBizModulesArticleForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加微网站文章信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+							<td style="border: none;">
+								标题：
+								<div class="input-wrap">
+									<input type="text" id="title" name="title" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								模块：
+								<div class="input-wrap">
+									<select id="moduleId" name="moduleId" style="width:100%">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								展示顺序：
+								<div class="input-wrap">
+									<input type="text" id="sortNum" name="sortNum" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								标题尾部图片：
+								<img src="${req.contextPath}/assets/img/default.png" id="add-tailePicIcon" style="width:100px; height:100px;"/>
+                                <input type="text" id="add-taileImgPath" name="taileImgPath" style="width:40%;"/>
+                                <span id="add-taileUploadIcon">
+                                </span>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								文章URL：
+								<div class="input-wrap">
+									<input type="text" id="url" name="url" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								图片：
+								<img src="${req.contextPath}/assets/img/default.png" id="add-picIcon" style="width:100px; height:100px;"/>
+                                <input type="text" id="add-imgPath" name="imgPath" style="width:50%;"/>
+                                <span id="add-uploadIcon">
+                                </span>
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveBizModulesArticleBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editBizModulesArticleForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑微网站文章信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                     <table class="wide-table table">
+                     	<tr>
+							<td style="border: none;">
+								标题：
+								<div class="input-wrap">
+									<input type="text" id="edit-title" name="title" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								模块：
+								<div class="input-wrap">
+									<select id="edit-moduleId" name="moduleId" style="width:100%">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								展示顺序：
+								<div class="input-wrap">
+									<input type="text" id="edit-sortNum" name="sortNum" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-id" name="id" value="" />
+						<tr>
+							<td style="border: none;">
+								标题尾部图片路径：
+								<img src="${req.contextPath}/assets/img/default.png" id="edit-tailePicIcon" style="width:100px; height:100px;"/>
+                                <input type="text" id="edit-taileImgPath" name="taileImgPath" style="width:40%;"/>
+                                <span id="edit-taileUploadIcon">
+                                </span>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								文章URL：
+								<div class="input-wrap">
+									<input type="text" id="edit-url" name="url" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								图片：
+								<img src="${req.contextPath}/assets/img/default.png" id="edit-picIcon" style="width:100px; height:100px;"/>
+                                <input type="text" id="edit-imgPath" name="imgPath" style="width:50%;"/>
+                                <span id="edit-uploadIcon">
+                                </span>
+							</td>
+						</tr>
+                   </table>
+               </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveBizModulesArticleBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="bizModulesArticle-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<tr>
+			<th>序号</th>
+			<th>标题</th>
+			<th style="display:none">模块ID</th>
+			<th>模块名称</th>
+			<th>展示顺序</th>
+			<th style="display:none">主键ID</th>
+			<th style="display:none">创建人</th>
+			<th>标题尾部图片</th>
+			<th>文章URL</th>
+			<th>图片</th>
+			<th>创建时间</th>
+			<th style="display:none">标题尾部图片路径</th>
+			<th style="display:none">图片路径</th>
+			<th style="display:none">文章URL</th>
+			
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td style="width : 150px; word-break: break-all;">{{title}}</td>
+			<td style="display:none">{{moduleId}}</td>
+			<td>{{moduleName}}</td>
+			<td>{{sortNum}}</td>
+			<td style="display:none">{{id}}</td>
+			<td style="display:none">{{createUser}}</td>
+			<td><img src="{{taileImgPath}}" style="width:80px;height: 50px;"></td>
+			<td style="width : 150px; word-break: break-all;">
+				<a href="javascript:void(0)" onclick="fnPreview('{{url}}');">{{url}}</a>
+			</td>
+			<td><img src="{{imgPath}}" style="width:100px;height: 70px;"></td>
+			<td>{{createTime}}</td>
+			<td style="display:none">{{taileImgPath}}</td>
+			<td style="display:none">{{imgPath}}</td>
+			<td style="display:none">{{url}}</td>
+			
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<script id="modules-template" type="text/x-handlebars-template">
+	<option value = "">---请选择---</option>
+	{{#each this}}
+		<option value = {{moduleId}}>{{name}}</option>
+	{{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/biz/weiweb/modulesarticle-list.js"></script>
+

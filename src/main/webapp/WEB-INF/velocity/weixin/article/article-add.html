@@ -1,0 +1,326 @@
+<link rel="stylesheet" href="${req.contextPath}/assets/css/global.css">
+<link rel="stylesheet" href="${req.contextPath}/assets/css/startendDate.css">
+
+<link rel="stylesheet" href="${req.contextPath}/assets/ueditor/xiumi-ue-v5.css">
+
+<style>
+.del-box {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	text-align: center;
+	height: 30px;
+	line-height: 30px; display: none;
+}
+.pointer{
+    cursor:pointer;
+}
+.green-border{
+    border:2px solid #2e8f6e !important;
+}
+.default-border{
+    border:1px solid #dfe5e7;
+}
+.mb0{
+    margin-bottom:0 !important;
+}
+.mb10{
+    margin-bottom:10px;
+}
+
+
+</style>
+
+<!-- 头部 结束 -->
+<div class="content-wrapper">
+	<!-- 右侧内容 -->
+	<div class="main-right">
+		<h4 class="rigttop-title"></h4>
+		<div class="right-topmenu1 clear"></div>
+		<!-- 右侧主体开始 -->
+		<input type='hidden' id="media-id">
+		<div class="jiangweixinmw-box clear">
+			<div class="jiangweixinmw-left">
+				<!-- 主图文 -->
+				<div class="clear jiangweixinmw-left-listof1 green-border article-container index0">
+				<input type="hidden" class="index-num" value="0">
+				<!-- 隐藏域，存放当前图片mediaid -->
+					<div class="jianginput1" style="text-align:center">
+					    <img class="big-thumb thumb-box">
+					</div>
+					<p class="jiangtitle article-title leftimgTitle">标题</p>
+				</div>
+				<!-- 小图文 开始-->
+				<!-- 小图文 结束-->
+
+				<div class="jiangaddbtn pointer" id="add-bt"></div>
+			</div>
+			<div class="jiangweixinmw-right fr">
+				<div class="jiangweixinmw-rightof1 clear">
+					<div class="jiangfile-box fl pointer upload-bt">
+						<p>封面图片(900*500)</p>
+						<img class="yunlu-imgiconbg" src="${req.contextPath}/assets/img/yunlu-imgimg1.png" alt="">
+						<!-- <p id="bigThumb">封面图片(900*500)</p> -->
+						<!-- <p id="smThumb" style="display:none">封面图片(200*200)</p> -->
+						
+					</div>
+								<!-- 20170206 18:00 云璐修改开始 -->
+					<div class="jianginput-box fr">
+						<input class="jianginput jianglong" id="title" type="text" name=""
+							value="" placeholder="标题">
+							<input class="jianginput jiangshort mb10" id="author"
+								type="text" name="" value="" placeholder="作者"> 
+							<input class="jianginput jianglong2 mb10" type="text" name=""
+								value="" placeholder="摘要，如果不填写会默认抓取正文前64个" id="digest">
+							<div class="clear mb10 ylartadd-divof1">
+								<span class="fl">类型：</span>
+								<select name="" class="jiangshort fl mr10" id="articleaddSelect1">
+									<option value="article">文章</option>
+									<option value="activity">活动</option>
+								</select>
+							</div>
+							<div class="clear ylartadd-divof1" id="articleaddType">
+								<span class="fl">隶属城市：</span>
+								<select name="" class="fl jiangshort" id="articleaddSelect2">
+									<option value="河南省">河南省</option>
+									<option value="郑州市">郑州市</option>
+									<option value="开封市">开封市</option>
+									<option value="洛阳市">洛阳市</option>
+									<option value="平顶山市">平顶山市</option>
+									<option value="安阳市">安阳市</option>
+									<option value="鹤壁市">鹤壁市</option>
+									<option value="新乡市">新乡市</option>
+									<option value="焦作市">焦作市</option>
+									<option value="濮阳市">濮阳市</option>
+									<option value="许昌市">许昌市</option>
+									<option value="漯河市">漯河市</option>
+									<option value="三门峡市">三门峡市</option>
+									<option value="商丘市">商丘市</option>
+									<option value="周口市">周口市</option>
+									<option value="驻马店市">驻马店市</option>
+									<option value="南阳市">南阳市</option>
+									<option value="信阳市">信阳市</option>
+									<option value="济源市">济源市</option>
+								</select>
+								 <input id="txtBeginDate" class="fl jiangshort ylarticleadd-date" value="开始日期" readonly="">
+  								 <input id="txtEndDate" class="fl jiangshort ylarticleadd-date" value="结束日期" readonly="">
+							</div>
+
+					</div>
+					<!-- 20170206 18:00 修改结束 -->
+				</div>
+				<div class="jiangweixinmw-rightof2 jiangmb10">
+					<script id="container" name="content" type="text/plain"></script>
+					<script type="text/javascript"
+						src="${req.contextPath}/assets/ueditor/ueditor.config.js?v=1"></script>
+					<script type="text/javascript"
+						src="${req.contextPath}/assets/ueditor/ueditor.all.js"></script>
+					<script type="text/javascript"
+						src="${req.contextPath}/assets/ueditor/xiumi-ue-dialog-v5.js"></script>
+					<script type="text/javascript">
+						var ue = UE.getEditor('container');
+					</script>
+
+				</div>
+				<div class="jiangweixinmw-rightof3">
+					<div class="clear">
+						<input class="jiangcheck1" id="source-bt" type="checkbox" name="a"
+							value=""> <label class="jianglabel" for="b"
+							style="float: none">原文链接</label><br> <input
+							class="jianginput jianglong" id="source-url" type="text" name=""
+							value="" placeholder="原文链接"
+							style="border: 1px solid #cfdbdd; width: 90%; margin-bottom: 10px; display: none">
+					</div>
+				</div>
+				<div class="jiangweixinmw-rightof4">
+					<a style="cursor: pointer;"  class="yulan jiangcurrent">预览</a> 
+					<a href="javascript:;" class="jiangcurrent" id="save-bt">保存</a> 
+				</div>
+			</div>
+			<!-- 上传图片弹窗2.0 开始  20170213 11:00-->
+					<div class="yunlu-mask" id="upload-modal">
+						<div class="yunlu-pop">
+						<!-- 关闭按钮 开始-->
+						<div class="clear"><span class="fr yunluicon yunl-iconclose  yunlu-popclose closeYunlupopBtn"></span></div>
+						<!-- 关闭按钮 结束-->
+						<div class="yunlupop-search1">
+							<input type="text" name="" value="" id="yunlupopinput1" placeholder="">
+							<span class="yunluicon yunl-iconsearch" id="yunlupopSearchbtn1"></span>
+						</div>
+						<!-- 云璐弹窗正文1 开始 -->
+						<div class="yunlupop-content1 clear">
+							
+						</div>
+						<!-- 分页开始 -->
+						<div class="page-box" style="line-height: 30px; height: 30px;">
+				<input type="hidden" id="currPage">
+					<span style="float: left" class="pagination" id="totalNum"></span>
+					<ul style="float: right;" id="pagination" class="pagination">
+						<li class="active"><a title="Current page is 1">1</a></li>
+						<li><a title="Go to next page">&gt;</a></li>
+						<li><a title="Go to last page">&gt;&gt;</a></li>
+					</ul>
+				</div>
+						<!-- 分页结束 -->
+						<!-- 云璐弹窗正文1 结束 -->
+						<input type="submit" name="" class="yunlupop-btn1" value="确定" id="yunlupopConfirmbtn1">
+						</div>
+					</div>
+
+				<!-- 上传图片弹窗2.0 结束 20170213 11:00-->
+		</div>
+		<div class="jiangiphone">
+			<ul class="jiangiphone-left">
+				<li class="jiangactive">图文消息</li>
+				<li>消息正文</li>
+				<li>分享到朋友圈</li>
+				<li>发送给朋友</li>
+			</ul>
+			<div class="jiangiphoneview">
+				<div class="jiangiphone-content">
+					<div class="jiangiphone-artical">
+						<div class="jiangiphone-title">公众号名称</div>
+						<div class="jiangiphone-bg">
+							<div class="jiangiphone-artical-bg">
+								<p>test</p>
+								<p>01月09日</p>
+								<img class="jiangzhengwen" src="${req.contextPath}/assets/img/wenzhangyulan.jpg" />
+								<p>文章摘要</p>
+								<hr />
+								<p>
+									阅读原文<span class="rightjian">></span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="jiangiphone-content ">
+					<div class="jiangiphone-artical">
+						<div class="jiangiphone-title">公众号名称</div>
+						<div class="jiangiphone-bg">
+							<div class="jiangiphone-artical-bg">
+								<p>test</p>
+								<p>01月09日 	testa <a href="#" class="jiangweixinname">公众号名称</a></p>
+								<img class="jiangzhengwen" src="${req.contextPath}/assets/img/wenzhangyulan.jpg" />
+								<div class="jiangblueborder">
+									<a></a>
+									<div class="">
+										<span class="jiangtopjian">^</span>
+										<p class="jiangbottomdashed">
+											点击【<span style="color:rgb(51,171,227);">箭头所指处</span>】 可快速关注
+										</p>
+										微信号:xxxxxxxx
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="jiangiphone-content">
+					<div class="jiangiphone-artical">
+						<div class="jiangiphone-title">朋友圈</div>
+						<div class="jiangfriend clear">
+							<img class="jiangtouxiang" src="${req.contextPath}/assets/img/weixitubiao.jpg" />
+							<a class="jiangtuandui">微信团队</a>
+							<div class="jiangtdcontent">
+								<img class="jiangthumbnail" src="${req.contextPath}/assets/img/wenzhangyulan.jpg" />
+								<a>test</a>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				<div class="jiangiphone-content" >
+					<div class="jiangiphone-artical  clear">
+						<div class="jiangiphone-title">微信团队</div>
+						<div class="jiangiphone-bg">						
+							<img class="jiangtouxiang" src="${req.contextPath}/assets/img/weixitubiao.jpg" />
+							<div class="jiangsend jiangiphone-artical-bg">
+									<img class="jiangleftjian" src="${req.contextPath}/assets/img/jiangsendbox.jpg" />
+									<div style="margin-bottom:10px">test</div>
+									<img class="jiangthumbnail" src="${req.contextPath}/assets/img/wenzhangyulan.jpg" />
+									<a>文章摘要</a>
+							</div>	
+						</div>					
+					</div>
+				</div>
+			</div>
+			
+			<button class="jiangsjclose">关闭</button>
+		</div>
+		<!-- 右侧主体结束 -->
+
+	</div>
+</div>
+
+<script id="article-add-template" type="text/x-handlebars-template">
+		<div class="index{{indexNum}} clear article-container">
+					<input type="hidden" class="index-num" value={{indexNum}}>
+					<p class="jiangtxt1  fl leftimgTitle">标题</p>
+					<img class="sm-thumb thumb-box" src="">
+					<!-- 悬浮按钮 -->
+					<div class="del-box del-index-{{indexNum}}">
+						<a class="iconfont icon-weibiaoti106 del-btn" type="button"></a>
+					</div>
+		</div>
+</script>
+
+<script id="image-list-template"  type="text/x-handlebars-template">
+  {{#each this}}
+							<section>
+								<img src="{{localUrl}}" alt="">
+								<div class="yunlupop-cinnerof1 clear">
+									<b class="yunluicon"></b>
+									<span>{{name}}</span>
+								</div>
+							</section>
+ {{/each}}
+ 
+
+</script>
+
+<!-- 上传图片弹窗1.0 开始 -->
+<!--
+<div class="modal fade" id="upload-modal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form id="addImageForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">上传图片</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                            <tr>
+                                <td style="border: none;">
+								<div class="input-wrap" style="width:120px;height:120px">
+									<img src="${req.contextPath}/assets/img/default.png" id="picIcon"style="width: 80px; height: 80px;"/>
+                                    <input type="hidden" id="imagePath" name="localUrl" />
+                                    <span id="uploadIcon">
+                                    </span>
+                                 </div>
+                                <span id="returnMessage"></span>
+                                </td>
+                            </tr>	
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+ -->
+<!-- 上传图片弹窗1.0 结束 -->
+
+
+
+
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/js/global.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/startendDate.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/js/weixin/article/article-add.js"></script>

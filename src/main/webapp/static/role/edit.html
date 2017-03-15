@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    @@include('../../assets/tpl/css.tpl')
+</head>
+@@include('../../assets/tpl/header.tpl') @@include('../../assets/tpl/aside.tpl')
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i> 编辑角色信息</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        基本信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table">
+                            <tr>
+                                <td>角色名称：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-xingming-copy"></i>
+                                        <input type="text" placeholder="角色名称">
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                </td>
+                                <td class="">角色编码：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-bianmaweihu"></i>
+                                        <input type="password" placeholder="角色编码">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <span class="query-bt-green lg-bt"  data-toggle="modal" data-target="#myModal">+ 添加按钮权限</span>
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        菜单权限
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table table table-hover border-table align-center-table">
+                            <tr>
+                                <th>全选</th>
+                                <th>菜单名称</th>
+                                <th>菜单URL</th>
+                                <th>类型</th>
+                                <th>顺序</th>
+                                <th>等级</th>
+                                <th>操作</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                                <td style="text-align: left;"><i class="iconfont icon-xiasanjiao"></i> 仓库管理</td>
+                                <td>action.do?list</td>
+                                <td>访问类型</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td><a href="javascript:;"  data-toggle="modal" data-target="#myModal">按钮权限</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                                <td>采购管理</td>
+                                <td>action.do?list</td>
+                                <td>访问类型</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td><a href="javascript:;"  data-toggle="modal" data-target="#myModal">按钮权限</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                                <td>收货管理</td>
+                                <td>action.do?list</td>
+                                <td>访问类型</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td><a href="javascript:;"  data-toggle="modal" data-target="#myModal">按钮权限</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                                <td>物料管理</td>
+                                <td>action.do?list</td>
+                                <td>访问类型</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td><a href="javascript:;"  data-toggle="modal" data-target="#myModal">按钮权限</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                                <td>库存管理</td>
+                                <td>action.do?list</td>
+                                <td>访问类型</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td><a href="javascript:;"  data-toggle="modal" data-target="#myModal">按钮权限</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                                <td style="text-align: left;"><i class="iconfont icon-xiasanjiao"></i> 订单管理</td>
+                                <td>action.do?list</td>
+                                <td>访问类型</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td><a href="javascript:;"  data-toggle="modal" data-target="#myModal">按钮权限</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                                <td>订单管理</td>
+                                <td>action.do?list</td>
+                                <td>访问类型</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td><a href="javascript:;"  data-toggle="modal" data-target="#myModal">按钮权限</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                                <td>手机订单</td>
+                                <td>action.do?list</td>
+                                <td>访问类型</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td><a href="javascript:;"  data-toggle="modal" data-target="#myModal">按钮权限</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                                <td>手机订单</td>
+                                <td>action.do?list</td>
+                                <td>访问类型</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td><a href="javascript:;"  data-toggle="modal" data-target="#myModal">按钮权限</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                                <td>手机订单</td>
+                                <td>action.do?list</td>
+                                <td>访问类型</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td><a href="javascript:;"  data-toggle="modal" data-target="#myModal">按钮权限</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <span class="query-bt-green" style="margin: 20px 0 0 0;">
+                    保存
+                </span>
+                <span class="query-bt-green" style="margin: 20px 0 0 20px;">
+                    取消
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">按钮权限
+                <span class="title-tip">菜单名称：用户管理</span></h4>
+            </div>
+            <div class="modal-body">
+                <table class="modal-table">
+                    <tr>
+                        <td>按钮列表：</td>
+                        <td>
+                            <input type="checkbox"> 添加</td>
+                        <td>
+                            <input type="checkbox"> 编辑</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="checkbox"> 导出</td>
+                        <td>
+                            <input type="checkbox"> 查看</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="checkbox"> 删除</td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn">保存</span>
+                <span type="button" class="btn" data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-wrapper -->
+@@include('../../assets/tpl/footer.tpl')
+</div>
+@@include('../../assets/tpl/js.tpl')
+</body>
+
+</html>

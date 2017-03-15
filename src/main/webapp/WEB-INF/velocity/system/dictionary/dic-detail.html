@@ -1,0 +1,120 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<style type="text/css" id="treeview4-style"> .treeview .list-group-item{cursor:pointer}.treeview span.indent{margin-left:10px;margin-right:10px}.treeview span.icon{width:12px;margin-right:5px}.treeview .node-disabled{color:silver;cursor:not-allowed}.node-treeview4{color:#333;}.node-treeview4:not(.node-disabled):hover{background-color:#F5F5F5;} 
+  </style>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">查看详情</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div style="margin-top:-10px">
+            	 <input type="button" class="btn btn-primary ml15" data-toggle="modal" data-target="#myModal" value="新增" />
+                 <input type="button" class="btn btn-primary ml10" id="edit-saveBtn" value="保存" />
+                 <input type="button" class="btn btn-primary ml10" id="delBtn" value="删除" />
+                 <input type="button" class="btn btn-default ml10" id="returnBtn" value="返回" />
+            </div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width: 40%;min-height: 515px;">
+                        <div class="info-item-title">
+                            	$!{dicGroup.dicGroupName}
+                        <!-- 字典组ID隐藏域 -->
+                        <input type="hidden" id="dicGroupId" value="$!{dicGroup.id}" />
+                        </div>
+                        <div class="info-item-content">
+                        	<!-- 数据字典树状结构数据 -->
+                            <div id="init-tree" class="treeview"></div>
+                        </div>
+                    </div>
+                    <div class="info-item-box fr" style="width:58%;min-height: 515px;">
+                    <form id="editForm">
+                        <div class="info-item-title">
+                            编辑信息
+                        </div>
+                        <div class="info-item-content">
+                            <table class="wide-table table">
+                                <tr>
+                                    <td style="border: none;">
+                                    	<!-- ID隐藏域 -->
+	                                	<input type="hidden" id="edit-id" name="id" value="" />
+                                        <span class="red">* </span>字典名称：
+                                        <div class="input-wrap">
+                                            <input type="text" id="edit-dicName" name="dicName" class="fluid-input" required="true" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;">
+                                        <span class="red">* </span>字典编码：
+                                        <div class="input-wrap">
+                                            <input type="text" id="edit-dicCode" name="dicCode" class="fluid-input" required="true" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                       </form>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <form id="addForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加字典</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+                            <td style="border: none;">
+                            	<!-- 字典组ID隐藏域 -->
+                               	<input type="hidden" name="dicGroupId" value="$!{dicGroup.id}" />
+                            	<!-- 父级别ID隐藏域 -->
+                               	<input type="hidden" id="parentId" name="parentId" value="0" />
+                                <span class="red">* </span>字典名称：
+                                <div class="input-wrap">
+                                    <input type="text" id="dicName" name="dicName" class="fluid-input" required="true" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: none;">
+                                <span class="red">* </span>字典编码：
+                                <div class="input-wrap">
+                                    <input type="text" id="dicCode" name="dicCode" class="fluid-input" required="true" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: none;" id="parentDicName">父级：---</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+            	<input type="button" class="btn btn-primary" id="saveBtn" value="保存" />
+            	<input type="button" class="btn btn-default"  data-dismiss="modal" value="取消" />
+            </div>
+        </div>
+    </div>
+  </form> 
+</div>
+<script id="deplevel-list-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{id}}">{{levName}}</option>
+	  {{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/bootstrap/js/bootstrap-treeview.js"></script>
+<script src="${req.contextPath}/assets/js/system/dictionary/dic-detail.js"></script>
+<!-- 引入公共底部     -->

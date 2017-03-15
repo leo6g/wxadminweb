@@ -1,0 +1,247 @@
+<!-- Content Wrapper. Contains page content -->
+<<style>
+	.dis-no{
+		display:none;
+	}
+</style>
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">微网站管理</h4>
+         <form id="queryForm">
+			<div class="row query-box">
+			    <div class="col-xs-5 box-sm">
+					<input type="text" id="queryName" name="name" value="" class="large" placeholder="请输入图片名称"/>
+				</div> 
+				<div class="col-xs-2 box-bt">
+					<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查 询" />
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<span class="btn btn-primary" data-toggle="modal" data-target="#myModal">新增</span>
+            <span class="btn btn-primary" id="editBannerBtn" data-toggle="modal" data-target="#myModal1">编辑</span>
+            <span class="btn btn-primary" id="delBannerBtn">删除</span>
+		</div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            微网站信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="bannerListTable" class="table border-table table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addBannerForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加微网站</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+							<td style="border: none;">
+								图片路径：
+								<div class="input-wrap">
+									<input type="text" id="path" name="path" value="" class="fluid-input" />
+								</div>
+								<div class="info-item-box fl" id="preview" style="width:350px;min-height: 200px;margin-left:23px;margin-top:5px;background-color:lightgray;">
+            					</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								图片名称：
+								<div class="input-wrap">
+									<input type="text" id="name" name="name" value="" class="fluid-input" required maxLength="6"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;display:none">
+								创建人：
+								<div class="input-wrap">
+									<input type="text" id="createUser" name="createUser" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								轮播类型：
+								<div class="input-wrap">
+								<!-- 	<input type="text" id="linkType" name="linkType" value="" class="fluid-input" />-->
+									<select required name="type" id="type" class="fluid-input" >
+										<option value="banner">轮播广告</option>
+										<option value="background">背景图片</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+						<tr class="select-url">
+							<td style="border: none;">
+								图片链接URL：
+								<div class="input-wrap">
+									<input type="text" id="url" name="url" value="" class="fluid-input" maxLength="66"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								轮播顺序：
+								<div class="input-wrap">
+									<input type="text" id="sort" name="sort" value="" class="fluid-input" required />
+								</div>
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveBannerBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editBannerForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑微网站</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table">
+                            	<tr>
+							<td style="border: none;">
+								图片路径：
+								<div class="input-wrap">
+									<input type="text" id="edit-path" name="path" value="" class="fluid-input" />
+									<input type="hidden" id="oldPath" >
+								</div>
+								<div class="info-item-box fl" id="edit-preview" style="width:350px;min-height: 200px;margin-left:23px;margin-top:5px;background-color:lightgray;">
+            					</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								图片名称：
+								<div class="input-wrap">
+									<input type="text" id="edit-name" name="name" value="" class="fluid-input" required maxLength="6"/>
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-bannerId" name="bannerId" value="" />
+						<tr>
+							<td style="border: none;display:none">
+								创建人：
+								<div class="input-wrap">
+									<input type="text" id="edit-createUser" name="createUser" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								轮播类型：
+								<div class="input-wrap">
+								<!-- 	<input type="text" id="linkType" name="linkType" value="" class="fluid-input" />-->
+									<select required name="type" id="edit-type" class="fluid-input" >
+										<option value="banner">轮播广告</option>
+										<option value="background">背景图片</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+						<tr class="select-url1">
+							<td style="border: none;">
+								图片链接URL：
+								<div class="input-wrap">
+									<input type="text" id="edit-url" name="url" value="" class="fluid-input" maxLength="66" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								轮播顺序：
+								<div class="input-wrap">
+									<input type="text" id="edit-sort" name="sort" value="" class="fluid-input" required />
+								</div>
+							</td>
+						</tr>
+						
+                            </table>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveBannerBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="Banner-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<tr>
+			<th>序号</th>
+			<th>图片路径</th>
+			<th>图片名称</th>
+			<th style="display:none">null</th>
+			<th>创建人</th>
+			<th>轮播类型</th>
+			<th>图片链接URL</th>
+			<th>轮播顺序</th>
+			<th>创建时间</th>
+			
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td><img src="{{path}}" style="width:100px;height: 70px;" alt="正在加载..."></td>
+			<td>{{name}}</td>
+			<td style="display:none">{{bannerId}}</td>
+			<td>{{createUser}}</td>
+			<td>{{type}}</td>
+			<td>{{url}}</td>
+			<td>{{sort}}</td>
+			<td>{{createTime}}</td>
+			
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 首先需要引入plupload的源代码 -->
+<script src="${req.contextPath}/assets/plupload/plupload.full.min.js"></script>
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/weiweb/banner/banner-list.js"></script>
+

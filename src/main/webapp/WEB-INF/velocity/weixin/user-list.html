@@ -1,0 +1,188 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">关注用户管理</h4>
+        <form id="queryForm">
+			<div class="row query-box">
+				<div class="col-xs-5 box-sm" style=" width: 30%;">
+					<span style="">昵&nbsp;&nbsp;&nbsp;称：</span>
+					<input class="large" type="text" value="" id="queryNickName" name="nickName" placeholder="请输入昵称"  style="width: 230px;" />
+				</div>
+				<div class="col-xs-5 box-sm" style="width: 30%;">
+					<span >姓名：</span>
+					<input class="large" type="text" value="" id="queryName" name="name" placeholder="请输入姓名" style="width: 230px;" />
+				</div>
+				<div class="col-xs-5 box-sm" style="width: 30%;">
+					<span >手机号码：</span>
+					<input class="large" type="text" value="" id="queryPhoneNumber" name="phoneNumber" placeholder="请输入手机号码"  style="width: 210px;"/>
+				</div>
+
+			</div>
+			<div  style="background: #fafad2;padding-left: 1.4%;padding-bottom: 20px;">
+				用户组：
+				<select id ="userGroupId" name="userGroupId" class="large" style="width:21.6%;height: 26px; border: 1px solid #ebebeb;" >
+				</select>
+				     <!--<span class="oper-bt-gray" id="moveUser" style="width: 110px;color: black;" >-->
+                <select id ="userMoveGroupId" name="userMoveGroupId" style="height: 26px;border: 1px solid #ebebeb;">
+				</select>
+				<!--</span>-->
+			</div>
+		</form>
+		<div class="row" >
+		<div class="col-xs-5 box-sm">
+
+			</div >	
+				<input type="button" class="btn btn-primary" style="vertical-align: bottom; height:28px;margin-left:-34.5%;-moz-margin-start: -31.6%;  " id="querySubmit" value="查 询"/>
+			
+                <span class="oper-bt-gray" data-toggle="modal" data-target="#myModal"  style="height: 28px; border-width: 0;">添加组</span>
+                <span class="oper-bt-gray" id="editWXUserGroupBtn" data-toggle="modal" data-target="#myModal1" style="height: 28px; border-width: 0;">修改组</span>
+                <span class="oper-bt-gray" id="delWXUserGroupBtn" style="height: 28px; border-width: 0;">删除组</span>
+<!--                 <span class="oper-bt-gray" id="synWXUserGroupBtn" style="height: 28px; border-width: 0;">同步组</span> -->
+                <span class="oper-bt-gray" id="moveUser" style="height: 28px; border-width: 0;">移动  </span>
+           
+		</div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            关注用户信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="wXUserListTable" class="table border-table table-hover table-striped align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addWXUserGroupForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加用户组</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+						<tr>
+							<td style="border: none;">
+								分组名称：
+								<div class="input-wrap">
+									<input type="text" id="name" name="name" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveWXUserGroupBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editWXUserGroupForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑用户组</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table">
+						<tr>
+							<td style="border: none;">
+								分组名称：
+								<div class="input-wrap">
+									<input type="text" id="edit-name" name="name" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-groupId" name="groupId" value="" />
+                            </table>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveWXUserGroupBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="wXUser-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+	            <th></th>
+				<th>昵称</th>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>分组名称</th>
+				<th style="display:none">主键ID</th>
+				<th>用户头像</th>
+				<th>手机号码</th>
+				<th>关注时间</th>		
+			</tr>
+		</thead>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+            <td><input type="checkbox" name="selectUser"  value="{{openId}}"/></td>
+			<td>{{nickName}}</td>
+			<td>{{name}}</td>
+			<td>{{gender}}</td>
+			<td>{{groupName}}</td>
+			<td style="display:none">{{wxUserId}}</td>
+			<td><img src="{{headerImage}}" style="width:100px;height: 70px;"></td>
+			<td>{{phoneNumber}}</td>
+			<td>{{subscribeTime}}</td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<script id="wxUserGroup-template" type="text/x-handlebars-template">
+	<option value = "">---请选择---</option>
+	{{#each this}}
+		<option value = {{groupId}}>{{name}}</option>
+	{{/each}}
+</script>
+<script id="wxUserGroup-template2" type="text/x-handlebars-template">
+	<option value = "">请选择移动组</option>
+	{{#each this}}
+		<option value = {{groupId}}>{{name}}</option>
+	{{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/weixin/user-list.js"></script>
+<!-- 引入公共底部     -->
+

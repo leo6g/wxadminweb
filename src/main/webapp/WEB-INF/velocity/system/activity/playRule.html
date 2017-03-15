@@ -1,0 +1,113 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">抽奖规则设置</h4>
+		<div class="row">
+            <span class="btn btn-primary" id="getRule" style="margin-right: 30px">获取配置</span>
+            <span class="btn btn-primary" id="setRule">设置配置</span>
+		</div>
+        <form id="addForm">
+		       <div class="row query-box" style="margin-bottom: 20px;">
+                    <table>
+                        <tr>
+                             <td>
+                               	奖项数量：
+                                <input type="text" id="prizes" name="prizes" value="$!{prizes}" required="true"   placeholder="请先设置奖项数量"  readonly="readonly"/>
+                             </td>
+                        </tr>
+                        <tr>
+                         	<td>
+                               	参与人数：
+                                <input type="text" id="mans" name="mans" required="true"   placeholder="参与人数" />
+                        	</td>
+                        </tr>
+                        <tr>
+                         	<td>
+                               	配置信息：
+                                <!-- <input type="text" id="configInfo" name="configInfo" required="true"   placeholder="配置信息" /> -->
+                                <textarea id="configInfo" name="configInfo" rows="10" cols="50" placeholder="配置信息"></textarea>
+                        	</td>
+                        </tr>
+                    </table>
+		       </div>
+		 </form>
+    </div>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript">
+	$(function() {
+		//设置配置信息
+		$("#setRule").click(function(){
+			setRule();
+		});
+		//获取配置信息
+		$("#getRule").click(function(){
+			getRule();
+		});
+	});
+
+	//设置规则信息
+	function setRule(){
+		var url = contextPath + "/system/rediscache/setRule";
+		/* var prizes = $("#prizes").val();
+		var mans = $("#mans").val();
+		var params = 'prizes='+prizes+'&mans='+mans; */
+		var configInfo = $("#configInfo").val();
+		var params = 'configInfo='+configInfo;
+		//异步请求信息
+		Util.ajax.postJson(url, params, function(data, flag){
+			if(flag){
+				if(data.returnCode=="0"){
+					alert("设置配置信息操作成功!");
+				}else{
+					alert(data.returnMessage);
+				}
+			}
+		});
+	}
+	
+	//获取规则信息
+	function getRule(){
+		var prizes = $("#prizes").val();
+		var mans = $("#mans").val();
+		if(mans==null||mans==""){
+			var url = contextPath + "/system/rediscache/setRuleNow";
+			//异步请求信息
+			Util.ajax.postJson(url, params, function(data, flag){
+				if(flag){
+					if(data.returnCode=="0"){
+						//console.info(data);
+						var info = "awardOne:"+data.bean.awardOne+";"+"awardTwo:"+data.bean.awardTwo+";"+"awardThree:"+data.bean.awardThree+";"
+						$("#configInfo").val(info);
+						alert("获取配置信息操作成功!");
+					}else{
+						alert(data.returnMessage);
+					}
+				}
+			});
+		}else{
+			var url = contextPath + "/system/rediscache/getRule";
+			var params = 'prizes='+prizes+'&mans='+mans;
+			//异步请求信息
+			Util.ajax.postJson(url, params, function(data, flag){
+				if(flag){
+					if(data.returnCode=="0"){
+						//console.info(data);
+						var info = "awardOne:"+data.bean.awardOne+";"+"awardTwo:"+data.bean.awardTwo+";"+"awardThree:"+data.bean.awardThree+";"
+						$("#configInfo").val(info);
+						alert("设置配置信息操作成功!");
+					}else{
+						alert(data.returnMessage);
+					}
+				}
+			});
+		}
+	}
+</script>

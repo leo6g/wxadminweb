@@ -1,0 +1,333 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<style type="text/css">
+	#myModal td{
+		border: solid 1px lightgray !important;
+		padding: 2px;
+	}
+</style>
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">信用卡信息发布表管理</h4>
+		 <form id="queryForm">
+			<div class="row query-box" style="margin-bottom: 10px;">
+				<div class="col-xs-4" style="padding-right: 0;width: 36%;">
+					信用卡名称：<input class="large" type="text" value="" id="queryName" name="name" placeholder="请输入信用卡名称" />
+				</div>
+				<div class="col-xs-4" style="padding-right: 0;width: 36%;">
+					创建起止时间： <input type="text" placeholder="开始时间" name="beginTime" onclick="laydate()" /> -
+					<input type="text" placeholder="结束时间" name="endTime" onclick="laydate()" />
+				</div>
+				<div class="col-xs-1" style="width: 22%;">
+					<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查 询"/>
+					<input type="reset" class="btn btn-default clear-margin ml10" id="" value="重置"/>
+				</div>
+			</div>
+		</form>
+        <div class="row" style="margin-bottom: 20px;">
+            <div style="margin-top:-10px">
+                <span class="oper-bt-gray" id="addWXCardInfoBtn" data-toggle="modal" data-target="#myModal" style="display:none;">新增</span>
+                <span class="oper-bt-gray" id="editWXCardInfoBtn" data-toggle="modal" data-target="#myModal1" style="display:none;">编辑</span>
+                <span class="oper-bt-gray" id="viewCardBtn" style="display:none;">详情</span>
+                <span class="oper-bt-gray" id="delWXCardInfoBtn" style="display:none;">删除</span>
+            </div>
+            <div id="demo"></div>
+            <div class="info-wrap excel-wrap" style="margin-top: 10px; width: 100%;">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            信用卡信息发布表信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="wXCardInfoListTable" class="table border-table table-striped table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <!-- 隐藏角色 -->
+                            <input type="hidden" id="role" value="${role}"/>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addWXCardInfoForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加信用卡信息发布表</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table style="width: 570px;">
+                        <tr>
+							<td>卡名称：</td>
+							<td>
+								<div class="input-wrap">
+									<input type="text" id="name" name="name" value="" class="fluid-input" />
+								</div>
+							</td>
+							<td>
+								信用卡类型：
+							</td>
+							<td>
+								<div class="input-wrap">
+									<select name="type" id="type" class="fluid-input">
+										<option>标准系列</option>
+                                    	<option>品质生活</option>
+                                    	<option>缤纷商旅</option>
+                                    </select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>详情：</td>
+							<td colspan="3">
+								<div>
+									<textarea id="comments" name="comments" maxlength="200" style="max-width: 400px;width: 400px;"></textarea>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>产品状态：</td>
+							<td>
+								<div class="input-wrap">
+									<select name="state" id="state" class="fluid-input">
+										<option value="onSale">上架</option>
+                                    	<option value="offSale">下架</option>
+                                    </select>
+								</div>
+							</td>
+							<td>是否热门推荐：</td>
+							<td>
+								<div class="input-wrap">
+									<select name="hotFlag" id="hotFlag" class="fluid-input"">
+										<option value="T">是</option>
+                                    	<option value="F">否</option>
+                                    </select>
+								</div>
+							</td>
+						</tr>
+						<!-- <tr>
+							<td style="border: none;">
+								审核状态：
+								<div class="input-wrap">
+									<input type="text" id="authState" name="authState" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr> -->
+						<tr>
+							<td>图片路径：</td>
+							<td>
+								<div class="input-wrap">
+									<input type="text" id="imagePath" name="imagePath" value="" class="fluid-input" readonly/>
+								</div>
+							</td>
+							<td colspan="2">
+								<div class="info-item-box fl" id="preview" style="width:200px;min-height: 180px;margin-left:23px;margin-top:5px;background-color:lightgray;">
+            					</div>
+							</td>
+						</tr>
+						<input type="hidden" id="authState" name="authState" value="" class="fluid-input" />
+						<input type="hidden" id="role" value="${role}"/>
+						<tr>
+							<td>信用卡权益信息：</td>
+							<td colspan="3">
+								<textarea id="rights" name="rights" style="max-width: 400px;width: 400px;"></textarea>
+							</td>
+						</tr>
+					</table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" style="width: 120px" id="saveWXCardInfoBtn">确认并提交审核</span>
+                <span type="button" class="btn" style="width: 120px" id="saveDraftWXCardInfoBtn">保存草稿</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editWXCardInfoForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑信用卡信息发布表</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table">
+                            	<tr>
+							<td style="border: none;">
+								卡名称：
+								<div class="input-wrap">
+									<input type="text" id="edit-name" name="name" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								信用卡类型：
+								<div class="input-wrap">
+									<select name="type" id="edit-type" class="fluid-input">
+										<option>标准系列</option>
+                                    	<option>品质生活</option>
+                                    	<option>缤纷商旅</option>
+                                    </select>
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-cardId" name="cardId" value="" />
+						<tr>
+							<td style="border: none;">
+								详情：
+								<div class="input-wrap">
+									<input type="text" id="edit-comments" name="comments" maxlength="200" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								产品状态：
+								<div class="input-wrap">
+									<select name="state" id="edit-state" class="fluid-input">
+										<option value="onSale">上架</option>
+                                    	<option value="offSale">下架</option>
+                                    </select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								审核状态：
+								<div class="input-wrap">
+									<select name="authState" id="edit-authState" class="fluid-input">
+										<option value="DRAFT">草稿</option>
+                                    	<option value="1-WAITING">提交审核</option>
+                                    </select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								图片路径：
+								<div class="input-wrap">
+									<input type="text" id="edit-imagePath" name="imagePath" value="" class="fluid-input" readonly/>
+									<input type="hidden" id="oldImagePath" >
+								</div>
+								<div class="info-item-box fl" id="edit-preview" style="width:350px;min-height: 200px;margin-left:23px;margin-top:5px;background-color:lightgray;">
+            					</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								是否热门推荐：
+								<div class="input-wrap">
+									<select name="hotFlag" id="edit-hotFlag" class="fluid-input"">
+										<option value="T">是</option>
+                                    	<option value="F">否</option>
+                                    </select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+									<input type="hidden" id="view-authState" value="" />
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								信用卡权益信息：
+								<div class="input-wrap">
+									<input type="text" id="edit-rights" name="rights" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+                            </table>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveWXCardInfoBtn">确定</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+<script id="wXCardInfo-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+		  <tr>
+			<th>序号</th>
+			<th>卡名称</th>
+			<th>信用卡类型</th>
+			<th style="display:none">主键ID</th>
+			<th style="width: 20%;">详情</th>
+			<th>产品状态</th>
+			<th>审核状态</th>
+			<th>图片</th>
+			<th>是否热门推荐</th>
+			<th>创建时间</th>
+			<th style="display:none">创建人</th>
+			<th style="display:none"></th>
+			<th style="display:none"></th>
+		 </tr>
+		</thead>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{name}}</td>
+			<td>{{type}}</td>
+			<td style="display:none">{{cardId}}</td>
+			<td>{{comments}}</td>
+			<td>{{state}}</td>
+			<td>{{authState}}</td>
+			<td><img src="{{imagePath}}" style="width:100px;height: 70px;" alt="正在加载..."></td>
+			<td>{{hotFlag}}</td>
+			<td>{{createTime}}</td>
+			<td style="display:none">{{createUser}}</td>
+			<td style="display:none">{{viewState}}</td>
+			<td style="display:none">{{rights}}</td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<style>
+		body,p,div{ padding: 0; margin: 0;}
+		.wraper{ padding: 30px 0;}
+		.btn-wraper{ text-align: center;}
+		.btn-wraper input{ margin: 0 10px;}
+		#file-list{ width: 350px; margin: 20px auto;}
+		#file-list li{ margin-bottom: 10px;}
+		.file-name{ line-height: 30px;}
+		.progress{ height: 4px; font-size: 0; line-height: 4px; background: orange; width: 0;}
+		.tip1{text-align: center; font-size:14px; padding-top:10px;}
+	    .tip2{text-align: center; font-size:12px; padding-top:10px; color:#b00}
+	    .catalogue{ position: fixed; _position:absolute; _width:200px; left: 0; top: 0; border: 1px solid #ccc;padding: 10px; background: #eee}
+	    .catalogue a{ line-height: 30px; color: #0c0}
+	    .catalogue li{ padding: 0; margin: 0; list-style: none;}
+    </style>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 首先需要引入plupload的源代码 -->
+<script src="${req.contextPath}/assets/plupload/plupload.full.min.js"></script>
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/biz/finance/cardinfo-list.js"></script>
+<!-- 引入公共底部     -->
+ 

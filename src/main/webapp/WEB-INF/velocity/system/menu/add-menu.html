@@ -1,0 +1,109 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<form id="formdata">
+<input type="hidden" value="$!{menuId}" id="menuId"/>
+<div class="content-wrapper">
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><a href="javascript:C.load('${req.contextPath}/system/menu/list')"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i></a> 添加菜单信息</h4>
+        <div class="row query-box" style="margin-bottom: 111px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        基本信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table">
+                        <tr>
+                            <td colspan="3" id="parentName"></td>
+                        </tr>
+                            <tr>
+                                <td>菜单名称：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-fudai"></i>
+                                        <input type="text" name="menuName" id="menuName" placeholder="菜单名称" required>
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                    
+                                </td>
+                                <td class="">菜单URL：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-url"></i>
+                                        <input type="text" name="menuUrl" id="menuUrl" placeholder="菜单URL" required>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">菜单图标：
+                                    <br>
+                                    <div class="input-wrap"> 
+                                        	<img src="${req.contextPath}/assets/img/default.png" id="picIcon"style="width: 20px; height: 20px;"/>
+	                                        <input type="hidden" id="menuIcon" name="menuIcon" />
+	                                        <span id="uploadIcon">
+	                                        </span>
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                    
+                                </td>
+                                <td class="">菜单顺序：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-bianshunxu"></i>
+                                        <input type="text" name="menuOrder" placeholder="菜单顺序" >
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">菜单类型：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-leixing"></i>
+                                        <select name="menuType" id="menuType" required>
+                                            <option value="1">访问类型</option>
+                                            <option value="2">菜单类型</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                    
+                                </td>
+                                <td class="">菜单等级：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-huangguan"></i>
+                                        <select name="menuLevel" id="menuLevel">
+                                            <option value="1">1级</option>
+                                            <option value="2">2级</option>
+                                            <option value="3">3级</option>
+                                            <option value="4">4级</option>
+                                            <option value="5">5级</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-primary"  id="submitData" style="margin: 20px 0 0 0;" value="确认"/>
+
+           
+                <input type="button" class="btn btn-default" style="margin: 20px 0 0 20px;" onclick="C.load('${req.contextPath}/system/menu/list')" value="取消"/>
+
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/system/menu/add-menu.js"></script>
+<!-- 引入公共底部     -->

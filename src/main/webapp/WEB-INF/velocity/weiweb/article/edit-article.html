@@ -1,0 +1,64 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/lang/zh-cn/zh-cn.js"></script>
+<!-- Content Wrapper. Contains page content -->
+<form id="formdata">
+<div class="content-wrapper">
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><a href="javascript:void(0)" onclick="C.load('${req.contextPath}/weiweb/article/list')"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i></a> 微网站文章信息管理</h4>
+        <div class="row query-box" style="margin-bottom: 111px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                       编辑微网站文章信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table">
+                            <tr>
+                                <td>标题：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-fudai"></i>
+                                        <input type="text" name="title" id="title" placeholder="标题">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>正文：
+                                    <br>
+                                    <div>
+										<script id="edit-content" name="content" type="text/plain" style="width:550px;height:300px;"></script>
+									</div>
+                                </td>
+                                
+                            </tr>
+							<!-- 隐藏主键 -->
+							<input type="hidden" id="articleId" name="articleId" value="$!{articleId}"/>
+                        </table>
+                    </div>
+                </div>
+                <span class="query-bt-green"  id="edit-saveWWArticleBtn" style="margin: 20px 0 0 0;">
+                    确认
+                </span>
+                <span class="query-bt-green" style="margin: 20px 0 0 20px;" onclick="C.load('${req.contextPath}/weiweb/article/list')">
+                    取消
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/plupload/plupload.full.min.js"></script>
+<!-- 引入公共底部     -->
+<script type="text/javascript">
+	UEDITOR_CONFIG.UEDITOR_HOME_URL = '${req.contextPath}/assets/ueditor/';
+	var ue = UE.getEditor('edit-content');
+	
+</script>
+<script src="${req.contextPath}/assets/js/weiweb/article/edit-article.js"></script>

@@ -1,0 +1,200 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <form id="addForm">
+  	<input type="hidden" id="test" name="test" value="">
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i> 添加用户信息</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        活动信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table">
+                            <tr>
+                                <td>活动名称：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <input type="text" id="activityName" name="activityName" value="" />
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                </td>
+                                <td class="">活动描述：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <input type="text" id="comments" name="comments" value=""  />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">有效开始时间：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-riqi1"></i>
+                                        <input type="text" id="startDate" name="startDate" value="" dateISO="true"  onclick="laydate()"  />
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                </td>
+                                <td class="">有效结束时间：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-riqi1"></i>
+                                        <input type="text" id="endDate" name="endDate"  dateISO="true"  onclick="laydate()"  />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td class="">活动编码:
+                                    <br>
+                                    <div class="input-wrap">
+                                         <input type="text" id="activityCode" name="activityCode" value=""  />
+                                    </div>
+                                </td>
+                            	<td class="t5">
+                                </td>
+                            	<td class="">等级:
+                                    <br>
+                                    <div class="input-wrap">
+                                        <input type="text" id="counts"  />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="info-item-box" style="margin-top:20px;">
+                    <div class="info-item-title">
+                        奖项信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table" id="zy">
+<!--                             <tr> -->
+<!--                                 <td>真实姓名： -->
+<!--                                     <br> -->
+<!--                                     <div class="input-wrap"> -->
+<!--                                         <i class="iconfont icon-quanxianshezhi"></i> -->
+<!--                                         <input type="text" id="realName" name="realName" value="" required="true" placeholder="真实姓名" /> -->
+<!--                                     </div> -->
+<!--                                 </td> -->
+<!--                                 <td class="t5"> -->
+<!--                                 </td> -->
+<!--                                 <td class="">性别： -->
+<!--                                     <br> -->
+<!--                                     <div class="input-wrap"> -->
+<!--                                         <i class="iconfont icon-gender"></i> -->
+<!--                                         <select id="sex" name="sex" class="" required="true" > -->
+<!--                                             <option value="">请选择</option> -->
+<!--                                             <option value="0">男</option> -->
+<!--                                             <option value="1">女</option> -->
+<!--                                         </select> -->
+<!--                                     </div> -->
+<!--                                 </td> -->
+<!--                             </tr> -->
+<!--                             <tr> -->
+<!--                                 <td class="">奖品名称： -->
+<!--                                     <br> -->
+<!--                                     <div class="input-wrap"> -->
+<!--                                         <input type="text" id="birthday" name="birthday" value="" dateISO="true" placeholder="奖品名称" /> -->
+<!--                                     </div> -->
+<!--                                 </td> -->
+<!--                                 <td class="">奖品等级： -->
+<!--                                     <br> -->
+<!--                                     <div class="input-wrap"> -->
+<!--                                         <input type="text" id="email" name="email" value="" email="true" placeholder="奖品等级" /> -->
+<!--                                     </div> -->
+<!--                                 </td> -->
+<!--                                 <td class="">奖品数量： -->
+<!--                                     <br> -->
+<!--                                     <div class="input-wrap"> -->
+<!--                                         <input type="text" id="email1" name="email1" value="" email="true" placeholder="奖品数量" /> -->
+<!--                                     </div> -->
+<!--                                 </td> -->
+<!--                             </tr> -->
+<!--                             <tr> -->
+<!--                                 <td class="">联系方式： -->
+<!--                                     <br> -->
+<!--                                     <div class="input-wrap"> -->
+<!--                                         <i class="iconfont icon-lianxifangshi1"></i> -->
+<!--                                         <input type="text" id="telPhone" name="telPhone" value="" number="true" placeholder="联系方式" /> -->
+<!--                                     </div> -->
+<!--                                 </td> -->
+<!--                                 <td class="t5"> -->
+<!--                                 </td> -->
+<!--                                 <td></td> -->
+<!--                             </tr> -->
+<!--                             <tr> -->
+<!--                                 <td class="">职位： -->
+<!--                                     <br> -->
+<!--                                     <div class="input-wrap"> -->
+<!--                                         <i class="iconfont icon-shangpinbianma"></i> -->
+<!--                                         <select id="positionId" name="positionId" class="" required="true" > -->
+<!--                                         </select> -->
+<!--                                     </div> -->
+<!--                                 </td> -->
+<!--                                 <td class="t5"> -->
+<!--                                 </td> -->
+<!--                                 <td class="">部门： -->
+<!--                                     <br> -->
+<!--                                     <div class="input-wrap"> -->
+<!--                                         <i class="iconfont icon-riqi1"></i> -->
+<!--                                         <input type="text" id="departName" name="departName" value="" required="true" placeholder="请选择部门" /> -->
+<!--                                         <input type="hidden" id="departId" name="departId" value=""  /> -->
+<!--                                     </div> -->
+<!--                                 </td> -->
+<!--                             </tr> -->
+                            
+                            
+<!--                             <tr> -->
+<!--                                 <td class="">用户手机号码： -->
+<!--                                     <br> -->
+<!--                                     <div class="input-wrap"> -->
+<!--                                         <i class="iconfont icon-lianxifangshi1"></i> -->
+<!--                                         <input type="text" id="phoneNumber" name="phoneNumber" value="" number="true" placeholder="用户手机号码" /> -->
+<!--                                     </div> -->
+<!--                                 </td> -->
+<!--                                 <td class="t5"> -->
+<!--                                 </td> -->
+<!--                                 <td></td> -->
+<!--                             </tr> -->
+                            
+                        </table>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-primary" style="margin: 20px 0 0 0;" id="saveBtn" value="保存" />
+                <input type="button" class="btn btn-default" style="margin: 20px 0 0 20px;" id="cancelBtn" value="取消" />
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+
+<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+<!--    <form id="addDepartForm"> -->
+<!--     <div class="modal-dialog"> -->
+<!--         <div class="modal-content"> -->
+<!--             <div class="modal-header"> -->
+<!--                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+<!--                 <h4 class="modal-title" id="myModalLabel">请选择部门</h4> -->
+<!--             </div> -->
+<!--             <div class="modal-body"> -->
+<!--                 <div class="info-item-content"> -->
+<!--                     机构树状结构数据 -->
+<!--                     <div id="depart-tree" class="treeview"></div> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--     </div> -->
+<!--   </form>  -->
+<!-- </div> -->
+
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/biz/award/add-activity.js"></script>
+<!-- 引入公共底部     -->

@@ -1,0 +1,145 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">抽奖人员资格信息表管理</h4>
+         <form id="queryForm">
+				<div class="row query-box">
+						<div class="col-xs-5 box-sm">
+							人员名称：
+							<input class="large" type="text" value="" placeholder="请输入人员名称" name="name" style="width:200px"/>
+						</div>
+						<div class="col-xs-5 box-md">
+							抽奖期次：
+							<select  name="seriesNum" class="large seriesNumList"></select>
+						</div>
+					</div>
+		</form>
+		<div class="row" >
+		    <input type="button" class="btn btn-primary" style="margin-left: 10px;" id="querySubmit" value="查 询"  />
+            <input type="button" class="btn btn-primary ml10" data-toggle="modal" data-target="#myModal1" value="导入"/>
+            <span class="btn btn-primary ml10" id="delTBizAwardPlayerBtn">删除</span>
+            <span class="btn btn-primary ml10" data-target="#myModal2" data-toggle="modal">批量删除</span>
+		</div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+                            <table id="tBizAwardPlayerListTable" class="clickable-table table table-hover">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addTBizAwardPlayerForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">导入抽奖人员资格信息表</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+						<tr>
+							<td style="border: none;">
+								抽奖期数：
+								<div class="input-wrap">
+									<input type="text" id="seriesNum" name="seriesNum" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr id="importTr">
+                                <td>
+									<input type="button" class="btn btn-primary" style="margin: 20px 0 0 0;" id="uploadBtn" value="上传" />
+                                    <input type="text" id="filePath"  name="filePath" value=""/>
+                                </td>
+                         </tr>						
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn" id="insertAward" value="确定"/>
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+
+
+<div class="modal fade" id="myModal2"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addTBizAwardPlayerForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">按抽奖期次删除</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+						<tr>
+							<td style="border: none;">
+								抽奖期数：
+								<div class="input-wrap">	
+							        <select id="seriesSomeNum"  name="seriesNum" class="large seriesNumList"></select>
+								</div>
+							</td>
+						</tr>					
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn" id="delTBizAwardPlayerSomeBtn" value="确定"/>
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="tBizAwardPlayer-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<tr style="background-color: #dcdcdc;">
+			<th>序号</th>
+			<th>姓名</th>
+			<th>手机号码</th>
+			<th style="display:none">null</th>
+			<th>抽奖期数</th>
+			<th>是否参与</th>
+			
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{name}}</td>
+			<td>{{phoneNumber}}</td>
+			<td style="display:none">{{id}}</td>
+			<td>{{seriesNum}}</td>
+			<td>{{IsAward playFlag}}</td>
+			
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<script id="seriesnum-list-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{seriesNum}}">{{seriesNum}}</option>
+	  {{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/biz/award/awardplayer-list.js"></script>
+

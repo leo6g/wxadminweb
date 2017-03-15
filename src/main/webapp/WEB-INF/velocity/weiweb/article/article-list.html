@@ -1,0 +1,162 @@
+<!-- Content Wrapper. Contains page content -->
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">微网站文章信息管理</h4>
+         <form id="queryForm">
+			<div class="row query-box">
+				<div class="col-xs-3 box-sm" style="width: 20%">
+					文章标题：
+					<input type="text" value="" id="queryTitle" name="title" placeholder="请输入文章标题" />
+				</div>
+				<div class="col-xs-2 box-bt">
+					<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查 询" />
+					<input type="button" class="btn btn-default" style="margin:0 0 0 10px;" id="resetBtn" value="重置"/>
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<span class="btn btn-primary" data-toggle="modal" data-target="#myModal">新增</span>
+            <span class="btn btn-primary" id="editWWArticleBtn">编辑</span>
+            <span class="btn btn-primary" id="viewWWArticleBtn">详情</span>
+            <span class="btn btn-primary" id="delWWArticleBtn">删除</span>
+		</div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            微网站文章信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="wWArticleListTable" class="table border-table table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addWWArticleForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加微网站文章信息管理</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+						<tr>
+							<td style="border: none;">
+								标题：
+								<div class="input-wrap">
+									<input type="text" id="title" name="title" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								内容：
+								<div>
+									<script id="add" name="content" type="text/plain" style="width:550px;height:300px;"></script>
+								</div>
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveWWArticleBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editWWArticleForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑微网站文章信息管理</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table">
+						<tr>
+							<td style="border: none;">
+								标题：
+								<div class="input-wrap">
+									<input type="text" id="edit-title" name="title" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-articleId" name="articleId" value="" />
+						<input type="hidden" id="edit-content" name="content" value=""/>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveWWArticleBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="wWArticle-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<tr>
+			<th>序号</th>
+			<th>标题</th>
+			<th style="display:none">内容</th>
+			<th style="display:none">主键ID</th>
+			<th>阅读次数</th>
+			<th>创建人</th>
+			<th>创建时间</th>
+			
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{title}}</td>
+			<td style="display:none">{{content}}</td>
+			<td style="display:none">{{articleId}}</td>
+			<td>{{viewTimes}}</td>
+			<td>{{createUser}}</td>
+			<td>{{createTime}}</td>
+			
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript">
+	UE.getEditor('add');
+</script>
+
+<script src="${req.contextPath}/assets/js/weiweb/article/article-list.js"></script>
+

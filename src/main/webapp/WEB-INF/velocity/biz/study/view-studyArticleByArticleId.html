@@ -1,0 +1,78 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<script type="text/javascript" charset="utf-8"
+	src="${req.contextPath}/assets/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="${req.contextPath}/assets/ueditor/ueditor.all.min.js">
+	
+</script>
+<script type="text/javascript" charset="utf-8"
+	src="${req.contextPath}/assets/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="${req.contextPath}/assets/ueditor/xiumi-ue-dialog-v5.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="${req.contextPath}/assets/ueditor/xiumi-ue-v5.css" />
+<script
+	src="${req.contextPath}/assets/js/biz/study/view-studyArticleByArticelId.js"></script>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<div class="container">
+		<h3>
+			<b><font size="5">$!{title}</font></b>
+		</h3>
+		<font color='lightgray' size="3">$!{createTime} </font> <a
+			href="weixin://contacts/profile/prospertu"> <font color='#87CEFA'
+			size="3">河南邮储银行个人金融</font>
+		</a>
+		<fieldset class="comment_quote"
+			style="padding: 5px; font-size: 14px; font-family: 宋体; border: 1px solid rgb(204, 204, 204); color: rgb(51, 51, 51); line-height: 24px; box-sizing: border-box; background-color: rgb(248, 247, 245); margin-top: 10px;">
+			<legend style="box-sizing: border-box;">
+				<span
+					style="font-family: arial, helvetica, sans-serif; font-size: 16px;">
+					<strong style="color: rgb(102, 102, 102); font-size: 14px;">
+						<span
+						style="margin-right: 8px; padding: 4px 10px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; color: rgb(255, 255, 255); background-color: rgb(191, 0, 0);">
+							邮小宝 </span>
+				</strong> <strong style="color: rgb(60, 117, 45); font-size: 14px;">
+				</strong>
+				</span>
+			</legend>
+			<p style="word-wrap: normal;">
+				<span style="color: rgb(36, 64, 97); font-family: 微软雅黑;">
+					跟上邮小宝，节奏带起来。实用金融知识干货、高倍收益理财产品、缤纷信用卡钜惠、万千吃喝玩乐特惠商户、便捷一站式生活缴费、超多巨好玩游戏、有趣逗乐互动。麻溜关注起来吧！
+				</span>
+			</p>
+		</fieldset>
+
+		<div
+			style="padding: 10px; background-color: rgb(246, 244, 233); margin: 10px 0;">$!{content}</div>
+		<div id="praiseDiv">
+			<div style="display: none;" id="dianzan">
+				<img src="${req.contextPath}/assets/img/dianzan.png"
+					style="width: 20px; height: 20px; float: left;" />赞一个<font
+					color='lightgray'>&nbsp;$!{praiseTimes}</font>
+			</div>
+			<div style="display: none;" id="dianzan1">
+				<img src="${req.contextPath}/assets/img/dianzan1.png"
+					style="width: 20px; height: 20px; float: left;" />已赞<font
+					color='lightgray' id='praise'>&nbsp;$!{praiseTimes}</font>
+			</div>
+		</div>
+		<input type="hidden" id="praiseState" value="$!{praiseState}" /> <input
+			type="hidden" id="itemId" value="$!{itemId}" /> <input type="hidden"
+			id="title" value="$!{title}" /> <input type="hidden" id="contextPath"
+			value="$!{req.contextPath}" /> <input type="hidden" id="praiseTimes"
+			value="$!{praiseTimes}" /> <input type="hidden" id="showAdver"
+			value="$!{showAdver}" /> <input type="hidden" id="showPraise"
+			value="$!{showPraise}" /> <input type="hidden" id="showRemark"
+			value="$!{showRemark}" />
+	</div>
+	<input type="button" class="btn btn-primary"
+		style="margin: 20px 0 0 0;" id="backBtn" value="返回" />
+
+</div>
+
+
+
+
+

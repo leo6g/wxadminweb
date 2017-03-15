@@ -1,0 +1,264 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">员工推荐管理</h4>
+         <form id="queryForm">
+			<div class="row query-box" style="margin-bottom: 10px;">
+				<div class="col-xs-5 box-sm" style="width: 70%;">
+					关注用户昵称：
+					<input class="large" type="text" id="queryNickName" name="nickName" value="" placeholder="请输入用户昵称" />
+				</div>
+				<div class="col-xs-2 box-bt" style="position: relative; left:17.5%;-moz-margin-start:2.5%;" > 
+					<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查 询" />
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<!-- <span class="btn btn-primary" data-toggle="modal" data-target="#myModal">新增</span>
+            <span class="btn btn-primary" id="editStaffRecomendBtn" data-toggle="modal" data-target="#myModal1">编辑</span>
+            <span class="btn btn-primary" id="delStaffRecomendBtn">删除</span> -->
+		</div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            员工推荐信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="staffRecomendListTable" class="table border-table table-hover table-striped align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addStaffRecomendForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加员工推荐</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+							<td style="border: none;">
+								关注用户ID：
+								<div class="input-wrap">
+									<input type="text" id="openId" name="openId" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								员工柜员号码：
+								<div class="input-wrap">
+									<input type="text" id="staffCode" name="staffCode" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								取消关注时间：
+								<div class="input-wrap">
+									<input type="text" id="cancelTime" name="cancelTime" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								关注时间：
+								<div class="input-wrap">
+									<input type="text" id="subscribeTime" name="subscribeTime" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								关注用户头像：
+								<div class="input-wrap">
+									<input type="text" id="headImg" name="headImg" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								关注用户昵称：
+								<div class="input-wrap">
+									<input type="text" id="nickName" name="nickName" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								当前状态(T:关注|F:取消关注)：
+								<div class="input-wrap">
+									<input type="text" id="curState" name="curState" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								重复关注时间：
+								<div class="input-wrap">
+									<input type="text" id="resubTime" name="resubTime" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveStaffRecomendBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editStaffRecomendForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑员工推荐</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table">
+                            	<tr>
+							<td style="border: none;">
+								关注用户ID：
+								<div class="input-wrap">
+									<input type="text" id="edit-openId" name="openId" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								员工柜员号码：
+								<div class="input-wrap">
+									<input type="text" id="edit-staffCode" name="staffCode" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-id" name="id" value="" />
+						<tr>
+							<td style="border: none;">
+								取消关注时间：
+								<div class="input-wrap">
+									<input type="text" id="edit-cancelTime" name="cancelTime" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								关注时间：
+								<div class="input-wrap">
+									<input type="text" id="edit-subscribeTime" name="subscribeTime" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								关注用户头像：
+								<div class="input-wrap">
+									<input type="text" id="edit-headImg" name="headImg" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								关注用户昵称：
+								<div class="input-wrap">
+									<input type="text" id="edit-nickName" name="nickName" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								当前状态(T:关注|F:取消关注)：
+								<div class="input-wrap">
+									<input type="text" id="edit-curState" name="curState" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								重复关注时间：
+								<div class="input-wrap">
+									<input type="text" id="edit-resubTime" name="resubTime" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						
+                            </table>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveStaffRecomendBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="staffRecomend-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th>关注用户ID</th>
+				<th>员工柜员号码</th>
+				<th style="display:none">主键</th>
+				<th>取消关注时间</th>
+				<th>关注时间</th>
+				<th>关注用户头像</th>
+				<th>关注用户昵称</th>
+				<th>当前状态</th>
+				<th>重复关注时间</th>
+			</tr>
+		</thead>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{openId}}</td>
+			<td>{{staffCode}}</td>
+			<td style="display:none">{{id}}</td>
+			<td>{{cancelTime}}</td>
+			<td>{{subscribeTime}}</td>
+			<td><img src="{{headImg}}" style="width:100px;height: 70px;"></td>
+			<td>{{nickName}}</td>
+			<td>{{transformat curState}}</td>
+			<td>{{resubTime}}</td>
+			
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/biz/recommend/affrecomend-list.js"></script>
+

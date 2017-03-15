@@ -1,0 +1,242 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">信用卡申办信息管理</h4>
+        <form id="queryForm">
+			<div class="row query-box" style="margin-bottom: 10px;">
+<!--             <div style="margin-top:-10px"> -->
+<!--                 <span class="oper-bt-gray" data-toggle="modal" data-target="#myModal">新增</span> -->
+<!--                 <span class="oper-bt-gray" id="editCardApplierBtn" data-toggle="modal" data-target="#myModal1">编辑</span> -->
+<!--                 <span class="oper-bt-gray" id="delCardApplierBtn">删除</span> -->
+<!--             </div> -->
+                        <div class="col-xs-5 box-sm">
+							姓&nbsp;&nbsp;&nbsp;名：
+							<input class="large" type="text" value="" placeholder="请输入姓名" id="queryName" name="name"/>
+						</div>
+						<div class="col-xs-5 box-md">
+							申请时间： <input type="text" placeholder="开始时间" name="beginTime" onclick="laydate()"/> -
+							<input type="text" placeholder="结束时间" name="endTime" onclick="laydate()"/>
+						</div>
+						<div class="row" style="height: 45px;"></div>
+						
+						<div class="col-xs-5 box-sm">
+							手机号：
+							<input class="large" type="text" value="" placeholder="请输入手机号码" id="queryCellNumber" name="cellNumber"/>
+						</div>
+						 <div class="col-xs-5 box-sm"  style="width:15%;">
+                                                                                        地市：<select id="cityList" name="cityId" class="large"  >
+                              </select>
+                         </div>
+                         <div class="col-xs-5 box-sm">
+                                                                                        区县：<select id="townList" name="townId" class="large" style="width: 80px ;">
+                              </select>
+                         </div>
+						<div class="row" style="height: 45px;"></div>
+                         
+                         <div class="col-xs-5 box-sm">
+                                                                                        网&nbsp;&nbsp;&nbsp;&nbsp;点：<select id="countryList" name="countryId" class="large" style=" height: 26px ;">
+                              </select>
+                         </div>
+						<div class="col-xs-2 box-bt" style="width: 50%;padding: 0;margin-top: -5px;">
+							<input type="button" class="btn btn-primary" style="margin:0 0 0 18px; height: 26px  !important;line-height: 24px;" id="querySubmit" value="查 询"/>
+						    <input type="button" class="btn btn-primary" id="exportBtn" style="margin:0 0 0 18px; height: 26px  !important;line-height: 24px;" value="导出"/>
+						    <input type="reset" class="btn btn-default clear-margin ml10" id="" value="重置" style="height: 27px;line-height: 24px;"/>
+						</div>
+			</div>
+			</form>
+            <!--<div class="row" style="height:40px">-->
+<!--  						<input type="button" class="btn btn-primary" id="addMenu" value="+ 添 加"/>  -->
+													
+			<!--</div>-->
+					<div class="excel-wrap">
+						<table class="clickable-table table table-striped table-hover" id="cardApplierListTable">
+						</table>
+						<div class="page-box" style="width: 97%;margin:0 auto">
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+					</div>
+				</div>
+			</div>
+    
+    
+    
+    
+    
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addCardApplierForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加信用卡申办信息表</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+							<td style="border: none;">
+								身份证号码：
+								<div class="input-wrap">
+									<input type="text" id="idNumber" name="idNumber" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								姓名：
+								<div class="input-wrap">
+									<input type="text" id="name" name="name" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								申请时间：
+								<div class="input-wrap">
+									<input type="text" id="applyTime" name="applyTime" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								null：
+								<div class="input-wrap">
+									<input type="text" id="netPointId" name="netPointId" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveCardApplierBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editCardApplierForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑信用卡申办信息表</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table">
+						<tr>
+							<td style="border: none;">
+								姓名：
+								<div class="input-wrap">
+									<input type="text" id="edit-name" name="name" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-applierId" name="applierId" value="" />
+						<tr>
+							<td style="border: none;">
+								申请时间：
+								<div class="input-wrap">
+									<input type="text" id="edit-applyTime" name="applyTime" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								null：
+								<div class="input-wrap">
+									<input type="text" id="edit-netPointId" name="netPointId" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								手机号码：
+								<div class="input-wrap">
+									<input type="text" id="edit-cellNumber" name="cellNumber" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						
+                            </table>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn" id="edit-saveCardApplierBtn" value="保存"/>
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="cardApplier-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th>姓名</th>
+				<th style="display:none">APPLIER_ID</th>
+				<th>申请时间</th>
+				<th>申办网点</th>
+				<th>手机号码</th>
+				<th>信用卡名称</th>
+				<th>信用卡类型</th>
+				<th>接收人</th>
+				<th>处理状态</th>
+				<th>处理结果</th>
+			</thead>
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{name}}</td>
+			<td style="display:none">{{applierId}}</td>
+			<td>{{applyTime}}</td>
+			<td>{{orgShtName}}</td>
+			<td>{{cellNumber}}</td>
+			<td>{{cardName}}</td>
+			<td>{{cardType}}</td>
+			<td>{{realName}}</td>
+			<td>{{tranState processState}}</td>
+			<td>{{tranResult processResult}}</td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+
+<script id="city-list-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{newOrgId}}">{{city}}</option>
+	  {{/each}}
+</script>
+
+<script id="town-list-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{newOrgId}}">{{town}}</option>
+	  {{/each}}
+</script>
+<script id="country-list-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{newOrgId}}">{{orgShtName}}</option>
+	  {{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/biz/cardappli/rdapplier-list.js"></script>
+

@@ -1,0 +1,81 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+
+			<div class="content-wrapper">
+				<div class="container">
+					<h4 class="main-title">菜单列表</h4>
+					<form id="queryForm">
+					<div class="row query-box">
+						<div class="col-xs-5 box-sm">
+							菜单名称：
+							<input class="large" type="text" value="" placeholder="请输入菜单名称" name="menuName" style="width:200px"/>
+						</div>
+						<div class="col-xs-5 box-md">
+							创建起止时间： <input type="text" placeholder="开始时间" name="beginTime" onclick="laydate()"/> -
+							<input type="text" placeholder="结束时间" name="endTime" onclick="laydate()"/>
+						</div>
+						<div class="col-xs-2 box-bt">
+							
+						</div>
+					</div>
+					</form>
+					<div class="row" style="margin-left: -14px;">
+						<input type="button" class="btn btn-primary ml15" id="addMenu" value="添加"/>
+						<input type="button" class="btn btn-primary ml10" id="editMenu" value="编辑"/>
+						<input type="button" class="btn btn-primary ml10" id="viewMenu" value="查看"/>
+						<input type="button" class="btn btn-primary ml10" id="deleteMenu" value="删除"/>
+						<input type="button" class="btn btn-primary" style="margin-left:10px" id="querySubmit" value="查询"/>
+						<input type="reset" class="btn btn-default" style="margin:0 0 0 10px;" id="" value="重置"/>
+							
+						
+					</div>
+					<div class="excel-wrap">
+						<table class="clickable-table table table-hover" id="menuTableList">
+							<tr style="background-color: #dcdcdc;">
+								<th>菜单名称</th>
+								<th>菜单URL</th>
+								<th>图标</th>
+								<th>类型</th>
+								<th>顺序</th>
+								<th>等级</th>
+								<th>创建时间</th>
+								<th>最后编辑时间</th>
+								<th>操作</th>
+							</tr>
+						<tbody id="menu-list-table">
+										
+						</tbody>
+							
+
+
+						</table>
+					</div>
+				</div>
+			</div>
+<script id="menu-list-template" type="text/x-handlebars-template">
+	  {{#each this}}
+				<tr data-tt-id="{{id}}" data-tt-parent-id="{{parentId}}">
+					<td style="text-align:left">{{menuName}}</td>
+                    <td style="display:none">{{id}}</td>
+					<td>{{menuUrl}}</td>
+					<td><img src="{{EmenuUrl menuIcon}}" class="folder02" alt=""></td>
+					<td>{{EmenuType menuType}}</td>
+					<td>{{menuOrder}}</td>
+					<td>{{menuLevel}}</td>
+					<td>{{createTime}}</td>
+					<td>{{updateTime}}</td>
+					<td>
+							<a href="javascript:void(0)" onclick=C.load("${req.contextPath}/system/button/list?menuId={{id}}")>按钮</a>
+					</td>
+				</tr> 
+	  {{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/lib/treetable/js/jquery.treetable.js"></script>
+<link rel="stylesheet" href="${req.contextPath}/assets/lib/treetable/css/jquery.treetable.css">
+<link rel="stylesheet" href="${req.contextPath}/assets/lib/treetable/css/jquery.treetable.theme.default.css?_v=1.0">
+<script src="${req.contextPath}/assets/js/system/menu/menu-list.js"></script>
+<!-- 引入公共底部     -->

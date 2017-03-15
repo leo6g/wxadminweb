@@ -1,0 +1,78 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">劳动竞赛个人排名管理</h4>
+         <form id="queryForm">
+					<div class="row query-box">
+						<div class="col-xs-5 box-sm">
+							机构名称：
+							<input class="large" type="text" value="" placeholder="请输入机构名称" name="departName" style="width:200px"/>
+						</div>
+						<div class="col-xs-5 box-sm">
+							员工姓名：
+							<input class="large" type="text" value="" placeholder="请输入员工姓名" name="realName" style="width:200px"/>
+						</div>
+						<div class="col-xs-5 box-sm">
+							柜员号：
+							<input class="large" type="text" value="" placeholder="请输入柜员号" name="staffCode" style="width:200px"/>
+						</div>
+						<!-- <div class="col-xs-5 box-md">
+							统计日期： <input type="text" placeholder="统计日期" name="statisDate2" onclick="laydate()"/> 
+						</div> -->
+					</div>
+		</form>
+		<div class="row" style="margin-left: 14px;">
+						<input type="button" class="btn btn-primary" style="margin-left:10px" id="querySubmit" value="查询"/>
+						<span class="oper-bt-gray" id="exportBtn" style="height: 26px;line-height: 24px; ">导出</span>
+						<input type="reset" class="btn btn-default clear-margin ml10" style="margin:0 0 0 10px;" id="resetBtn" value="重置"/>						
+		</div>
+        <div class="excel-wrap">
+                            <table id="tBStaffRecomendR1ListTable" class="table border-table table-hover table-striped align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="tBStaffRecomendR1-list-template" type="text/x-handlebars-template">
+	<tbody>
+      <thead style="background-color: #dcdcdc;">
+		<tr>
+			<th>名次</th>
+			<th>柜员号</th>
+            <th>员工姓名</th>
+            <th>昨日推荐量</th>
+			<th>机构名称</th>
+			<th>累计推荐量</th>
+            <th>统计日期</th>
+			
+		</tr>
+      </thead>
+	  {{#each this}}
+		<tr>
+        	<td>{{openCntRank}}</td>
+			<td>{{staffCode}}</td>
+            <td>{{realName}}</td>
+			<td>{{openDayCnt}}</td>
+			<td>{{departName}}</td>
+			<td>{{openCnt}}</td>
+            <td>{{statisDate}}</td>			
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/report/staffrecomendr1-list.js"></script>
+

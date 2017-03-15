@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/global.css">
+</head>
+<body>
+    <!--右侧区域-->
+	    <!-- 右侧主体开始 -->
+		 <div class="zl_main">
+		    <h4 style="margin-left:30px;margin-top:20px;">素材管理</h4>
+		    <ul class="zl_nav">
+		        <li>微信图文</li>
+		        <li>微盟图文</li>
+		        <li>图片</li>
+		        <li>音频</li>
+		        <li>视频</li>
+		    </ul>
+		    <input type="text" placeholder="图片名字" id="zl_search"><span id="zl_img_search"><img src="${req.contextPath}/assets/img/2.png"></span>
+		    <span class="zl_weixin_sound">微信音频1/1000</span>
+		    <button class="zl_btn_add" style="width:120px;height:30px;background:#0ca670;color:#fff;font-size:14px;outline:0;border-radius:3px;">+添加视频</button>
+		    <div class="zl_content">
+		        <div class="zl_each">
+		            <p>f0caffd.gif</p>
+		            <p style="color:#dedfe1;border-bottom:1px solid #dedfe1;padding-bottom:5px;margin-right:10px;">2017-01-06 16:40(来自本地视频)</p>
+		            <p><img src="${req.contextPath}/assets/img/3.png" style="width:270px;height:130px;margin-top:10px;"></p>
+		            <ul class="zl_content_bottom">
+		                <li><img src="${req.contextPath}/assets/img/4.png"></li>
+		                <li><img src="${req.contextPath}/assets/img/5.png"></li>
+		                <li data-toggle="popover" data-html="true" data-placement="top"
+		                    title="<h5 style='margin-left:20px;margin-right:20px;background-color:#fff;'>确定删除视频吗?</h5>"
+		                    data-container="body"
+		                    data-content="<button style='margin-left:15px;background:#2e8f6e;
+		                    color:#fff;padding:2px 20px 2px 20px;outline:0;border:0;' class='qd'>确定</button>
+		                    <button style='margin-left:10px;padding:2px 20px 2px 20px;outline:0;
+		                    background:#fff;border:1px solid #d9d9d9;' class='qx'>取消</button>">
+		                    <img src="${req.contextPath}/assets/img/6.png">
+		                </li>
+		            </ul>
+		        </div>
+		        <div class="zl_each">
+		            <p>f0caffd.gif</p>
+		            <p style="color:#dedfe1;border-bottom:1px solid #dedfe1;padding-bottom:5px;margin-right:10px;">2017-01-06 16:40(来自本地视频)</p>
+		            <p><img src="${req.contextPath}/assets/img/3.png" style="width:270px;height:130px;margin-top:10px;"></p>
+		            <ul class="zl_content_bottom">
+		                <li><img src="${req.contextPath}/assets/img/4.png"></li>
+		                <li><img src="${req.contextPath}/assets/img/5.png"></li>
+		                <li data-toggle="popover" data-html="true" data-placement="top"  title="<h5 style='margin-left:20px;margin-right:20px;'>确定删除视频吗?</h5>" data-container="body" data-content="<button style='margin-left:15px;background:#2e8f6e;color:#fff;padding:2px 20px 2px 20px;outline:0;border:0;' class='qd'>确定</button><button style='margin-left:10px;padding:2px 20px 2px 20px;outline:0;background:#fff;border:1px solid #d9d9d9;' class='qx'>取消</button>"><img src="${req.contextPath}/assets/img/6.png"></li>
+		            </ul>
+		        </div>
+		        <div class="zl_each">
+		            <p>f0caffd.gif</p>
+		            <p style="color:#dedfe1;border-bottom:1px solid #dedfe1;padding-bottom:5px;margin-right:10px;">2017-01-06 16:40(来自本地视频)</p>
+		            <p><img src="${req.contextPath}/assets/img/3.png" style="width:270px;height:130px;margin-top:10px;"></p>
+		            <ul class="zl_content_bottom">
+		                <li><img src="${req.contextPath}/assets/img/4.png"></li>
+		                <li><img src="${req.contextPath}/assets/img/5.png"></li>
+		                <li data-toggle="popover" data-html="true" data-placement="top"  title="<h5 style='margin-left:20px;margin-right:20px;'>确定删除视频吗?</h5>" data-container="body" data-content="<button style='margin-left:15px;background:#2e8f6e;color:#fff;padding:2px 20px 2px 20px;outline:0;border:0;' class='qd'>确定</button><button style='margin-left:10px;padding:2px 20px 2px 20px;outline:0;background:#fff;border:1px solid #d9d9d9;' class='qx'>取消</button>"><img src="${req.contextPath}/assets/img/6.png"></li>
+		            </ul>
+		        </div>
+		        <div class="zl_page">
+		            <ul>
+		                <li><</li>
+		                <li>1</li>
+		                <li>></li>
+		            </ul>
+		            <div>
+		                <span style="margin-left:20px;margin-top:-3px;display:inline-block;float:left;">共1页&nbsp;&nbsp;到第&nbsp;&nbsp;</span>
+		                <input type="text" style="width:40px;height:34px;margin:0;float:left;border:1px solid rgb(220,220,220);outline:0;"><span>&nbsp;页</span>
+		                <button style="width:45px;height:35px;line-height:39px;margin-left:10px;background:#2e8f6e;color:#fff;outline:0;border:0;">跳转</button>
+		            </div>
+		        </div>
+		    </div>
+  <!--   右侧主体结束 -->
+</div>
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../js/global.js"></script>
+<script>
+            $("[data-toggle='popover']").popover();
+
+            $("body").on('click','.qd',function(){
+                $(".popover").hide();
+            });
+            $("body").on('click','.qx',function(){
+                $(".popover").hide();
+            });
+</script>
+</body>
+</html>

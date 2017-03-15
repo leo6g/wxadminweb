@@ -1,0 +1,87 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/xiumi-ue-dialog-v5.js"></script>
+<link rel="stylesheet" type="text/css" href="${req.contextPath}/assets/ueditor/xiumi-ue-v5.css"/>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <form id="addForm">
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i> 编辑操作手册文章信息</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box" style="margin-top:20px;">
+					<!-- 隐藏域 -->
+                   	<input type="hidden" id="articleId" name="articleId" value="$!{articleId}">
+                   	
+                    <div class="info-item-title">
+                        操作手册文章信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table">
+                            <tr>
+                              <td class="">文章标题：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-riqi1"></i>
+                                        <input type="hidden" id="categoryId" name="categoryId" value="e03ce5164f0c40e784baa87fad0756ad" />
+                                        <input type="text" id="title" name="title" value=""  placeholder="文章标题" />
+                                    </div>
+                               </td>
+                                <td class="t5">
+                                </td>
+                                <td class="">顺序：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-riqi1"></i>
+                                        <input type="text" id="sortNum" name="sortNum" value="" required="true"   placeholder="顺序" />
+									</div>
+                                </td>
+                            </tr>
+                            <tr>
+	                            <td>类型：
+                                    <br>
+									<div class="input-wrap">
+                                        <i class="iconfont icon-shangpinbianma"></i>
+                                        <select id="subCategory" name="subCategory" required="true" >
+                                        </select>
+                                    </div>
+	                            </td>
+                            </tr>
+                            <td>正文：
+                                    <br>
+                                    <div>
+										<script id="editorContent" name="content" type="text/plain" style="width:550px;height:300px;"></script>
+									</div>
+                            </td>
+                            
+                        </table>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-primary" style="margin: 20px 0 0 0;" id="saveBtn" value="保存" />
+                <input type="button" class="btn btn-default" style="margin: 20px 0 0 20px;" id="cancelBtn" value="取消" />
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/plupload/plupload.full.min.js"></script>
+<!-- 引入公共底部     -->
+<script type="text/javascript">
+	
+	UEDITOR_CONFIG.UEDITOR_HOME_URL = '${req.contextPath}/assets/ueditor/';
+	var ue = UE.getEditor('editorContent');
+
+</script>
+<script src="${req.contextPath}/assets/js/biz/study/edit-manuals.js"></script>
+<!-- 引入公共底部     -->

@@ -1,0 +1,145 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<input type="hidden" id="roleId" value="$!{roleId}"/>
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><a href="javascript:history.go(-1)"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i></a> 编辑权限</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                                                   基本信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table">
+                            <tr>
+                                <td>角色名称：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-xingming-copy"></i>
+                                        <span id="roleName"></span>
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                </td>
+                                <td class="">角色编码：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-bianmaweihu"></i>
+                                        <span id="roleCode"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        菜单权限
+                    </div>
+                    <div class="info-item-content">
+                        <table class="clickable-table wide-table table table-hover border-table align-center-table" id="menuTableList">
+                            <tr id="menu-list-head">
+                                <th>全选</th>
+                                <th>菜单名称</th>
+                                <th>按钮名称</th>
+                            </tr>
+	                        <tbody id="menu-list-table">
+											
+							</tbody>
+                        </table>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-primary" style="margin: 20px 0 0 0;" id="submitData" value="保存"/>
+                <input type="button" class="btn btn-default" style="margin: 20px 0 0 20px;" onclick="C.load('${req.contextPath}/system/role/list')" value="取消"/>                    
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-wrapper -->
+<!-- 这个模板是之前的-这是原生table实现树的结构 -->
+<script id="menu-list-template-old" type="text/x-handlebars-template">
+	  {{#each this}}
+                <tr data-trigger="collapse" class="child-menu">
+                                <td style="width:10%">
+								 {{#compareR isRelate}}
+                                    <input type="checkbox" name="menuId" menuId="{{id}}" checked="checked" pt>
+                                 {{else}}
+                                    <input type="checkbox" name="menuId" menuId="{{id}}"  pt>
+                                 {{/compareR}}
+								</td>
+                                <td style="text-align: left;width:40%"><i class="iconfont icon-wanggexinxi08"></i> {{menuName}}</td>
+                                  <td style="width:50%">
+                                         {{#each buttoninfo}}
+                                               {{#compareR isRelate}}
+                                                   <input type="checkbox" name="buttonId" buttonId="{{id}}" checked="checked">{{butName}}
+                                               {{else}}
+                                                   <input type="checkbox" name="buttonId" buttonId="{{id}}">{{butName}}
+                                               {{/compareR}}
+                                          {{/each}}
+                                   </td>                          
+                            </tr>
+<tr class="collapsibles " style="display:none">
+<td colspan="3" style="padding:0;border-bottom-width:0">
+<table style="width:100%;margin:0" class="table-hover">
+             {{#each children}}
+                            <tr>
+                                <td style="width:10%;border-width:0 1px 1px 0;">
+									{{#compareR isRelate}}
+                                       <input type="checkbox" name="menuId" menuId="{{id}}" checked="checked" child>
+                                	{{else}}
+										<input type="checkbox" name="menuId" menuId="{{id}}" child>		
+									{{/compareR}}		
+								</td>
+                                <td style="width:40%;border-width:0 1px 1px 1px">{{menuName}}</td>
+                                <td style="width:50%;border-width:0 0 1px 1px">
+                                         {{#each buttoninfo}}
+                                               {{#compareR isRelate}}
+                                                   <input type="checkbox" name="buttonId" buttonId="{{id}}" checked="checked">{{butName}}
+                                               {{else}}
+                                                   <input type="checkbox" name="buttonId" buttonId="{{id}}">{{butName}}
+                                               {{/compareR}}
+                                          {{/each}}
+                                </td>                               
+                            </tr> 
+              {{/each}}
+</table>
+</td>
+</tr>
+	  {{/each}}
+</script>
+<!-- 这个模板目前使用的-这是用jquery-treetable实现树的结构 -->
+<script id="menu-list-template" type="text/x-handlebars-template">
+	  {{#each this}}
+				<tr  data-tt-id="{{id}}" data-tt-parent-id="{{parentId}}">
+                    <td>
+					  {{#compareR isRelate}}
+                        <input type="checkbox" name="menuId" menuId="{{id}}" menuparentId="{{parentId}}" checked="checked">
+                      {{else}}
+                        <input type="checkbox" name="menuId" menuId="{{id}}" menuparentId="{{parentId}}">
+                      {{/compareR}}
+                    </td>
+					<td triangle-icon style="text-align:left">{{menuName}}</td>
+                    <td>
+                               {{#each buttoninfo}}
+                                  {{#compareR isRelate}}
+                                    <input type="checkbox" name="buttonId" buttonId="{{id}}" checked="checked">{{butName}}
+                                  {{else}}
+                                   <input type="checkbox" name="buttonId" buttonId="{{id}}">{{butName}}
+                                 {{/compareR}}
+                              {{/each}}
+                     </td> 
+
+				 </tr> 
+	  {{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/lib/treetable/js/jquery.treetable.js"></script>
+<link rel="stylesheet" href="${req.contextPath}/assets/lib/treetable/css/jquery.treetable.css">
+<link rel="stylesheet" href="${req.contextPath}/assets/lib/treetable/css/jquery.treetable.theme.default.css">
+<script src="${req.contextPath}/assets/js/system/role/edit-power.js"></script>
+<!-- 引入公共底部     -->

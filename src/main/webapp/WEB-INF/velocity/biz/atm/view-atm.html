@@ -1,0 +1,72 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><i class="fa iconfont icon-zuojiantou-copy arrow-bt" id="returnBack"></i> 查看ATM位置</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        基本信息
+                    </div>
+                    <div class="info-item-content">
+                        <table>
+                            <tr>
+                                <td class="t1">设备种类：</td>
+                                <td class="t2">$!{obj.typeName}</td>
+                                <td class="t1">所在市：</td>
+                                <td class="t3">$!{obj.cityName}</td>
+                            </tr>
+                            <tr>
+                                <td class="t1">一级支行：</td>
+                                <td class="t2">$!{obj.townName}</td>
+                                <td class="t1">管辖网点：</td>
+                                <td class="t3">$!{obj.orgShtName}</td>
+                            </tr>
+                            <tr>
+                                <td class="t1">地址类型：</td>
+                                <td class="t2">$!{obj.addrTypeName}</td>
+                                <td class="t1">安装地点：</td>
+                                <td class="t3">$!{obj.address}</td>
+                            </tr>
+                            <tr>
+                                <td class="t1">经度：</td>
+                                <td class="t2">$!{obj.longitude}</td>
+                                <td class="t1">维度：</td>
+                                <td class="t3">$!{obj.latitude}</td>
+                            </tr>
+                            <tr>
+                                <td class="t1">联系电话：</td>
+                                <td class="t2">$!{obj.tactorPhone}</td>
+                                <td class="t1">设备状态：</td>
+                                <td class="t3">
+	                                #if($!obj.state ==  0)  
+	                            		正常
+	                        		#elseif($!obj.state == 1)  
+	                            		维修
+	                        		#elseif($!obj.state == -1)  
+	                            		故障
+	                        		#else  
+	                            		正常
+	                        		#end 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="t1">ATM图片：</td>
+                                <td class="t2">
+									<img src="${req.contextPath}/$!{obj.imagePath}" id="preview" onerror="this.src='${req.contextPath}/assets/img/no_pic.png'" style="width:240px; height:160px"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="returnBtn" style="margin: 20px 0 0 0">
+                	返 回
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/biz/atm/view-atm.js"></script>

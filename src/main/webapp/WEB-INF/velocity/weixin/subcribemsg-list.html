@@ -1,0 +1,219 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">关注语管理</h4>
+        <form id="queryForm">
+			<div class="row query-box">
+				<div class="col-xs-5 box-sm" >
+					消息类型：
+					<select name="msgType" id="queryMsgType" class="large" style="width:200px;" onchange="javascript:getSelect(this.value);">
+                		<option value="" selected>---请选择---</option>       
+                        <option value="text">文本消息</option>
+                        <option value="news">图文消息</option>
+                    </select>
+				</div>
+				<div class="col-xs-5 box-md">
+					创建起止时间： <input type="text" placeholder="开始时间" name="beginTime" onclick="laydate()" /> -
+					<input type="text" placeholder="结束时间" name="endTime" onclick="laydate()" />
+				</div>
+				<div class="col-xs-2 box-bt">
+
+				</div>
+			</div>
+		</form>
+		<div class="row" >
+				<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查 询"/>			
+                <span class="btn btn-primary" data-toggle="modal" data-target="#myModal">新增</span>
+                <span class="btn btn-primary" id="editWXSubcribeMsgBtn" data-toggle="modal" data-target="#myModal1">编辑</span>
+                <span class="btn btn-primary" id="delWXSubcribeMsgBtn">删除</span>
+            </div>
+        <div class="excel-wrap" style="margin-bottom: 20px;"> 
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            关注语信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="wXSubcribeMsgListTable" class="table border-table table-hover table-striped align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addWXSubcribeMsgForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加微信关注语</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                    	<tr>
+							<td style="border: none;">
+								消息类型：
+								<div class="input-wrap">
+									<select name="msgType" id="msgType" class="fluid-input" required="true">
+                                    		<option value="" selected>---请选择---</option>       
+                                            <option value="text">文本消息</option>
+                                            <option value="news">图文消息</option>
+                                        </select>
+									</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								模板名称：
+								<div class="input-wrap">
+								<select name="templateId" id="templateId" class="fluid-input" required="true">
+                                            <option value=""></option>
+                                        </select>
+								</div>
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveWXSubcribeMsgBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editWXSubcribeMsgForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑微信关注语</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table">
+                        <tr>
+							<td style="border: none;">
+								消息类型：
+								<div class="input-wrap">
+									<select name="msgType" id="edit-msgType" class="fluid-input" required="true">
+										<option value="text">文本消息</option>
+                                    	<option value="news">图文消息</option>
+                                    </select>
+								</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								模板名称：
+								<div class="input-wrap">
+								<select name="templateId" id="edit-templateId"  class="fluid-input" onchange="getSelect(this.options[this.options.selectedIndex].value);" required="true">
+									<option value=""></option>
+                                </select>
+								</div>
+							</td>
+						</tr>
+						
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-subId" name="subId" value="" />
+						<tr>
+							<td style="border: none;">
+									<input type="hidden" id="edit-createUser" name="createUser" value="" class="fluid-input" />
+								<!-- 创建人：
+								<div class="input-wrap">
+								</div> -->
+							</td>
+						</tr>
+						
+                            </table>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveWXSubcribeMsgBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="wXSubcribeMsg-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th>模板名称</th>
+				<th>消息类型</th>
+				<th style="display:none">主键ID</th>
+				<th>内容</th>
+				<th>创建时间</th>
+				<th style="display:none">创建人</th>
+			</tr>
+		</thead>
+		
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{templateName}}</td>
+			<td>{{msgType}}</td>
+			<td style="display:none">{{subId}}</td>
+			{{#equals msgType '图文消息'}}
+				<td>
+					[<a href="javascript:void(0)" data-id="{{templateId}}" class="reviewBtn">预览内容</a>]
+				</td>
+			{{/equals}}
+
+			{{#equals msgType '文本消息'}}
+				<td>
+					{{textContent}}
+				</td>
+			{{/equals}}
+
+			<td>{{createTime}}</td>
+			<td style="display:none">{{createUser}}</td>
+			<td style="display:none">{{templateId}}</td>
+
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<script id="news-template" type="text/x-handlebars-template">
+	<option value = "" selected>---请选择---</option>
+	{{#each this}}
+		<option value = {{newsTempId}}>{{name}}</option>
+	{{/each}}
+</script>
+<script id="text-template" type="text/x-handlebars-template">
+	<option value = "" selected>---请选择---</option>
+	{{#each this}}
+		<option value = {{textTempId}}>{{name}}</option>
+	{{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/weixin/subcribemsg-list.js"></script>
+<!-- 引入公共底部     -->

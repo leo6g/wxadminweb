@@ -1,0 +1,83 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<form id="formdata">
+<input type="hidden" id="btnId" name="btnId" value="$!{btnId}"/>
+<input type="hidden" id="menuId" name="menuId" value="$!{menuId}"/>
+<div class="content-wrapper">
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><a href="javascript:history.go(-1)"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i></a> 编辑按钮信息</h4>
+        <div class="row query-box" style="margin-bottom: 170px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        基本信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table">
+                        <tr>
+                            <td colspan="3" id="menuName"></td>
+                        </tr>
+                            <tr>
+                                <td>按钮名称：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-fudai"></i>
+                                        <input type="text" name="butName" id="butName" placeholder="按钮名称">
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                    
+                                </td>
+                                <td class="">按钮URL：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-url"></i>
+                                        <input type="text" name="url" id="url" placeholder="按钮URL">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">按钮图标：
+                                    <br>
+                                    <div class="input-wrap"> 
+                                        	<img src="${req.contextPath}/assets/img/default.png" id="picIcon"style="width: 20px; height: 20px;"/>
+	                                        <input type="hidden" id="butIcon" name="butIcon" />
+	                                        <span id="uploadIcon">
+	                                        </span>
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                    
+                                </td>
+                                <td class="">按钮编码：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-bianshunxu"></i>
+                                        <input type="text" name="butCode" id="butCode" placeholder="按钮编码">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-primary" style="margin: 20px 0 0 0;" id="submitData" value="确认"/>
+                    
+                
+                <input type="button" class="btn btn-default" style="margin: 20px 0 0 20px;" onclick="C.load('${req.contextPath}/system/button/list?menuId=$!{menuId}')" value="取消"/>
+                   
+               
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/system/menu/btn-edit.js"></script>
+<!-- 引入公共底部     -->

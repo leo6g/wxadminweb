@@ -1,0 +1,91 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">操作手册文章表管理</h4>
+         <form id="queryForm">
+			<div class="row query-box" style="padding-bottom: 10px; margin-bottom: 10px;">
+				<div class="col-xs-3 box-sm" style="width: 25%">
+					文章标题：
+					<input type="text" id="title-search"  name="title" placeholder="请输入文章标题" />
+				</div>
+				<div class="col-xs-3 box-sm" style="width: 25%">
+					类型：
+					<select id="subCategory" name="subCategory">
+					
+					</select>
+				</div>
+				<div class="col-xs-2 box-bt" style="width: 49%; float: right;margin-top: -11px;">
+					<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查 询" />
+					<input type="button" class="btn btn-primary ml15" id="addBtn"  value="新增" />
+		            <span class="btn btn-primary" id="editStudyArticleBtn">编辑</span>
+		            <span class="btn btn-primary" id="delStudyArticleBtn">删除</span>
+					<input type="button" class="btn btn-primary ml15" id="viewBtn"  value="查看" />
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			
+		</div>
+		<input type="hidden" id="edit-articleId" name="articleId" value="" />
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            操作手册文章表信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="studyArticleListTable" class="table border-table table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+<script id="studyArticle-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<tr>
+			<th>序号</th>
+			<th>文章标题</th>
+			<th>类型</th>
+			<th style="display:none">文章ID</th>
+			<th>顺序</th>
+			<th>创建时间</th>
+			<th>创建人</th>
+			
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{title}}</td>
+			<td>{{transformat subCategory}}</td>
+			<td style="display:none">{{articleId}}</td>
+			<td>{{sortNum}}</td>
+			<td>{{createTime}}</td>
+			<td>{{createUser}}</td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/biz/study/manuals-list.js"></script>
+

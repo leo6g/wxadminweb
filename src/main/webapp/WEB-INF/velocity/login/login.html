@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="${req.contextPath}/assets/bootstrap/css/bootstrap.min.css">
+    	<link rel="stylesheet" href="${req.contextPath}/assets/css/skins/_all-skins.min.css">
+    	<link rel="stylesheet" href="${req.contextPath}/assets/css/wechat.css">
+    	<link rel="stylesheet" href="${req.contextPath}/assets/css/login.css">
+    	<script src="${req.contextPath}/assets/lib/jquery/jquery.min.js"></script>
+    	<script src="${req.contextPath}/assets/js/login/login.js"></script>
+	</head>
+<body style="min-width:1349px;overflow:scroll;">      
+  <div class="login">
+    <div id="top">
+			<div class="login-head">
+				<div class="login-head-a">
+					<img src="${req.contextPath}/assets/img/logo.png" title="" alt=""/>
+				</div>
+				<div class="login-head-b">
+					微信平台后台管理系统
+				</div>
+			</div>
+    </div>
+	<div class="login-con">
+		<div class="login-a" style="width:100%; ">
+             <img src="${req.contextPath}/assets/img/weChatNum.jpg" width="100" height="100" style="position:absolute;left:685px;top:401px" />
+          <div class="login-b" style="width: 400px;margin-right:155px;">
+            <div class="login-b-a">用户登录</div>
+              <div class="login-b-b" >
+                <ul>
+                  <li>
+                     <div class="login-input-wrap" style="width:80%;float: left;position: relative;">
+                        <i class="login-icon iconfont icon-yonghuxinxi"></i>
+                        <input type="text" id="userName" name="userName" placeholder="用户名"  style="position:absolute;left: 45px;top: 5px;width: 70%;">
+                    </div>
+                    <h1 id="m-tip"></h1>
+                  </li>
+                  <li>
+					<div class="login-input-wrap" style="width:80%;float: left;position: relative;">
+                        <i class="login-icon iconfont icon-mima1"></i>
+                        <input type="password" id="passWord" name="passWord" placeholder="密码" style="position:absolute;left: 45px;top: 5px;width: 70%;" />
+                    </div>
+                    <h1 id="p-tip"></h1>
+                  </li>
+                 <li>
+                    <!-- <div class="login-input-wrap" style="width:60%;float: left;">
+                        <i class="login-icon iconfont icon-shoushumingcheng"></i>
+                        
+                        <input type="text" id="validateCode" name="validateCode" placeholder="验证码" style="width: 70%;"/>
+                    </div>
+                    <img id="codeImg" src="${req.contextPath}/servlet/validateCodeServlet" alt="" style="margin-left: 2px ; height:40px">--> 
+                    <span id="errorSpan" class="red login-error" style="clear:both;display:none"><i class="iconfont icon-guanbi1"></i> 账号或密码错误</span>  
+                    <span class="query-bt-green" id="loginBtn" style="width:80%;height: 40px;line-height: 40px;text-align: center;">登 录</span> 
+                  </li>
+                </ul>
+              </div>
+            </div>
+		</div>
+	</div>
+	<!-- 下面的隐藏input勿删！！！！判断session超时跳转用 -->
+	<input type="hidden" id="pageName" value="loginPage">
+		<div class="login-foot" style="font-family:Verdana, Arial, Helvetica, sans-serif;">
+			Copyright © 2015 - 2016 上海陆鹰实业有限公司 .All rights reserved.
+		</div>
+	</div>
+	<!-- 引入公共JS资源文件  -->
+	#parse("./common/common-js.html")
+</body>    
+</html>

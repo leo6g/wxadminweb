@@ -1,0 +1,117 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<div class="container">
+		<h4 class="main-title">ATM位置管理</h4>
+		<div class="row query-box" style="padding-bottom:20px">
+			<div class="row	 box-sm" >
+				安装地点：
+				<input class="large " type="text" id="address" name="address" value="" placeholder="请输入安装地点" />
+		
+			</div>
+
+			
+		</div>
+		<div class="row" >
+			<input type="button" class="btn b-primary" id="addBtn" value="新增" />
+			<input type="button" class="btn b-primary ml10" id="editBtn" value="编辑" />
+			<input type="button" class="btn b-primary ml10" id="delBtn" value="删除" />
+			<input type="button" class="btn b-primary ml10" id="viewBtn" value="查看" />
+			<input type="button" class="btn btn-primary ml10" data-toggle="modal" data-target="#myModal" value="导入"/>
+			<div style="display: inline-block;margin-left: 10px;">
+				<input type="button" class="btn btn-primary" id="searchBtn" value="查 询" />
+				<input type="button" class="btn btn-default ml10" id="resetBtn" value="重置" />
+			</div>
+		</div>
+		<div class="excel-wrap">
+			<!-- 隐藏选中的ID -->
+			<input type="hidden" id="edit-id" name="id" value="" />
+			<table id="listTable" class="table table-hover table-striped clickable-table">
+			</table>
+			<div class="page-box" style="width: 97%;margin:0 auto">
+				<input type="hidden" id="currPage" value="1" />
+                <span style="float:left" class="pagination" id="totalNum" ></span>
+                <ul style="float: right;" id="pagination"></ul>
+            </div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">导入ATM位置信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                    	<tr>
+                                <td>
+									<input type="button" class="btn btn-primary" style="margin: 20px 0 0 0;" id="uploadBtn" value="上传" />
+                                    <input type="text" id="filePath"  name="filePath" value=""/>
+                                </td>
+						</tr>		
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th>设备种类</th>
+				<th>所在市</th>
+				<th>一级支行</th>
+				<th>管辖网点</th>
+				<th>安装地点</th>
+				<th>地址类型</th>
+				<th>图片</th>
+				<th>联系电话</th>
+				<th>经度</th>
+				<th>维度</th>
+				<th>ATM状态</th>
+		  	</tr>
+		</thead>
+	  {{#each this}}
+		<tr data-id="{{atmId}}">
+			<td>{{ORACLESTART}}</td>
+			<td>{{typeName}}</td>
+			<td>{{cityName}}</td>
+			<td>{{townName}}</td>
+			<td>{{orgShtName}}</td>
+			<td>{{address}}</td>
+			<td>{{addrTypeName}}</td>
+			<td>
+				<img src="${req.contextPath}/{{imagePath}}" onerror="this.src='${req.contextPath}/assets/img/no_pic.png'" style="width:70px; height:50px"/>
+			</td>
+			<td>{{tactorPhone}}</td>
+			<td>{{longitude}}</td>
+			<td>{{latitude}}</td>
+			<td>
+				{{#equals state 0}}
+					正常
+				{{/equals}}
+				{{#equals state 1}}
+					维修
+				{{/equals}}
+				{{#equals state -1}}
+					故障
+				{{/equals}}
+			</td>
+		</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/biz/atm/atm-list.js"></script>

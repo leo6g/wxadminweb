@@ -1,0 +1,293 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">微信账号配置信息管理</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div style="margin-top:-10px">
+                <span class="oper-bt-gray" data-toggle="modal" data-target="#myModal">新增</span>
+                <span class="oper-bt-gray" id="editWXConfigBtn" data-toggle="modal" data-target="#myModal1">编辑</span>
+                <span class="oper-bt-gray" id="delWXConfigBtn">删除</span>
+            </div>
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            微信账号配置信息信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="wXConfigListTable" class="table border-table table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addWXConfigForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加微信账号配置信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+							<td style="border: none;">
+								token信息：
+								<div class="input-wrap">
+									<input type="text" id="token" name="token" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								账号描述：
+								<div class="input-wrap">
+									<input type="text" id="description" name="description" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								公众号类型：
+								<div class="input-wrap">
+									<input type="text" id="type" name="type" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								公众号APPID：
+								<div class="input-wrap">
+									<input type="text" id="appId" name="appId" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								访问token：
+								<div class="input-wrap">
+									<input type="text" id="accessToke" name="accessToke" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								公众号名称：
+								<div class="input-wrap">
+									<input type="text" id="account" name="account" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								原始ID：
+								<div class="input-wrap">
+									<input type="text" id="accountId" name="accountId" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								邮箱地址：
+								<div class="input-wrap">
+									<input type="text" id="email" name="email" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								公众号密码：
+								<div class="input-wrap">
+									<input type="text" id="appSecret" name="appSecret" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								null：
+								<div class="input-wrap">
+									<input type="text" id="createUser" name="createUser" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveWXConfigBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editWXConfigForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑微信账号配置信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table">
+                            	<tr>
+							<td style="border: none;">
+								token信息：
+								<div class="input-wrap">
+									<input type="text" id="edit-token" name="token" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								账号描述：
+								<div class="input-wrap">
+									<input type="text" id="edit-description" name="description" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								公众号类型：
+								<div class="input-wrap">
+									<input type="text" id="edit-type" name="type" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-cfgId" name="cfgId" value="" />
+						<tr>
+							<td style="border: none;">
+								公众号APPID：
+								<div class="input-wrap">
+									<input type="text" id="edit-appId" name="appId" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								访问token：
+								<div class="input-wrap">
+									<input type="text" id="edit-accessToke" name="accessToke" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								公众号名称：
+								<div class="input-wrap">
+									<input type="text" id="edit-account" name="account" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								原始ID：
+								<div class="input-wrap">
+									<input type="text" id="edit-accountId" name="accountId" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								邮箱地址：
+								<div class="input-wrap">
+									<input type="text" id="edit-email" name="email" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								公众号密码：
+								<div class="input-wrap">
+									<input type="text" id="edit-appSecret" name="appSecret" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								null：
+								<div class="input-wrap">
+									<input type="text" id="edit-createUser" name="createUser" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						
+                            </table>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveWXConfigBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="wXConfig-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<tr>
+			<th>序号</th>
+			<th>token信息</th>
+			<th>账号描述</th>
+			<th>公众号类型</th>
+			<th style="display:none">主键ID</th>
+			<th>公众号APPID</th>
+			<th>访问token</th>
+			<th>公众号名称</th>
+			<th>原始ID</th>
+			<th>邮箱地址</th>
+			<th>公众号密码</th>
+			<th>null</th>
+			<th>null</th>
+			
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{token}}</td>
+			<td>{{description}}</td>
+			<td>{{type}}</td>
+			<td style="display:none">{{cfgId}}</td>
+			<td>{{appId}}</td>
+			<td>{{accessToke}}</td>
+			<td>{{account}}</td>
+			<td>{{accountId}}</td>
+			<td>{{email}}</td>
+			<td>{{appSecret}}</td>
+			<td>{{createUser}}</td>
+			<td>{{createTime}}</td>
+			
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/weixin/wxconfig-list.js"></script>
+<!-- 引入公共底部     -->

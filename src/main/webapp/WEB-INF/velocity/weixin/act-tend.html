@@ -1,0 +1,66 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/xiumi-ue-dialog-v5.js"></script>
+<link rel="stylesheet" type="text/css" href="${req.contextPath}/assets/ueditor/xiumi-ue-v5.css"/>
+<!-- Content Wrapper. Contains page content -->
+<form id="formdata">
+<div class="content-wrapper">
+    <div class="container">
+        <i></i>
+        <h4 class="main-title">活动专属维护信息</h4>
+        <div class="row query-box" style="margin-bottom: 111px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        维护活动专属信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table">
+                            <tr>
+                                <td>标题：
+                                    <br>
+                                    <div class="input-wrap" style="width:370px">
+                                        <i class="iconfont icon-fudai"></i>
+                                        <input type="text" name="title" id="title" placeholder="标题">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>正文：
+                                    <br>
+                                    <div>
+										<script id="editorContent" name="content" type="text/plain" style="width:550px;height:300px;"></script>
+									</div>
+                                </td>
+                                
+                            </tr>
+							<!-- 隐藏主键 -->
+							<input type="hidden" id="itemId" name="itemId" value="$!{itemId}"/>
+                        </table>
+                    </div>
+                </div>
+                <span class="query-bt-green"  id="submitData" style="margin: 20px 0 0 0;">
+                    保存
+                </span>
+                <span class="query-bt-green" style="margin: 20px 0 0 20px;" onclick="viewBtn()">
+                    预览
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/plupload/plupload.full.min.js"></script>
+<!-- 引入公共底部     -->
+<script type="text/javascript">
+	UEDITOR_CONFIG.UEDITOR_HOME_URL = '${req.contextPath}/assets/ueditor/';
+	var ue = UE.getEditor('editorContent');
+	
+</script>
+<script src="${req.contextPath}/assets/js/weixin/act-tend.js"></script>

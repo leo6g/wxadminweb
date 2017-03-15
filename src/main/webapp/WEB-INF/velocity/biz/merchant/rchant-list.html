@@ -1,0 +1,551 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">特惠商户信息管理</h4>
+         <form id="queryForm">
+			<div class="row query-box">
+
+                        <div class="col-xs-5 box-sm" style="width: 30%;">
+							商户类型：
+							<select  name="type" class="large typeList"></select>
+						</div>
+						<div class="col-xs-5 box-md" style="width: 31%;">
+							商户状态：<select  name="state" class="large stateList"></select>
+						</div>
+						<!--<div class="row" style="height: 45px;">	</div>-->
+						<div class="col-xs-5 box-sm" style="width: 30%;">
+							商户名称：<input class="large" type="text" value="" placeholder="请输入商户名称" id="queryName" name="name" style="width:70%;"/>
+						</div>
+						<div class="col-xs-2 box-bt">
+							
+						</div>
+			</div>
+			</form>
+			<div class="row" style="margin-left: -10px;">
+						<input type="button" class="btn btn-primary ml10" data-toggle="modal" data-target="#myModal" value="添加"/>
+						<input type="button" class="btn btn-primary ml10" id="editMerchantBtn" data-toggle="modal" data-target="#myModal1" value="编辑"/>
+						<input type="button" class="btn btn-primary ml10" id="viewMerchant" data-toggle="modal" data-target="#myModal2" value="查看"/>
+						<input type="button" class="btn btn-primary ml10" id="delMerchantBtn" value="删除"/>
+						<input type="button" class="btn btn-primary ml10" id="" value="发布"/>
+						<input type="button" class="btn btn-primary ml10" id="" value="优惠卡卷管理"/>	
+						<input type="button" class="btn btn-primary ml10" data-toggle="modal" data-target="#myModal3" value="导入"/>
+						<input type="button" class="btn btn-primary ml10" id=exportBtn value="导出"/>
+						<input type="button" class="btn btn-primary" style="margin-left: 10px;" id="querySubmit" value="查 询"  />
+					    <input type="reset" class="btn btn-default clear-margin ml10" id="" value="重置"  />
+						
+			</div>
+           <div class="excel-wrap">
+                <table id="merchantListTable" class="clickable-table table table-hover table-striped">
+                            <!-- 动态显示列表 -->
+                 </table>
+				<div class="page-box" style="width: 97%;margin:0 auto">
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                 </div>
+          </div>
+           
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addMerchantForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加特惠商户信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                    	<tr>
+							<td style="border: none;">
+								商户名称：
+								<div class="input-wrap">
+									<input type="text" id="name" name="name" value="" class="fluid-input" required/>
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+                            <td style="border: none;">
+								商户简称：
+								<div class="input-wrap">
+									<input type="text" id="shortName" name="shortName" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								商户类型：
+								<div class="input-wrap">
+									<input type="text" id="type" name="type" value="" class="fluid-input" required/>
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+							<td style="border: none;">
+								商户地址：
+								<div class="input-wrap">
+									<input type="text" id="address" name="address" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								商户介绍：
+								<div class="input-wrap">
+									<input type="text" id="introduction" name="introduction" value="" class="fluid-input" />
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+							<td style="border: none;">
+								联系电话：
+								<div class="input-wrap">
+									<input type="text" id="tactorPhone" name="tactorPhone" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								纬度：
+								<div class="input-wrap">
+									<input type="text" id="latitude" name="latitude" value="" class="fluid-input" required/>
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+							<td style="border: none;">
+								经度：
+								<div class="input-wrap">
+									<input type="text" id="longitude" name="longitude" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								状态：
+								<div class="input-wrap">
+									<select  name="state" class="large stateList"></select>
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+							<td style="border: none;">
+								活动名称：
+								<div class="input-wrap">
+									<input type="text" id="activityName" name="activityName" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>	
+						<tr>
+							<td style="border: none;">
+								是否热门：
+								<div class="input-wrap">
+									<select id="isHot" name="isHot">
+										<option value="T">是</option>
+										<option value="F">否</option>
+									</select>
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+							<td style="border: none;">
+								广告图片：
+								<div class="input-wrap" style="width:100px;height:100px">
+						        	<img src="${req.contextPath}/assets/img/default.png" id="bannerPicIcon" style="width: 80px; height: 80px;"/>
+                                    <input type="hidden" id="bannerImg" name="bannerImg" />
+                                    <span id="bannerUploadIcon">
+                                    </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								活动开始日期：
+								<div class="input-wrap">
+									<input type="date" placeholder="开始时间" name="startDate" id="startDate" onclick="laydate()" class="fluid-input" />
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+							<td style="border: none;">
+								活动结束日期：
+								<div class="input-wrap">
+									<input type="date" placeholder="结束时间" id="endDate" name="endDate" onclick="laydate()" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								活动内容：
+								<div class="input-wrap">
+									<!-- <input type="text" id="activityContent" name="activityContent" value="" class="fluid-input" /> -->
+									<textarea rows="4" cols="5" id="activityContent" name="activityContent" value="" class="fluid-input"></textarea>
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+							<td style="border: none;">
+								图片路径：
+								<div class="input-wrap" style="width:100px;height:100px">
+						        	<img src="${req.contextPath}/assets/img/default.png" id="picIcon"style="width: 80px; height: 80px;"/>
+                                    <input type="hidden" id="imagePath" name="imagePath" />
+                                    <span id="uploadIcon">
+                                    </span>
+								</div>
+							</td>
+						</tr>	
+											
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn" id="saveMerchantBtn" value="保存"/>
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editMerchantForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑特惠商户信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                    	<tr>
+							<td style="border: none;">
+								商户名称：
+								<div class="input-wrap">
+								    <input type="hidden" id="merchantId" name="merchantId" />
+									<input type="text" id="edit-name" name="name" value="" class="fluid-input" required/>
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+							<td style="border: none;">
+								商户简称：
+								<div class="input-wrap">
+									<input type="text" id="edit-shortName" name="shortName" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								商户类型：
+								<div class="input-wrap">
+									<input type="text" id="edit-type" name="type" value="" class="fluid-input" required/>
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+							<td style="border: none;">
+								商户地址：
+								<div class="input-wrap">
+									<input type="text" id="edit-address" name="address" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								商户介绍：
+								<div class="input-wrap">
+									<input type="text" id="edit-introduction" name="introduction" value="" class="fluid-input" />
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+							<td style="border: none;">
+								联系电话：
+								<div class="input-wrap">
+									<input type="text" id="edit-tactorPhone" name="tactorPhone" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								纬度：
+								<div class="input-wrap">
+									<input type="text" id="edit-latitude" name="latitude" value="" class="fluid-input" required/>
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+							<td style="border: none;">
+								经度：
+								<div class="input-wrap">
+									<input type="text" id="edit-longitude" name="longitude" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								状态：
+								<div class="input-wrap">
+									<select id="edit-state" name="state" class="large stateList"></select>
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+							<td style="border: none;">
+								活动名称：
+								<div class="input-wrap">
+									<input type="text" id="edit-activityName" name="activityName" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>	
+						<tr>
+							<td style="border: none;">
+								是否热门：
+								<div class="input-wrap">
+									<select id="edit-isHot" name="isHot">
+										<option value="T">是</option>
+										<option value="F">否</option>
+									</select>
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+							<td style="border: none;">
+								广告图片：
+								<div class="input-wrap" style="width:100px;height:100px">
+						        	<img src="${req.contextPath}/assets/img/default.png" id="edit-bannerPicIcon" style="width: 80px; height: 80px;"/>
+                                    <input type="hidden" id="edit-bannerImg" name="bannerImg" />
+                                    <span id="edit-bannerUploadIcon">
+                                    </span>
+								</div>
+							</td>
+						</tr>
+						
+						<tr>
+							<td style="border: none;">
+								活动开始日期：
+								<div class="input-wrap">
+									<input type="text" placeholder="开始时间" name="startDate" id="edit-startDate" onclick="laydate()" class="fluid-input" />
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+							<td style="border: none;">
+								活动结束日期：
+								<div class="input-wrap">
+									<input type="text" placeholder="结束时间" name="endDate" id="edit-endDate" onclick="laydate()" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								活动内容：
+								<div class="input-wrap">
+									<!-- <input type="text" id="edit-activityContent" name="activityContent" value="" class="fluid-input" /> -->
+									<textarea rows="4" cols="5" id="edit-activityContent" name="activityContent" value="" class="fluid-input"></textarea>
+								</div>
+							</td>
+                            <td class="t5" style="border: none;">
+                            </td>
+							<td style="border: none;">
+								图片路径：
+								<div class="input-wrap" style="width:100px;height:100px">
+							        <img src="${req.contextPath}/assets/img/default.png" id="edit-picIcon"style="width: 80px; height: 80px;"/>
+                                    <input type="hidden" id="edit-imagePath" name="imagePath" />
+                                    <span id="edit-uploadIcon">
+                                    </span>
+								</div>
+							</td>
+						</tr>	
+																
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn" id="edit-saveMerchantBtn" value="保存"/>
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" id="myModal2"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">特惠商户详细信息</h4>
+            </div>
+            <div class="modal-body">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        基本信息
+                    </div>
+                    <div class="info-item-content">
+                        <table>
+                            <tr>
+                                <td class="t1">商户名称：</td>
+                                <td class="t2" id="view-name"></td>
+                                <td class="t1">商户简称：</td>
+                                <td class="t3" id="view-shortName"></td>
+                            </tr>
+                            <tr>
+                                <td>商户编码：</td>
+                                <td id="view-code"></td>
+                            </tr>
+                            <tr>
+                                <td>联系电话：</td>
+                                <td id="view-tactorPhone"></td>
+                                <td>商户地址：</td>
+                                <td id="view-address"></td>
+                                <td>商户介绍：</td>
+                                <td id="view-introduction"></td>
+                                <td>状态：</td>
+                                <td id="view-state"></td>
+                            </tr>
+                            <tr>
+                                <td>经度：</td>
+                                <td id="view-longitude"></td>
+                                <td>纬度：</td>
+                                <td id="view-latitude"></td>
+                            </tr>
+                            <tr>
+                                <td>活动名称：</td>
+                                <td id="view-activityName"></td>
+                                <td>活动开始日期：</td>
+                                <td id="view-startDate"></td>
+                            </tr>
+                            <tr>
+                                <td>活动结束日期：</td>
+                                <td id="view-endDate"></td>
+                                <td>活动内容：</td>
+                                <td id="view-activityContent"></td>
+                            </tr>
+                            <tr>
+                                <td>商户图片：</td>
+                                <td><img src="${req.contextPath}/assets/img/default.png" id="view-imagePath" style="width: 80px; height: 80px;"/></td>
+                                
+                                <td>广告图片：</td>
+                                <td><img src="${req.contextPath}/assets/img/default.png" id="view-bannerImg" style="width: 80px; height: 80px;"/></td>
+                                 <td>是否热门：</td>
+                                <td id="view-isHot"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="info-item-box" style="margin-top:20px;">
+                    <div class="info-item-title">
+                       活动信息
+                    </div>
+                    <div class="info-item-content">
+                        暂无
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="modal-footer">            
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+<div class="modal fade" id="myModal3"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">导入优惠信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                    	<tr>
+                            <tr>
+                                <td>
+									<input type="button" class="btn btn-primary" style="margin: 20px 0 0 0;" id="uploadBtn" value="上传" />
+                                    <input type="text" id="filePath"  name="filePath" value=""/>
+                                </td>
+                            </tr>
+						</tr>		
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="merchant-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th>商户名称</th>
+	            <th>商户简称</th>
+				<th>商户类型</th>
+	            <th>联系电话</th>
+	            <th>经度</th>
+	            <th>纬度</th>
+	            <th>商户图片</th>			
+				<th>状态</th>
+				<th>活动名称</th>
+				<th>活动开始日期</th>
+				<th>活动结束日期</th>
+				<th>活动内容</th>
+				<th>广告图片</th>
+				<th>是否热门</th>
+			</tr>
+		</thead>
+		
+	  {{#each this}}
+		<tr>
+        	<td style="vertical-align:middle">{{ORACLESTART}}</td>
+			<td style="display:none">{{merchantId}}</td>
+			<td width="100px" style="vertical-align:middle">{{name}}</td>
+            <td style="vertical-align:middle">{{shortName}}</td>
+            <td style="vertical-align:middle">{{type}}</td>
+			<td style="vertical-align:middle">{{tactorPhone}}</td>
+            <td style="vertical-align:middle">{{longitude}}</td>
+            <td style="vertical-align:middle">{{latitude}}</td>
+			<td width="200px" height="120px"><img src="{{imagePath}}" alt="" width="180px" height="120px"></td>
+			<td style="vertical-align:middle">{{state}}</td>	
+			<td style="vertical-align:middle">{{activityName}}</td>
+			<td style="vertical-align:middle">{{startDate}}</td>
+			<td style="vertical-align:middle">{{endDate}}</td>
+			<td style="vertical-align:middle">{{activityContent}}</td>
+			<td width="200px" height="120px"><img src="{{bannerImg}}" alt="" width="180px" height="120px"></td>
+			<td style="vertical-align:middle">{{tranHot isHot}}</td>				
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+
+<script id="type-list-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{type}}">{{type}}</option>
+	  {{/each}}
+</script>
+<script id="state-list-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{id}}">{{dicName}}</option>
+	  {{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/biz/merchant/rchant-list.js"></script>
+

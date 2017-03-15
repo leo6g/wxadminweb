@@ -1,0 +1,205 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">活动报名管理</h4>
+         <form id="queryForm">
+			<div class="row query-box">
+				<div class="col-xs-3">
+					地市名称：
+					<select name="belongCity" id="queryBelongCity" class="large" style="width:150px;" onchange="javascript:getSelect(this.value);">
+                		<option value="" selected>---请选择---</option>       
+                        <option value="郑州市">郑州市</option>
+                        <option value="开封市">开封市</option>
+                        <option value="洛阳市">洛阳市</option>
+                        <option value="平顶山市">平顶山市</option>
+                        <option value="安阳市">安阳市</option>
+                        <option value="鹤壁市">鹤壁市</option>
+                        <option value="新乡市">新乡市</option>
+                        <option value="焦作市">焦作市</option>
+                        <option value="濮阳市">濮阳市</option>
+                        <option value="许昌市">许昌市</option>
+                        <option value="漯河市">漯河市</option>
+                        <option value="三门峡市">三门峡市</option>
+                        <option value="南阳市">南阳市</option>
+                        <option value="商丘市">商丘市</option>
+                        <option value="信阳市">信阳市</option>
+                        <option value="周口市">周口市</option>
+                        <option value="驻马店市">驻马店市</option>
+                        <option value="济源市">济源市</option>
+                    </select>
+				</div>
+				<div class="col-xs-3">
+					活动类型：
+					<select name="actType" id="actType" class="large" style="width:150px;" onchange="javascript:getSelect(this.value);">
+                		<option value="" selected>---请选择---</option>       
+                        <option value="metal">贵金属购买预约</option>
+                        <option value="4s">汽车4S店活动</option>
+                    </select>
+				</div>
+				<div class="col-xs-3">
+					姓名：
+					<input class="large" type="text" value="" placeholder="请输入姓名" name="name" id="queryName" style="width:150px"/>
+					
+				</div>
+				<div class="col-xs-3">
+						手机号码：
+					<input class="large" type="text" value="" placeholder="请输入手机号码" name="phoneNumber" id="queryPhoneNumber" style="width:150px"/>
+				</div>
+			</div>
+		</form>
+		
+		<div class="row" style="margin-left: 14px;">
+			<input type="button" class="btn btn-primary" style="margin-left:10px" id="querySubmit" value="查询"/>
+			 <span class="oper-bt-gray" id="exportBtn" style="height: 26px;line-height: 24px; ">导出</span>
+			<input type="reset" class="btn btn-default clear-margin ml10" style="margin:0 0 0 10px;" id="resetBtn" value="重置"/>		               
+		</div>
+		
+		
+		
+		<!-- <div class="row">
+			<span class="btn btn-primary" data-toggle="modal" data-target="#myModal">新增</span>
+            <span class="btn btn-primary" id="editActSignBtn" data-toggle="modal" data-target="#myModal1">编辑</span>
+            <span class="btn btn-primary" id="delActSignBtn">删除</span>
+		</div> -->
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            活动报名信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="actSignListTable" class="table border-table table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addActSignForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加活动报名</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+							<td style="border: none;">
+								姓名：
+								<div class="input-wrap">
+									<input type="text" id="name" name="name" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								手机号码：
+								<div class="input-wrap">
+									<input type="text" id="phoneNumber" name="phoneNumber" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						
+						<tr>
+							<td style="border: none;">
+								车型：
+								<div class="input-wrap">
+									<input type="text" id="extStr1" name="extStr1" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								报名隶属地市：
+								<div class="input-wrap">
+									<select  name="belongCity" id="belongCity" class="large">
+				                		<option value="" selected>---请选择---</option>       
+				                        <option value="郑州市">郑州市</option>
+				                        <option value="开封市">开封市</option>
+				                        <option value="洛阳市">洛阳市</option>
+				                        <option value="平顶山市">平顶山市</option>
+				                        <option value="安阳市">安阳市</option>
+				                        <option value="鹤壁市">鹤壁市</option>
+				                        <option value="新乡市">新乡市</option>
+				                        <option value="焦作市">焦作市</option>
+				                        <option value="濮阳市">濮阳市</option>
+				                        <option value="许昌市">许昌市</option>
+				                        <option value="漯河市">漯河市</option>
+				                        <option value="三门峡市">三门峡市</option>
+				                        <option value="南阳市">南阳市</option>
+				                        <option value="商丘市">商丘市</option>
+				                        <option value="信阳市">信阳市</option>
+				                        <option value="周口市">周口市</option>
+				                        <option value="驻马店市">驻马店市</option>
+				                        <option value="济源市">济源市</option>
+				                    </select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								报名人OPEN_ID：
+								<div class="input-wrap">
+									<input type="text" id="openId" name="openId" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveActSignBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="actSign-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<tr>
+			<th>序号</th>
+			<th>姓名</th>
+			<th>手机号码</th>
+			<th>车型</th>
+			<th>报名地市名称</th>
+			<th>报名时间</th>
+			
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{name}}</td>
+			<td>{{phoneNumber}}</td>
+			<td>{{extStr1}}</td>
+			<td>{{belongCity}}</td>
+			<td>{{createTime}}</td>
+			
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/biz/actsign/tsign-list.js"></script>
+

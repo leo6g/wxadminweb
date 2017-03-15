@@ -1,0 +1,88 @@
+<!-- 选择视频modal-->
+<div style="z-index:1100" class="modal fade" id="myModalVideo"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="videoHide();"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">请选择视频</h4>
+            </div>
+            <div class="modal-body">
+                <span class="zl_weixin_sound" style="top:40px" id="countSpan2">微信视频1/1000</span>
+		    	<div class="zl_content" style="margin-top: 15px; width: 340px">
+			        <div id="videoTable">
+			        </div>
+		    	</div>
+		    	<div class="page-box" style="width: 97%; margin: 0 auto">
+					<input type="hidden" id="video-currPage">
+					<span style="float: left" class="pagination" id="video-totalNum"></span>
+					<ul style="float: right;" id="video-pagination" class="pagination">
+						<li class="active"><a title="Current page is 1">1</a></li>
+						<li><a title="Go to next page">&gt;</a></li>
+						<li><a title="Go to last page">&gt;&gt;</a></li>
+					</ul>
+				</div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveAudioResp">保存</span>
+                <span type="button" class="btn" onclick="videoHide();">取消</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 视频列表 -->
+<script id="video-list-template" type="text/x-handlebars-template">
+{{#each this}}
+		        <div class="zl_each" onclick="selected(this);" style="border-bottom:1px solid #dedfe1;margin-top:10px" mediaId="{{mediaId}}" name="{{name}}" vUrl="{{localUrl}}">
+		            <p>{{name}}</p>
+		            <p style="padding-bottom:5px;margin-right:10px;">{{createTime}}</p>
+		            <p>		        
+                          <video src="{{localUrl}}" controls="controls" class="showVideo" style="width:270px;height:130px;margin-top:10px;">
+                             Your browser does not support the video element.
+                         </video>
+                     </p>
+					<p>{{videoTags}}</p>
+					<p>{{videoInstru}}</p>
+		        </div>
+
+{{/each}}
+<div style="clear:both"></div>
+</script>
+
+<script type="text/javascript">
+//初始化音频列表信息
+function initvideoInfo(currentPage, limit){
+	if(typeof currentPage == "undefined"){
+		currentPage = 1;
+	}
+	if(typeof limit == "undefined"){
+		limit = global_limit;
+	}
+	var url = contextPath + "/wx/video/getList";
+	var params = "&pageNumber="+currentPage+"&limit="+limit;
+	//异步请求音频列表数据
+	Util.ajax.postJson(url, params, function(data, flag){
+		var source = $("#video-list-template").html();
+		var templet = Handlebars.compile(source);
+		if(flag && data.returnCode=="0"){
+			//渲染列表数据
+			var htmlStr = templet(data.beans);
+			$("#videoTable").html(htmlStr);
+			$("#countSpan2").text("微信视频"+data.bean.count+"/1000");
+			//初始化分页数据(当前页码，总数，回调查询函数)
+			initPaginator(currentPage, data.bean.count, initvideoInfo, "video-pagination", "video-totalNum", "video-currPage");
+		}
+	});
+}
+$("#saveAudioResp").click(function(){
+	$("#myModalVideo").modal("hide");
+});
+//添加视频页面
+function addVideo(){
+	C.load(contextPath+'/wx/video/add');
+};
+
+function videoHide(){
+	$(".selected").removeClass("selected");
+	$("#myModalVideo").modal("hide");
+}
+</script>

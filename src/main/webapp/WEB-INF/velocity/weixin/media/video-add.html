@@ -1,0 +1,89 @@
+<!-- Content Wrapper. Contains page content -->
+<link rel="stylesheet" href="${req.contextPath}/assets/css/global.css"> 
+	<div class="content-wrapper">
+     <div class="zl_main">
+     <form id="formdata">
+		    <h3 style="margin-top:15px;padding-left:30px;"><span class="title">上传视频</span></h3>
+		    <div style="margin-left:110px;margin-top:10px;width:700px;height:300px;background:#eaf5f1;">
+		          <video src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" controls="controls" id="showVideo" style="width:300px;height:230px">
+                     your browser does not support the video tag
+                 </video> 
+                <div class="input-wrap">
+                                    <input type="hidden" id="videoPath" name="localUrl" />
+                                    <span id="uploadIcon">
+                                    </span>
+                </div>
+                <input type="hidden" name="mediaId" id="mediaId"/>
+		    </div>
+		    <ul class="zl_list" style="min-height:350px">
+		        <li>
+		            <span class="title">标题</span>
+		            <input type="text" placeholder="标题" style="padding-left:30px;" name="name">
+		        </li>
+		        <li>
+		            <span class="title">分类</span>
+		            <select style="color:#acacac;width:200px;height:30px;padding-left:30px;" name="subType">
+		                <option value="1">微电影</option>
+		                <option value="2">网络剧</option>
+		                <option value="3">音乐</option>
+		                <option value="4">搞笑</option>
+		                <option value="5">动漫</option>
+		                <option value="6">游戏</option>
+		                <option value="7">拍客</option>
+		                <option value="8">新闻</option>
+		                <option value="9">体育</option>
+		                <option value="10">财经</option>
+		                <option value="11">科技</option>
+		                <option value="12">汽车</option>
+		                <option value="13">房产</option>
+		                <option value="14">生活</option>
+		                <option value="15">时尚</option>
+		                <option value="16">旅游</option>
+		                <option value="17">趣闻</option>
+		                <option value="18">广告</option>
+		                <option value="19">自拍</option>
+		                <option value="20">创意</option>
+		                <option value="21">电影</option>
+		                <option value="22">电视剧</option>
+		                <option value="23">综艺</option>
+		                <option value="24">娱乐</option>
+		                <option value="25">纪录片</option>
+		                <option value="26">教育</option>
+		            </select>
+		        </li>
+		        <li>
+                    <span class="title">标签</span>
+                    <input type="text" placeholder="标签" style="padding-left:30px;" name="videoTags">
+                </li>
+                <li>
+                    <span class="title" style="position:static;">简介</span>
+                    <textarea  rows="7" placeholder="简介" style="padding-left:30px;padding-top:5px;width:700px;box-sizing:border-box;" name="videoInstru"></textarea>
+                </li>
+		        <li>
+		            <span class="title" style="left:30px;top:395px;">视频内容</span>
+				     <span style="margin-left:15px;color:#8d8d8d">      
+				            格式支持大部分主流视频格式，视频不能超过10M	            
+		             </span> 
+		        </li>
+		    </ul>
+		    		  </form>
+		    <p ><input type="checkbox" checked="checked" style="width:15px;height:15px;border:1px solid #efefef;margin-left:350px;margin-top:20px;display:inline;">&nbsp;<span style="display:inline-block;vertical-align: top;margin-top:11px;line-height: 31px">我已阅读并同意《腾讯视频上传服务规则》</span></p>
+		    <p ><button style="width:110px;height:30px;background:#0ca670;color:#fff;font-size: 14px;outline:0;border:0;border-radius:3px;margin-left:450px;margin-top:10px;" id="submitData">保存</button></p>
+
+		   </div>
+   </div>
+
+
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/weixin/media/video-add.js"></script>
+

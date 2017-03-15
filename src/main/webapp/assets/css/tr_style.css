@@ -1,0 +1,19 @@
+/*表格tr点击时的背景颜色*/
+.tr-color{
+	background-color: #DFEBF2 !important;
+}
+
+/*鼠标悬浮时tr的背景颜色*/
+.table-hover>tbody>tr:hover{
+	background-color:#eee8aa !important;
+}
+
+/*奇数tr的背景颜色*/
+.table-striped>tbody>tr:nth-of-type(odd){
+	background-color:#f5f5dc;
+}
+
+
+.table>thead>tr>th{
+	vertical-align:top;
+}

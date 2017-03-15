@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>img{width: 100%;}</style>
+<meta content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<script src="${req.contextPath}/assets/lib/jquery/jquery.min.js"></script>
+<script src="${req.contextPath}/assets/common/common.js"></script>
+<link rel="stylesheet" href="${req.contextPath}/assets/fonts/demo.css">
+<link rel="stylesheet" href="${req.contextPath}/assets/fonts/iconfont.css">
+<title>中国邮政储蓄银行</title>
+</head>
+<body style="padding: 0 10px;">
+	<h3><b><font size="5">$!{title}</font></b></h3>
+	<!-- <font color = 'lightgray' size="3">$!{createTime} </font>
+	<a href="weixin://contacts/profile/prospertu">
+		<font color = '#87CEFA' size="3">河南邮储银行个人金融</font>
+	</a>
+	 -->
+	<fieldset class="comment_quote" style="padding: 5px; font-size: 14px; font-family: 宋体; border: 1px solid rgb(204, 204, 204); color: rgb(51, 51, 51); line-height: 24px; box-sizing: border-box; background-color: rgb(248, 247, 245);margin-top: 10px;">
+	<legend style="box-sizing: border-box;">
+    <span style="font-family: arial, helvetica, sans-serif; font-size: 16px;">
+     <strong style="color: rgb(102, 102, 102); font-size: 14px;">
+      <span style="margin-right: 8px; padding: 4px 10px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; color: rgb(255, 255, 255); background-color: rgb(191, 0, 0);">
+      邮小宝
+      </span>
+     </strong>
+     <strong style="color: rgb(60, 117, 45); font-size: 14px;">
+      <!-- <span style="color: rgb(192, 0, 0);">
+       ID:psbc-henan
+      </span> -->
+     </strong>
+    </span>
+   </legend>
+   <p style="word-wrap: normal;">
+    <span style="color: rgb(36, 64, 97); font-family: 微软雅黑;">
+     跟上邮小宝，节奏带起来。实用金融知识干货、高倍收益理财产品、缤纷信用卡钜惠、万千吃喝玩乐特惠商户、便捷一站式生活缴费、超多巨好玩游戏、有趣逗乐互动。麻溜关注起来吧！
+    </span>
+   </p>
+  </fieldset>
+  
+	<div style="padding: 10px; background-color: rgb(246, 244, 233);margin: 10px 0;">$!{content}</div>
+	<div id="praiseDiv">
+<!-- 		<div style="float:left;"><font color = 'lightgray'>阅读  $!{viewTimes}</font>&nbsp;</div> -->
+		<div style="display: none;" id="dianzan"><img src="${req.contextPath}/assets/img/dianzan.png" style="width:20px;height:20px;float:left;"/>赞一个<font color = 'lightgray'>&nbsp;$!{praiseTimes}</font></div>
+		<div style="display: none;" id="dianzan1"><img src="${req.contextPath}/assets/img/dianzan1.png" style="width:20px;height:20px;float:left;"/>已赞<font color = 'lightgray' id='praise'>&nbsp;$!{praiseTimes}</font></div>
+	</div>
+	<div style="background-color: lightgray;width: 100%;height: 200px;position: relative;" id="adverDiv">
+		<div style="border-top: 1px  dashed grey;left: 5%;position: absolute; width: 90%;margin: 10px auto 0; top: 10px;" >
+			<span style="position: absolute; left: 40%; top: -10px;background: lightgray;">广告</span>
+		</div>
+		<div id="advertise"  style="left: 10%; top: 30px;position: absolute;width: 80%"></div>
+	</div>
+	<!-- 广告区域 -->
+<!-- 	<div style="background-color: lightgray;width: 100%;height: 50px;position: relative;" id="remarkDiv"> -->
+<!-- 		<div style="border-top: 1px  dashed grey;left: 5%;position: absolute; width: 90%;margin: 10px auto 0; top: -1px;" > -->
+<!-- 			</div> -->
+<!-- 		<span style="position: absolute; left: 73%; top: 13px;color: #0088A8;" id="remarkBtn"><i class="iconfont icon-url"></i>有奖评论</span> -->
+<!-- 	</div> -->
+	<input type="hidden" id="praiseState" value="$!{praiseState}"/>
+	<input type="hidden" id="itemId" value="$!{itemId}"/>
+	<input type="hidden" id="openId" value="$!{openId}"/>
+	<input type="hidden" id="title" value="$!{title}"/>
+	<input type="hidden" id="contextPath" value="$!{req.contextPath}"/>
+	
+	<input type="hidden" id="praiseTimes" value="$!{praiseTimes}"/>
+	<input type="hidden" id="showAdver" value="$!{showAdver}"/>
+	<input type="hidden" id="showPraise" value="$!{showPraise}"/>
+	<input type="hidden" id="showRemark" value="$!{showRemark}"/>
+	<!-- <img data-ratio="0.6416666666666667" 
+	src="http://proxy1.weixinla.com/http://mmbiz.qpic.cn/mmbiz/nDPiaQNjQS7iaPSC6jM0mcO1GaNeV4njSSibwia68N8iaib1P46gpo1vQMibLBPUzicExd3ojTnmlw5FGiaG8uKMbIXbQmw/0?wx_fmt=gif" data-type="gif" data-w="720"/> -->
+	<script src="${req.contextPath}/assets/js/weixin/view-article.js"></script>
+</body>
+</html>

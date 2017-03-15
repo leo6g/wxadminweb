@@ -1,0 +1,336 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">微信文章管理</h4>
+         <form id="queryForm">
+			<div class="row query-box">
+				<div class="col-xs-3 box-sm" style="width: 25%">
+					文章名称：
+					<input class="" type="text" value="" id="queryName" name="name" placeholder="请输入文章名称" />
+				</div>
+				<div class="col-xs-3 box-sm" style="width: 25%">
+					文章类型：
+					<select id="queryType" name="type"  style="width:60% ; height: 27px; color:#999;" onchange="changeColor()">   
+				        <option value="">---请选择---</option>   
+				        <option value="menu" style="color:black;">菜单</option>   
+				        <option value="news" style="color:black;">新闻</option>
+				        <option value="push" style="color:black;">推送</option>
+				        <option value="subscribe" style="color:black;">关注</option>
+					</select>
+				</div>
+				<div class="col-xs-4">
+					发布起止时间： <input type="text" placeholder="开始时间"  id="beginTime"  name="beginTime" onclick="laydate()" style="width: 90px"/> -
+					<input type="text" placeholder="结束时间"  id="endTime"  name="endTime" onclick="laydate()" style="width: 90px"/>
+				</div>
+				<div class="col-xs-2 box-bt">
+				
+				</div>
+			</div>
+		</form>
+		<div class="row" >
+			<input type="button" class="btn btn-primary" style="" id="querySubmit" value="查 询" />
+
+			<span class="btn btn-primary" id="addWXArticleBtn" data-toggle="modal" data-target="#myModal" style="display:none;">新增</span>
+            <span class="btn btn-primary" id="editWXArticleBtn" data-toggle="modal" data-target="#myModal1" style="display:none;">编辑</span>
+            <span class="btn btn-primary" id="sendWXArticleBtn" data-toggle="modal" data-target="#myModal3" style="margin-right: 10px; margin-left: 10px;">发送</span>
+            <span class="btn btn-primary" id="viewWXArticleBtn" >详情</span>
+			<input type="button" class="btn btn-default clear-margin ml10" style="	" id="resetBtn" value="重置"/>
+            
+       </div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            微信文章信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="wXArticleListTable" class="table border-table table-hover table-striped align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <!-- 隐藏角色 -->
+                            <input type="hidden" id="role" value="$!{role}"/>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addWXArticleForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加微信文章</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+						<tr>
+							<td style="border: none;">
+								文章名称：
+								<div class="input-wrap">
+									<input type="text" id="name" name="name" value="" class="fluid-input" required="true" />
+								</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								文章类型：
+								<div class="input-wrap">
+									<select id="type" name="type"  style="width:100%"  required="true" >   
+								        <option value="">请选择</option>   
+								        <option value="menu">菜单</option>   
+								        <option value="news">新闻</option>
+								        <option value="push">推送</option>
+								        <option value="subscribe">关注</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								期数：
+								<div class="input-wrap">
+									<input type="text" id="weeklyNumber" name="weeklyNumber" value="" class="fluid-input" required="true"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								发布日期：
+								<div class="input-wrap">
+									<input type="text" id="publishDate" name="publishDate" value="" class="fluid-input" onclick="laydate()" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+									<input type="hidden" id="authState" name="authState" value=""/>
+									<input type="hidden" id="role" value="${role}"/>
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" style="width: 120px" id="saveWXArticleBtn">确认并提交审核</span>
+                <span type="button" class="btn" style="width: 120px" id="saveDraftWXArticleBtn">保存草稿</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" id="myModal2"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		 <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		 </div>
+		<div class="modal-body" id='preViewDiv' style="background-color:lightgray">
+		</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="myModal3"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		 <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		 	<h4 class="modal-title" id="myModalLabel">选择发送对象</h4>
+		 </div>
+			<div class="modal-body" style="background-color:lightgray">
+				 <div class="info-item-content">
+	                    <table class="wide-table table">
+							<tr>
+								<td style="border: none;">
+									发送类型：
+									<div class="input-wrap">
+										<select id="sendType" style="width:260px"  required="true" >   
+									        <option value="">请选择</option>   
+									        <option value="1">所有用户</option>   
+									        <option value="2">分组</option>
+										</select>
+									</div>
+								</td>
+								<td style="border: none;">
+									分组：
+									<div class="input-wrap">
+										<select id="sendGroup" style="width:260px"></select>
+									</div>
+								</td>
+							</tr>
+						</table>
+				 </div>
+			</div>
+		   <div class="modal-footer">
+               <span type="button" class="btn" id="sendBtn">发送</span>
+               <span type="button" class="btn"  data-dismiss="modal">取消</span>
+           </div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editWXArticleForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑微信文章</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                        <table class="wide-table table">
+							<tr>
+								<td style="border: none;">
+									文章名称：
+									<div class="input-wrap">
+										<input type="text" id="edit-name" name="name" value="" class="fluid-input" />
+									</div>
+								</td>
+							</tr>
+                           <tr>
+							<td style="border: none;">
+								文章类型：
+								<div class="input-wrap">
+									<select id="edit-type" name="type"  style="width:100%"  required="true" >   
+								        <option value="">请选择</option>   
+								        <option value="menu">菜单</option>   
+								        <option value="news">新闻</option>
+								        <option value="push">推送</option>
+								        <option value="subscribe">关注</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								期数：
+								<div class="input-wrap">
+									<input type="text" id="edit-weeklyNumber" name="weeklyNumber" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								审核状态：
+								<div class="input-wrap">
+									<select name="authState" id="edit-authState" class="fluid-input">
+										<option value="DRAFT">草稿</option>
+                                    	<option value="1-WAITING">提交审核</option>
+                                    </select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								发布日期：
+								<div class="input-wrap">
+									<input type="text" id="edit-publishDate" name="publishDate" value="" class="fluid-input" onclick="laydate()" />
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-newsTempId" name="newsTempId" value="" />
+						<!-- 隐藏发送状态 -->
+						<input type="hidden" id="edit-sendState" name="sendState" value=""/>
+						<input type="hidden" id="view-authState" value="" />
+                    </table>
+                </div>
+            </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveWXArticleBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="wXArticle-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th></th>
+				<th>文章名称</th>
+				<th>文章类型</th>
+				<th>期数</th>
+				<th>发送状态</th>
+				<th>审核状态</th>
+				<th>发布日期</th>
+				<th style="display:none">主键ID</th>
+				<th style="display:none">创建时间</th>
+				<th style="display:none">创建人</th>
+				<th>操作</th>
+				<th style="display:none"></th>
+			</tr>
+		</thead>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td><input type="radio" onclick="seltable()" name="selectOne" id="selectOne" value="{{newsTempId}}"/></td>
+			<td>{{name}}</td>
+			<td>{{transformat type}}</td>
+			<td>{{weeklyNumber}}</td>
+			<td>{{sendState}}</td>
+			<td>{{transformatState authState}}</td>
+			<td>{{publishDate}}</td>
+			<td style="display:none">{{newsTempId}}</td>
+			<td style="display:none">{{createTime}}</td>
+			<td style="display:none">{{createUser}}</td>
+			{{#equalsor authState '1-REJECTED' '2-REJECTED' '3-REJECTED' 'DRAFT'}}
+			{{#equalsout 'arti_ed'}}
+				<td>[<a href="javascript:void(0)" onclick="logicDelWXArticle('{{newsTempId}}')">删除</a>]
+					[<a href="javascript:void(0)" onclick="C.load('${req.contextPath}/wx/article/articleDetailsAdd?newsTempId={{newsTempId}}')">添加文章内容</a>]
+					[<a href="javascript:void(0)" onclick="C.load('${req.contextPath}/wx/article/articleDetailsView?newsTempId={{newsTempId}}')">查看文章内容</a>]
+					[<a href="javascript:void(0)" data-toggle="modal" onclick="fnPreview('{{newsTempId}}')" data-target="#myModal2">预览内容</a>]
+				</td>
+			{{else}}
+				<td>
+					[<a href="javascript:void(0)" data-toggle="modal" onclick="fnPreview('{{newsTempId}}')" data-target="#myModal2">预览内容</a>]
+				</td>
+			{{/equalsout}}
+			{{/equalsor}}
+			{{#equalsor authState '1-WAITING' '2-WAITING' '3-WAITING' 'COMPLETED'}}
+				<td>
+					[<a href="javascript:void(0)" data-toggle="modal" onclick="fnPreview('{{newsTempId}}')" data-target="#myModal2">预览内容</a>]
+				</td>
+			{{/equalsor}}
+			{{#equals authState 'undefined'}}
+				<td>
+					---
+				</td>
+			{{/equals}}
+			<td style="display:none">{{authState}}</td>	
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!--  -->
+<script id="group-template" type="text/x-handlebars-template">
+	<option value = "">---请选择分组---</option>
+	{{#each this}}
+		<option value = {{groupId}}>{{name}}</option>
+	{{/each}}
+</script>
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/weixin/article-list.js"></script>

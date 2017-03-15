@@ -1,0 +1,238 @@
+<link rel="stylesheet" href="${req.contextPath}/assets/css/global.css"> 
+<link href="${req.contextPath}/assets/showLoading/css/showLoading.css" rel="stylesheet" media="screen" /> 
+		<!-- 头部 结束 -->
+		<div class="content-wrapper">
+			<!-- 右侧内容 -->
+		<div class="wqconttent-right">
+			<div style="width: 832px;border-right: 1px solid gainsboro;">
+				<div style="position: relative;padding-top: 13px;">
+					<span class="wqallimg">全部图片</span>
+					<span class="wqsearch">
+					<form id="queryForm">
+					   <input style="height:37px" class="wqsearch-input" type="text" placeholder="图片名称" name="name"/>
+					   <img src="${req.contextPath}/assets/img/search.gif" alt="" id="querySubmit"/>
+				    </form>
+				   
+				</span>
+					<span style="margin-left: 70px;">
+					图片不超过2M
+		 		</span>
+				<span style="width: 19px;display: inline-block;box-sizing: border-box;">
+					<img style='width:20px' src="${req.contextPath}/assets/img/mmm.png" alt="" />
+				</span>
+				
+				<span style="position: relative;overflow: hidden;">
+					<button class="wqlocal" data-toggle="modal" data-target="#myModal3"> <i style="font-size: 20px;font-style: normal;color: white;">+</i> 本地上传</button>
+					
+				</span>
+				
+				</div>
+				<div class="wqcheck-box ">
+					<input type="checkbox" style="display: inline-block;width: 20px;" id="checkALL"/>  全选								
+					<span class="wqyichfez" data-toggle="modal" data-target="#myModal0">移动分组</span>
+					<span class="wqdel" id="deleteImageGroup">删除</span>
+					<span id="syncImage" class="wqyichfez">同步</span>
+				</div>
+				<div class="wqimgbox"  id="imageTable">
+				
+				</div>
+			</div>
+			<div style="width: 172px;">
+				<div style="background-color: rgb(249,250,252);height: 40px;text-align: center;line-height: 40px;">全部图片</div>
+				<div id="groupList"> 
+							  					 
+				</div>
+				<div class="popover-options" style="width: 116px;margin: 0 auto; height: 40px;text-align: background:rgb(249,250，252) center;line-height: 40px; border: 1px dashed gainsboro;padding-left:25px;padding-top: 9px;">
+					<!--新建分组-->
+					<a type="button" class="btn btn-warning" style="background-color: rgb(249,250,252) height: 80%;margin-top: 0px;" title="<h5>分组名称</h5><input type='text' class='wqaltinput' name='groupName' id='groupName'/>" data-container="body" data-toggle="popover" data-placement="bottom" data-content="<button class='qd'>确定</button><button class='qx'>取消</button>">
+						<i style="color: rgb(46,143,110);font-style: normal;">+</i> 新建分组
+					</a>
+				</div>
+			</div>
+
+		</div>
+			
+				<div class="page-box" style="width:948px; margin: 0 auto">
+				<input type="hidden" id="currPage">
+					<span style="float: left" class="pagination" id="totalNum"></span>
+					<ul style="float: right;" id="pagination" class="pagination">
+						<li class="active"><a title="Current page is 1">1</a></li>
+						<li><a title="Go to next page">&gt;</a></li>
+						<li><a title="Go to last page">&gt;&gt;</a></li>
+					</ul>
+				</div>
+		</div>
+<div class="modal fade" id="myModal3"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form id="addImageForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">上传图片</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                           <tr>
+                            
+                                <td style="border: none;">图片名称：
+									<input type="text" id="addimagename" class="fluid-input"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none;">
+								<div class="input-wrap" style="width:120px;height:120px">
+									<img src="${req.contextPath}/assets/img/default.png" id="picIcon"style="width: 80px; height: 80px;"/>
+                                    <input type="hidden" id="imagePath" name="localUrl" />
+                                    <span id="uploadIcon">
+                                    </span>
+                                 </div>
+                                <span id="returnMessage"></span>
+                                </td>
+                            </tr>	
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+
+
+<div class="modal fade" id="myModal2"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form id="editImageForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">修改名称</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                            <tr>
+                            
+                                <td style="border: none;">图片名称：
+									<input type="text" id="imagename" class="fluid-input"/>
+                                </td>
+                            </tr>	
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn" id="editImage" value="保存"/>
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form id="editImageForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">变更分组</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                            <tr>
+                            
+                                <td style="border: none;">分组列表：
+									<select  name="groupId" id="imagegroupid" class="large group2List"></select>
+                                </td>
+                            </tr>	
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn" id="editImageGroup" value="保存"/>
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+
+<div class="modal fade" id="myModal0"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form id="editImageGroupForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">变更分组</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                            <tr>
+                            
+                                <td style="border: none;">分组列表：
+									<select  name="groupId" id="imagegroupidAll" class="large group2List"></select>
+                                </td>
+                            </tr>	
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn" id="editImageGroupAll" value="保存"/>
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+
+<script id="group-list-template" type="text/x-handlebars-template">
+	    
+	  {{#each this}}
+		<div style="height: 40px;text-align: center;line-height: 40px;"><a href="javascript:void(0)" class="showGroupInfo" groupId="{{groupId}}" countImage={{countImage}}>{{groupName}}（{{countImage}}）</a></div>
+	  {{/each}}
+</script>
+<script id="image-list-template"  type="text/x-handlebars-template">
+  {{#each this}}
+               
+	<figure>
+
+                       <img src="{{localUrl}}" alt="" />
+						<div style="height: 35px;line-height: 35px;padding-left: 10px;">
+							<input type="checkbox" style="display: inline-block;" name="imgchecklist" id="" value="" materialId="{{materialId}}" mediaId="{{mediaId}}"/>
+							<span style="margin-left: 1px;width: 144px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;display: inline-block;height: 26px;line-height:39px">{{name}}</span>
+						</div>
+						<figcaption>
+							<span class="wqbianji">
+								<img src="${req.contextPath}/assets/img/bianji.gif" style="width: 55px;" alt="" class="editImage" materialId="{{materialId}}"/>
+							</span>
+							<span class="popover-options wqfenzu wqspanbox" style="margin: 0;">
+									<img src="${req.contextPath}/assets/img/name.gif" style="width: 60px; height: 31px;border-right:1px solid gainsboro ; " alt="" class="editImageGroup" materialId="{{materialId}}"/>
+							</span>
+							<span class=" popover-options wqspanbox " style="margin: 0;">
+							       <img src="${req.contextPath}/assets/img/delete.gif" style="width: 60px; height: 31px;" alt="" class="deleteImage" materialId="{{materialId}}" mediaId="{{mediaId}}" />							
+						</span>
+						</figcaption>
+
+					</figure>
+ {{/each}}
+</script>
+
+<script id="group2-list-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{groupId}}">{{groupName}}</option>
+	  {{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/showLoading/js/jquery.showLoading.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/weixin/media/image-list.js"></script>
+

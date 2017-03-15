@@ -1,0 +1,263 @@
+<!-- Content Wrapper. Contains page content -->
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/xiumi-ue-dialog-v5.js"></script>
+<link rel="stylesheet" type="text/css" href="${req.contextPath}/assets/ueditor/xiumi-ue-v5.css"/>
+<div class="content-wrapper">
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i> 修改投资理财产品</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        金融产品信息
+                    </div>
+                     <ul class="nav nav-tabs" data-trigger="tab">
+					  <li class = 'active' id="jbTab"><a href="javascript:void(0)">基本信息</a></li>
+					  <li id="articleTab"><a href="javascript:void(0)">关联文章信息</a></li>
+					</ul>
+  				<form id="editForm">
+					<div class="pane-wrapper">
+						<div class = 'active' id="jbDiv">
+								<div class="info-item-content">
+			                        <table class="wide-table">
+			                         <!-- ID-隐藏域-->
+			                         <input type="hidden" id="fincId" name="fincId" value="$!{obj.fincId}" />
+			                         <input type="hidden" id="hidden-articleId" value="$!{obj.articleId}" />
+			                         <!-- 产品类型ID-隐藏域-->
+			                         <input type="hidden" id="hidden-type" value="$!{obj.type}" />
+			                         <input type="hidden" id="hidden-subType" value="$!{obj.subType}" />
+			                         <input type="hidden" id="hidden-extStr1" value="$!{obj.extStr1}" />
+			                         <input type="hidden" id="hidden-extStr2" value="$!{obj.extStr2}" />
+			                         <input type="hidden" id="hidden-extStr3" value="$!{obj.extStr3}" />
+			                         <!-- 隐藏关联文章 -->
+	                            	 <input type="hidden" id="articleId" name="articleId" value="$!{obj.articleId}"/>
+			                         <!-- 隐藏分类类型 -->
+	                            	 <input type="hidden" id="category" name="category" value="$!{obj.finance}"/>
+			                            <tr>
+			                                <td>产品类型：
+			                                    <br>
+			                                    <div class="input-wrap">
+			                                        <select id="ficProdType" name="type" class="" value="" required="true" >
+			                                        </select>
+			                                    </div>
+			                                </td>
+			                                <td class="t5">
+			                                </td>
+			                                <td class="">产品名称：
+			                                    <br>
+			                                    <div class="input-wrap">
+			                                        <input type="text" id="name" name="name" value="$!{obj.name}" required="true" placeholder="请填写产品名称" />
+			                                    </div>
+			                                </td>
+			                            </tr>
+			                            <tr id="lc" style="display: none;">
+			                            	<td class="">币种：
+			                                    <br>
+			                                    <div class="input-wrap">
+			                                       <select name="extStr1" class=""  value="" required="true" >
+			                                        	<option value="">请选择</option>
+			                                        	<option value="人民币">人民币</option>
+			                                        	<option value="美元">美元</option>
+			                                        	<option value="欧元">欧元</option>
+			                                        </select>
+			                                    </div>
+			                                </td>
+			                                <td class="t5">
+			                                </td>
+			                                <td class="">风险等级：
+			                                    <br>
+			                                    <div class="input-wrap">
+			                                        <select id="fx" name="extStr2" class="" required="true"  value="">
+			                                        	<option value="">请选择</option>
+			                                        	<option value="较高">较高</option>
+			                                        	<option value="中等">中等</option>
+			                                        	<option value="较低">较低</option>
+			                                        </select>
+			                                    </div>
+			                                </td>
+			                            </tr>
+			                            <tr id="bx" style="display: none;">
+			                                <td>投保年龄：
+			                                    <br>
+			                                    <div class="input-wrap">
+			                                        <select id="tb" name="extStr1" class="" required="true"  value="">
+			                                        	<option value="">请选择</option>
+			                                        	<option value="28-70">28-70周岁</option>
+			                                        	<option value="30-60">30-60周岁</option>
+			                                        </select>
+			                                    </div>
+			                                </td>
+			                                <td class="t5">
+			                                </td>
+			                                <td>产品期限：
+			                                    <br>
+			                                    <div class="input-wrap">
+			                                        <select id="ficPeriodType" name="extStr2" class="" required="true"  value="">
+			                                        </select>
+			                                    </div>
+			                                </td>
+			                            </tr>
+			                            <tr>
+			                                <td class="">产品代码：
+			                                    <br>
+			                                    <div class="input-wrap">
+			                                        <input type="text" id="prodCode" name="prodCode" value="$!{obj.prodCode}"/>
+			                                    </div>
+			                                </td>
+			                                <td class="t5">
+			                                </td>
+			                                <td class="">图片示例：
+			                                    <br>
+			                                    <div class="input-wrap"> 
+			                                        	<img src="$!{obj.imagePath}" id="picIcon"style="width: 20px; height: 20px;"/>
+				                                        <input type="hidden" id="imagePath" name="imagePath" />
+				                                        <span id="uploadIcon">
+				                                        </span>
+			                                    </div>
+			                                </td>
+			                            </tr>
+			                            <tr id="gjs" style="display: none;">
+			                                <td>贵金属类型：
+			                                    <br>
+			                                    <div class="input-wrap">
+			                                        <select id="jslx" name="subType" class="" required="true"  value="">
+			                                        	<option value="">请选择</option>
+			                                        	<option value="热销产品">热销产品</option>
+			                                        	<option value="实物贵金属">实物贵金属</option>
+			                                        </select>
+			                                    </div>
+			                                </td>
+			                            </tr>
+			                            
+			                            <tr id="gz" style="display: none;">
+			                                <td>国债产品类型：
+			                                    <br>
+			                                    <div class="input-wrap">
+			                                        <select id="gzlx" name="subType" class="" required="true"  value="">
+			                                        	<option value="">请选择</option>
+			                                        	<option value="储蓄国债">储蓄国债</option>
+			                                        	<option value="凭证式国债">凭证式国债</option>
+			                                        </select>
+			                                    </div>
+			                                </td>
+			                                <td class="t5">
+			                                </td>
+			                                <td>年利率(%)：
+			                                    <br>
+			                                    <div class="input-wrap">
+			                                        <input id="nll" type="text" name="extStr1" value="" required="true" placeholder="请填写年利率" />
+			                                    </div>
+			                                </td>
+			                            </tr>
+			                            <tr>
+			                            	<td id="jj" style="display: none;">基金类型：
+			                                    <br>
+			                                    <div class="input-wrap">
+			                                        <select id="jjlx" name="subType" value="" required="true">
+			                                        	<option value="">请选择</option>
+			                                        	<option value="混合型">混合型</option>
+			                                        </select>
+			                                    </div>
+			                                </td>
+			                            </tr>
+			                            
+			                             <tr id="lc_ext" style="display: none;">
+			                            	<td class="">是否热门理财产品：
+			                                    <br>
+			                                    <div class="input-wrap">
+			                                       <select  name="extStr3" class="">
+			                                        	<option value="">请选择</option>
+			                                        	<option value="T">是</option>
+			                                        	<option value="F">否</option>
+			                                        </select>
+			                                    </div>
+			                                </td>
+			                            </tr>
+			                        </table>
+			                    </div>
+						</div>
+						<div id="articleDiv">
+					  			<div class="info-item-content">
+					  				<table class="wide-table">
+			                            <tr>
+			                                <td>标题：
+			                                    <br>
+			                                    <div class="input-wrap">
+			                                        <i class="iconfont icon-fudai"></i>
+			                                        <input type="text" name="itemForm.title" id="title" placeholder="标题"  required="true" >
+			                                    </div>
+			                                </td>
+			                                <!-- <td>类型：
+			                                    <br>
+			                                    <div class="input-wrap">
+			                                        <i class="iconfont icon-bianshunxu"></i>
+			                                        <input type="text" name="itemForm.type" placeholder="类型">
+			                                    </div>
+			                                </td> -->
+			                            </tr>
+			                            <tr>
+			                                <td>正文：
+			                                    <br>
+			                                    <div>
+													<script id="editorContent" name="itemForm.content" type="text/plain" style="width:550px;height:300px;"></script>
+												</div>
+			                                </td>
+			                                
+			                            </tr>
+			                            <!-- 隐藏主键 -->
+										<input type="hidden" id="itemId" name="itemForm.itemId" value=""/>
+										<!-- 设置显示点赞浏览量及广告 -->
+										<input type="hidden" name="itemForm.showPraise" value="F"/>
+										<input type="hidden" name="itemForm.showAdver" value="F"/>
+										<input type="hidden" name="itemForm.showRemark" value="F"/>
+			                   		</table>
+					  			</div>
+					  	</div>
+					</div>
+				</form>  
+                </div>
+                <input type="button" class="btn btn-primary" style="margin: 20px 0 0 0;" id="saveBtn" value="保存" />
+                <input type="button" class="btn btn-default" style="margin: 20px 0 0 20px;" id="cancelBtn" value="取消" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 产品类型模版 -->
+<script id="ficProdType-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{dicName}}">{{dicName}}</option>
+	  {{/each}}
+</script>
+
+<!-- 关联文章模版 -->
+<script id="article-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{itemId}}">{{title}}</option>
+	  {{/each}}
+</script>
+<!-- 理财期限模版 -->
+<script id="ficPeriodType-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{dicName}}">{{dicName}}</option>
+	  {{/each}}
+</script>
+
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/ueditor/xiumi-ue-dialog-v5.js"></script>
+<link rel="stylesheet" type="text/css" href="${req.contextPath}/assets/ueditor/xiumi-ue-v5.css"/>
+<script type="text/javascript">
+	UEDITOR_CONFIG.UEDITOR_HOME_URL = '${req.contextPath}/assets/ueditor/';
+	var ue = UE.getEditor('editorContent');
+</script>
+<script src="${req.contextPath}/assets/js/biz/ficprod/edit-ficprod.js"></script>

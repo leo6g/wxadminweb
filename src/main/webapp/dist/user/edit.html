@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>微信项目后台管理系统</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<!-- Bootstrap 3.3.6 -->
+<link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../assets/css/skins/_all-skins.min.css">
+<link rel="stylesheet" href="../../assets/css/wechat.css">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body class="hold-transition sidebar-mini skin-green-light">
+		<div class="wrapper">
+
+			<header class="main-header">
+				<!-- Logo -->
+				<a href="../menuuser/index.html" class="logo" style="width:auto">
+					<span class=""><img src="../../assets/img/logo.png"/>
+      	</span>
+					<span class="">微信平台后台管理系统</span>
+				</a>
+				<!-- Header Navbar: style can be found in header.less -->
+				<nav class="navbar navbar-static-top" style="z-index: -1;">
+					<!-- Sidebar toggle button-->
+					<div class="navbar-custom-menu">
+						<ul class="nav navbar-nav">
+							<li class="dropdown user user-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<span class="hidden-xs">系统管理员</span>
+								</a>
+								<!-- <ul class="dropdown-menu">
+									<li class="user-header">
+										<p>
+											Alexander Pierce - Web Developer
+											<small>Member since Nov. 2012</small>
+										</p>
+									</li>
+									<li class="user-body">
+										<div class="row">
+											<div class="col-xs-4 text-center">
+												<a href="#">Followers</a>
+											</div>
+											<div class="col-xs-4 text-center">
+												<a href="#">Sales</a>
+											</div>
+											<div class="col-xs-4 text-center">
+												<a href="#">Friends</a>
+											</div>
+										</div>
+									</li>
+									<li class="user-footer">
+										<div class="pull-left">
+											<a href="#" class="btn btn-default btn-flat">Profile</a>
+										</div>
+										<div class="pull-right">
+											<a href="#" class="btn btn-default btn-flat">Sign out</a>
+										</div>
+									</li>
+								</ul> -->
+							</li>
+							<!-- Control Sidebar Toggle Button -->
+						</ul>
+					</div>
+				</nav>
+			</header> <aside class="main-sidebar">
+				<!-- sidebar: style can be found in sidebar.less -->
+				<section class="sidebar">
+					<!-- Sidebar user panel -->
+					<!-- sidebar menu: : style can be found in sidebar.less -->
+					<ul class="sidebar-menu">
+						<li class="treeview">
+							<a href="../user/index.html">
+								<i class="fa iconfont icon-yonghuxinxi"></i>
+								<span>用户信息管理</span>
+							</a>
+						</li>
+						<li>
+							<a href="../role/list.html">
+								<i class="fa iconfont icon-jiaoseguanli"></i> <span>角色信息管理</span>
+							</a>
+						</li>
+						<li class="treeview">
+							<a href="../menu/list.html">
+								<i class="fa iconfont icon-quanxianguanli"></i> <span>菜单管理</span>
+							</a>
+						</li>
+						<li class="treeview">
+							<a href="../agency/list.html">
+								<i class="fa iconfont icon-zuzhijigou"></i> <span>组织机构</span>
+							</a>
+						</li>
+						<li class="treeview">
+							<a href="../job/list.html">
+								<i class="fa iconfont icon-zhiwei"></i> <span>职位</span>
+							</a>
+						</li>
+						<li class="treeview">
+							<a href="../agencyLevel/list.html">
+								<i class="fa iconfont icon-jigou1"></i> <span>机构级别</span>
+							</a>
+						</li>
+					</ul>
+				</section>
+				<!-- /.sidebar -->
+			</aside>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i> 编辑用户信息</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        基本信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table">
+                            <tr>
+                                <td>用户名称：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-quanxianshezhi"></i>
+                                        <input type="text" placeholder="用户名称">
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                    
+                                </td>
+                                <td class="">密码：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-mima1"></i>
+                                        <input type="password" placeholder="密码">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">有效开始时间：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-riqi1"></i>
+                                        <input type="text" placeholder="有效开始时间">
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                    
+                                </td>
+                                <td class="">有效结束时间：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-riqi1"></i>
+                                        <input type="text" placeholder="有效结束时间">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="info-item-box" style="margin-top:20px;">
+                    <div class="info-item-title">
+                        属性信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table">
+                            <tr>
+                                <td>真实姓名：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-quanxianshezhi"></i>
+                                        <input type="text" placeholder="真实姓名">
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                    
+                                </td>
+                                <td class="">性别：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-gender"></i>
+                                        <input type="text" placeholder="性别">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">出生日期：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-riqi1"></i>
+                                        <input type="text" placeholder="出生日期">
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                    
+                                </td>
+                                <td class="">邮箱地址：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-riqi1"></i>
+                                        <input type="text" placeholder="邮箱地址">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">联系方式：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-lianxifangshi1"></i>
+                                        <input type="text" placeholder="联系方式">
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                    
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="check-line" style="padding-top:10px">
+                                    角色： 
+                                     <input type="checkbox" style="margin-left: 0"> 普通用户
+                                     <input type="checkbox" > 高级用户
+                                     <input type="checkbox" > 钻石用户
+                                     <input type="checkbox" > 管理员
+                                     <input type="checkbox"> 超级管理员 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">部门：
+                                    <br>
+                                    <div class="input-wrap" style="border: none;">
+                                        <select name="" id="" class="form-control">
+                                            <option value="">研发部</option>
+                                            <option value="">市场部</option>
+                                            <option value="">公关部</option>
+                                            <option value="">财务部</option>
+                                            <option value="">人事部</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                    
+                                </td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <span class="query-bt-green" style="margin: 20px 0 0 0;">
+                    保存
+                </span>
+                <span class="query-bt-green" style="margin: 20px 0 0 20px;">
+                    取消
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+				<div class="pull-right hidden-xs">
+					<b>Version</b> 2.3.3
+				</div>
+				<strong>Copyright &copy; 2015-2016 <a href="http://landfalcon.com">上海陆鹰实业有限公司</a>.</strong> All rights reserved.
+			</footer>
+</div>
+<script src="../../assets/lib/jquery/jQuery-2.2.0.min.js"></script>
+<script src="../../assets/common/public.js"></script>
+<script src="../../assets/bootstrap/js/bootstrap.js"></script>
+</body>
+
+</html>

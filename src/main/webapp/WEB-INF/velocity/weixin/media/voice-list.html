@@ -1,0 +1,122 @@
+<!-- Content Wrapper. Contains page content -->
+<link rel="stylesheet" href="${req.contextPath}/assets/css/global.css"> 
+<link href="${req.contextPath}/assets/showLoading/css/showLoading.css" rel="stylesheet" media="screen" /> 
+	<div class="content-wrapper">
+    		 <div class="zl_main" style="overflow-y: auto;height:100%;width:100%">
+<!-- 		    <h4 style="margin-left:30px;margin-top:20px;">素材管理</h4> -->
+<!-- 		    <ul class="zl_nav"> -->
+<!-- 		        <li>微信图文</li> -->
+<!-- 		        <li>微盟图文</li> -->
+<!-- 		        <li>图片</li> -->
+<!-- 		        <li>音频</li> -->
+<!-- 		        <li>视频</li> -->
+<!-- 		    </ul> -->
+           <form id="queryForm">
+		    <input type="text" placeholder="音频名字" id="zl_search" name="name">
+		    <span id="zl_img_search" style="top:30px">
+		    <img src="${req.contextPath}/assets/img/2.png" id="querySubmit">
+		    </span>
+		    </form>
+		    <span class="zl_weixin_sound" style="top:40px" id="countSpan">微信音频1/1000</span>
+		    <button class="zl_btn_add" style="left: 650px;top:40px;width:120px;height:30px;background:#0ca670;color:#fff;font-size:14px;outline:0;border-radius:3px;" id="addVoice">+添加音频</button>
+		    <button  style="top:40px;width:120px;height:30px;background:#0ca670;color:#fff;font-size:14px;outline:0;border-radius:3px;position: absolute;left: 865px;border: 0;" id="syncVoice">同步</button>
+		    <div class="zl_content">
+		        <div id="voiceTable">
+		        </div>
+		    </div>
+  <!--   右侧主体结束 -->
+</div>
+   </div>
+
+
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form id="editVoiceForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">变更信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                            <tr>
+                            
+                                <td style="border: none;">标题：
+									<input type="text" placeholder="test" class="large" name="name" id="editName">
+                                </td>
+                            </tr>
+                            <tr>
+                            
+                                <td style="border: none;">分类：
+									<select  name="subType" id="editSubType" class="large">
+									<option value="1">财经</option>
+		                <option value="2">动漫</option>
+		                <option value="3">儿童</option>
+		                <option value="4">搞笑</option>
+		                <option value="5">健康</option>
+		                <option value="6">教育</option>
+		                <option value="7">军事</option>
+		                <option value="8">科技</option>
+		                <option value="9">历史</option>
+		                <option value="10">旅行</option>
+		                <option value="11">汽车</option>
+		                <option value="12">情感</option>
+		                <option value="13">体育</option>
+		                <option value="14">外语</option>
+		                <option value="15">文学</option>
+		                <option value="16">校园</option>
+		                <option value="17">音乐</option>
+		                <option value="18">影视</option>
+		                <option value="19">游戏</option>
+		                <option value="20">娱乐</option>
+									</select>
+                                </td>
+                            </tr>	
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn" id="editVoiceInfo" value="保存"/>
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+
+<script id="voice-list-template" type="text/x-handlebars-template">
+
+{{#each this}}
+		        <div class="zl_each">
+		            <p>{{name}}</p>
+		            <p style="color:#dedfe1;border-bottom:1px solid #dedfe1;padding-bottom:5px;margin-right:10px;">{{update_time}}</p>
+		            <p>		        
+                          <audio src="{{localUrl}}" controls="controls" class="showVoice" style="width:270px;height:130px;margin-top:10px;">
+                             Your browser does not support the audio element.
+                         </audio>
+                     </p>
+		            <ul class="zl_content_bottom">
+		                <li style="margin-left:-6px" class="editVoice" name="{{name}}" materialId="{{materialId}}" subType={{subType}}><img src="${req.contextPath}/assets/img/4.png"></li>
+		         
+		                <li style="margin-left:25px" class="deleteVoice" materialId="{{materialId}}" mediaId="{{mediaId}}"><img src="${req.contextPath}/assets/img/6.png"></li>
+		            </ul>
+		        </div>
+
+{{/each}}
+
+<div style="clear:both"></div>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/showLoading/js/jquery.showLoading.js"></script>
+<script src="${req.contextPath}/assets/js/weixin/media/voice-list.js"></script>
+

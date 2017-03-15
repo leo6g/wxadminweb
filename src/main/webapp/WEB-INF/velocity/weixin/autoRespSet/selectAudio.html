@@ -1,0 +1,91 @@
+<!-- 语音回复 -->
+<div style="z-index:1100" class="modal fade" id="myModalVoice"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="audioHide();"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">请选择语音</h4>
+            </div>
+            <div class="modal-body">
+                <span class="zl_weixin_sound" style="top:40px" id="countSpan">微信音频1/1000</span>
+                <div class="info-item-content" style="border-top:1px solid #dedfe1;margin-top: 15px;">
+                    <div id="voiceTable">
+		        </div>
+                </div>
+                <div class="page-box" style="width: 97%; margin: 0 auto">
+					<input type="hidden" id="audio-currPage">
+					<span style="float: left" class="pagination" id="audio-totalNum"></span>
+					<ul style="float: right;" id="audio-pagination" class="pagination">
+						<li class="active"><a title="Current page is 1">1</a></li>
+						<li><a title="Go to next page">&gt;</a></li>
+						<li><a title="Go to last page">&gt;&gt;</a></li>
+					</ul>
+				</div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveVoiceResp">保存</span>
+                <span type="button" class="btn" onclick="audioHide();">取消</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 音频列表 -->
+<script id="voice-list-template" type="text/x-handlebars-template">
+
+{{#each this}}
+		        <div class="zl_each" onclick="selected(this);" style="border-bottom:1px solid #dedfe1;margin-top:10px" mediaId="{{mediaId}}" name="{{name}}" aUrl="{{localUrl}}">
+		            <p>{{name}}</p>
+		            <p style="padding-bottom:5px;margin-right:10px;">{{update_time}}</p>
+		            <p>		        
+                          <audio src="{{localUrl}}" controls="controls" class="showVoice" style="width:270px;height:130px;margin-top:10px;">
+                             Your browser does not support the audio element.
+                         </audio>
+                     </p>
+		        </div>
+
+{{/each}}
+
+<div style="clear:both"></div>
+</script>
+
+<script type="text/javascript">
+//初始化音频列表信息
+function initvoiceInfo(currentPage, limit){
+	if(typeof currentPage == "undefined"){
+		currentPage = 1;
+	}
+	if(typeof limit == "undefined"){
+		limit = global_limit;
+	}
+	var url = contextPath + "/wx/voice/getList";
+	var params = "&pageNumber="+currentPage+"&limit="+limit;
+	//异步请求音频列表数据
+	Util.ajax.postJson(url, params, function(data, flag){
+		console.log(data);
+		var source = $("#voice-list-template").html();
+		var templet = Handlebars.compile(source);
+		if(flag && data.returnCode=="0"){
+			//渲染列表数据
+			var htmlStr = templet(data.beans);
+			$("#voiceTable").html(htmlStr);
+			$("#countSpan").text("微信音频"+data.bean.count+"/1000");
+			//初始化分页数据(当前页码，总数，回调查询函数)
+			initPaginator(currentPage, data.bean.count, initvoiceInfo, "audio-pagination", "audio-totalNum", "audio-currPage");
+		}
+	});
+}
+
+$("#saveVoiceResp").click(function(){
+	$("#myModalVoice").modal("hide");
+});
+//添加音频页面
+function addVoice(){
+	C.load(contextPath+'/wx/voice/add');
+};
+function audioHide(){
+	$(".selected").removeClass("selected");
+	$("#myModalVoice").modal("hide");
+}
+</script>
+
+

@@ -1,0 +1,254 @@
+<!-- Content Wrapper. Contains page content -->
+<link rel="stylesheet" href="${req.contextPath}/assets/css/msg-response.css">
+<style>
+.row span{
+	margin-right: 7px;
+	margin-left: 7px;
+}
+</style>
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">微信客服消息管理</h4>
+        
+		<div class="row" >
+			<!-- <input type="button" class="btn btn-primary" style="" id="querySubmit" value="查 询" /> -->
+			<span class="btn btn-primary" id="addWXArticleBtn" data-toggle="modal" data-target="#myModal">新增</span>
+            <span class="btn btn-primary" id="editWXArticleBtn" data-toggle="modal" data-target="#myModal1">编辑</span>
+            <span class="btn btn-primary" id="viewWXArticleBtn" data-toggle="modal" data-target="#myModal2">浏览</span>
+            <span class="btn btn-primary" id="sendWXArticleBtn">群发</span>
+			<!-- <input type="button" class="btn btn-default clear-margin ml10" id="resetBtn" value="重置"/> -->
+       </div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            微信客服消息信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="wXArticleListTable" class="table border-table table-hover table-striped align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <!-- 隐藏角色 -->
+                            <input type="hidden" id="role" value="$!{role}"/>
+                            <input type="hidden" id="selectId" />
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 新增弹框  -->
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addMessageForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加消息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+							<td style="border: none;">
+								文章标题：
+								<div class="input-wrap">
+									<input type="text" name="title" class="fluid-input" maxlength="50" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								文章摘要：
+								<div class="input-wrap">
+									<input type="text" name="digest" class="fluid-input" maxlength="50" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								封面图片：
+								<div>
+									<img src="${req.contextPath}/assets/img/default.png" id="picIcon" style="width: 100px; height: 100px;"/>
+                                    <input type="hidden" id="imagePath" name="coverPic" required/>
+                                    <span id="uploadIcon">
+                                    </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								文章链接url：
+								<div class="input-wrap">
+									<input type="text" name="url" class="fluid-input" maxlength="150" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								排序：
+								<div class="input-wrap">
+									<input type="number" name="sortIndex" class="fluid-input" style="border:none;height:26px" max="100" min="1" required/>
+								</div>
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveMessageBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editMessageForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑消息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+							<td style="border: none;">
+								文章标题：
+								<div class="input-wrap">
+									<input type="text" id="title" name="title" class="fluid-input" maxlength="50" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								文章摘要：
+								<div class="input-wrap">
+									<input type="text" id="digest" name="digest" class="fluid-input" maxlength="50" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								封面图片：
+								<div>
+									<img src="${req.contextPath}/assets/img/default.png" id="picIcon2" style="width: 100px; height: 100px;"/>
+                                    <input type="hidden" id="imagePath2" name="coverPic" required/>
+                                    <span id="uploadIcon2">
+                                    </span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								文章链接url：
+								<div class="input-wrap">
+									<input type="text" id="url" name="url" class="fluid-input" maxlength="150" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								排序：
+								<div class="input-wrap">
+									<input type="number" id="sortIndex" name="sortIndex" class="fluid-input" style="border:none;height:26px" max="100" min="1" required/>
+								</div>
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="editMessageBtn">保存</span>
+                <span type="button" class="btn" data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" id="myModal2"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">预览</h4>
+            </div>
+            <div class="modal-body">
+                <div id="preview" class="jiangbangitlist">
+						
+				</div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="wXArticle-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th style="display:none;">主键</th>
+				<th>文章标题</th>
+				<th>文章摘要</th>
+				<th>封面图片</th>
+				<th>文章链接URL</th>
+				<th>排序</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td style="display:none;">{{id}}</td>
+			<td>{{title}}</td>
+			<td>{{digest}}</td>
+			<td><img src="{{coverPic}}" style="width:100px;height:100px"/></td>
+			<td>{{url}}</td>
+			<td>{{sortIndex}}</td>
+			<td><span onclick="delMessage('{{id}}')" style="cursor:pointer;">删除</span></td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+
+<script id="preview-template" type="text/x-handlebars-template">
+<div class="jiangbangititem" style="margin:0 auto;">
+	<hr />
+	<div class="jiangbangthumbnails">
+	<img src="{{coverPic}}" style="height:150px"/>
+	<a class="jiangbangauthor">{{title}}</a>
+	</div>
+	{{#each this.normalArts}}
+		<hr />
+		<div class="jiangbangartical clear" style="height:40px;">
+			<p>{{title}}</p>
+			<img src="{{coverPic}}" style="width:50px;height:50px;" />
+		</div>
+	{{/each}}
+</div>
+</script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script src="${req.contextPath}/assets/js/weixin/message-list.js"></script>

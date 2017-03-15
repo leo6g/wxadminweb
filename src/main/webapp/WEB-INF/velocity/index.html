@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>微信平台后台管理系统</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="${req.contextPath}/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${req.contextPath}/assets/bootstrap/css/scojs.css">
+    <link rel="stylesheet" href="${req.contextPath}/assets/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="${req.contextPath}/assets/css/wechat.css">
+    <link rel="stylesheet" href="${req.contextPath}/assets/css/tr_style.css">
+    <!-- 引入公共JS文件  -->
+    <script type="text/javascript" src="http://api.map.baidu.com/getscript?v=2.0&ak=aXgMcV0atb2ssseF1Iq5vOUqU7snzn36&services=&t=20161103211915"></script>
+    <script src="${req.contextPath}/assets/lib/jquery/jquery.min.js"></script>
+    <script src="${req.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
+    <script src="${req.contextPath}/assets/lib/handlebars/handlebars-v3.0.3.js"></script>
+    <script src="${req.contextPath}/assets/lib/jqvalidate/jquery.validate.js"></script>
+    <script src="${req.contextPath}/assets/lib/paginator/bootstrap-paginator.js"></script>
+    <script src="${req.contextPath}/assets/common/common.js"></script>
+    <script src="${req.contextPath}/assets/bootstrap/js/sco.modal.js"></script>
+    <script src="${req.contextPath}/assets/bootstrap/js/sco.confirm.js"></script>
+    <script src="${req.contextPath}/assets/bootstrap/js/sco.message.js"></script>
+    <script src="${req.contextPath}/assets/bootstrap/js/sco.collapse.js"></script>
+    <script src="${req.contextPath}/assets/common/public.js"></script>
+    <script src="${req.contextPath}/assets/common/strong-table.js"></script>
+    <script src="${req.contextPath}/assets/common/clickme.js"></script>
+    <script src="${req.contextPath}/assets/lib/laydate/laydate.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	    <style>
+	    body{
+	    	min-width: 1143px !important;
+	    	overflow: scroll;
+
+	    }
+  li{
+    list-style: none;
+  }
+  li.level-button{
+    cursor: pointer;
+  }
+  .container{
+  	padding: 0 20px 0 0;
+  	box-sizing: border-box;
+  }
+  .main-footer{
+  	padding: 0 15px;
+  }
+  .zan-btn{
+  	cursor: pointer;
+  }
+    </style>
+</head>
+
+<body class="hold-transition sidebar-mini skin-green-light">
+    <div class="wrapper">
+        <!-- 头部begin -->
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="${req.contextPath}/index" class="logo" style="width: auto"> <span class=""><img
+					style="margin-top: -3px;"
+					src="${req.contextPath}/assets/img/logo.png" /></span> <span class="">微信平台后台管理系统</span>
+            </a>
+            <nav class="navbar navbar-static-top" style="z-index: -1;">
+                <!-- Sidebar toggle button-->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" style="padding-top: 18px;" data-toggle="dropdown"> <span class="hidden-xs" id="spanRealname">系统管理员</span>
+                            </a>
+                            <ul class="dropdown-menu" style="margin-top:2px;">
+                                <!-- User image -->
+                                <li class="user-header">
+                                   <p id="pRealname">欢迎，管理员</p>
+                                </li>
+                                <!-- Menu Body -->
+                                <!-- <li class="user-body">
+                                    <div class="row">
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Followers</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Sales</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Friends</a>
+                                        </div>
+                                    </div>
+                                </li> -->
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat" data-toggle="modal" data-target="#editPassWordModal">修改个人信息</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="${req.contextPath}/logout" class="btn btn-default btn-flat">退出</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- 头部end -->
+        <!-- 左侧菜单begin -->
+        <aside class="main-sidebar" style="overflow-y:scroll;height:800px">
+            <section class="sidebar">
+                <ul class="sidebar-menu" style="height:1900px;">
+                    <li  class="parent" id="menuTree">                        
+                    </li>
+                </ul>
+            </section>
+        </aside>
+        <!-- 左侧菜单end -->
+		<img class="zan-btn" width="12px" src="./assets/img/right.gif" style="position: fixed; left: 231px; ">
+        <!-- 主体部分begin -->
+        <div id="outer-main-box">
+        	<div class="content-wrapper welcome-box" style="display:none;  background-image:url(./assets/img/welcome.jpg);background-size: 100%;">
+				<div class="container">
+					<h4 class="main-title"></h4>
+                
+				</div>
+			</div>
+        </div>
+        <!-- 主体部分end -->
+        <!-- 底部begin  
+        <div class="content-wrapper">
+			<div class="container">
+				<footer class="main-footer" style="margin: 0;">
+		            <div class="pull-right hidden-xs">
+		                <b>Version</b> 2.3.3
+		            </div>
+		            <strong>Copyright &copy; 2015-2016 <a style="color:#333"
+						href="http://landfalcon.com">上海陆鹰实业有限公司</a>.
+					</strong> All rights reserved.
+		        </footer>
+			</div>
+		</div>
+		-->
+    </div>
+    
+    	<!-- 修改个人信息页面 -->
+		<div class="modal fade" id="editPassWordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			  <form id="editPasswordForm">  
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			                <h4 class="modal-title" id="myModalLabel">修改个人信息</h4>
+			            </div>
+			            <div class="modal-body">
+			            <input id="userId"  type="hidden"/>
+			                <div class="info-item-content">
+			                    <table class="wide-table table" id="editPassWordTable">
+			                               <tr>
+			                                    <td style="border: none;">
+			                                        <span class="red">* </span>原密码：
+			                                        <div class="input-wrap">
+			                                            <input id="oldPassWord"  type="password" class="fluid-input" required="true" />
+			                                        </div>
+			                                    </td>
+			                                </tr>
+			                                <tr>
+			                                    <td style="border: none;">
+			                                        <span class="red">* </span>新密码：
+			                                        <div class="input-wrap">
+			                                            <input id="newPassWord" name="passWord" type="password" class="fluid-input" required="true" />
+			                                        </div>
+			                                    </td>
+			                                </tr>
+			                                <tr>
+			                                    <td style="border: none;">
+			                                        <span class="red">* </span>确认密码：
+			                                        <div class="input-wrap">
+			                                            <input id="confirmPassWord" name="confirmWord"  type="password" class="fluid-input" required="true" />
+			                                        </div>
+			                                    </td>
+			                                </tr>
+			                                
+			                                <tr>
+			                                    <td style="border: none;">
+			                                        <span ></span>手机号码：
+			                                        <div class="input-wrap">
+			                                            <input id="phoneNumber" name="phoneNumber"  type="text" class="fluid-input"  />
+			                                        </div>
+			                                    </td>
+			                                </tr>
+			                    </table>
+			                </div>
+			            </div>
+			            <div class="modal-footer">
+			                <input type="button" class="btn btn-primary" id="editPassBtn" value="确认"/>
+			                <input type="button" class="btn btn-default" data-dismiss="modal" value="取消"/>
+			            </div>
+			        </div>
+			    </div>
+			  </form>
+		</div>
+    
+    
+    <!-- 左侧菜单模板begin data-parent="#menuTree-->
+    <script id="menu-template-old" type="text/x-handlebars-template">
+            {{#each this}}
+            <a class="menu-parent" style="padding-left:15px;" data-trigger="collapse" data-parent="#menuTree">
+                <img src="{{EmenuUrl menuIcon}}" />
+                <span>{{menuName}}</span>
+            </a>
+            <ul class="treeview-menu collapsible">
+                {{#each children}}
+                <li>
+                    <a target-url="{{menuUrl}}">
+                        <img src="{{EmenuUrl menuIcon}}" /></i>
+                        <span>{{menuName}}</span>
+                    </a>
+                </li>
+                {{/each}}
+            </ul>
+            {{/each}}
+    </script>
+    
+        <script id="menu-template" type="text/x-handlebars-template">
+         <ul style="padding: 0;">
+            {{#each this}}
+                  <li class="level-button menu-parent" data-parent=".parents">
+                         <a style="padding-left:15px;">
+                           <img src="{{EmenuUrl menuIcon}}" style="width:19px;height:19px;margin-top:-4px;"/>
+                           <span>{{menuName}}</span>
+                         </a>
+                  </li>
+                   <li class="collapsible temp-hide">
+                            <ul>
+                               {{#each children}}
+                               <li class="level-button" style="line-height:30px;">
+									<a target-url="{{menuUrl}}">
+                                    <img src="{{EmenuUrl menuIcon}}" style="width:19px;height:19px;margin-top:-4px;"/></i>
+                                    <span>{{menuName}}</span>
+                                    </a>
+							   </li>
+                               <li class="collapsible temp-hide">
+                                    <ul>
+                                       {{#each children}}
+                                        <li class="level-button"  style="line-height:30px;">
+									        <a target-url="{{menuUrl}}">
+                                    		<img src="{{EmenuUrl menuIcon}}" style="width:19px;height:19px;margin-top:-4px;"/></i>
+                                    		<span>{{menuName}}</span>
+                                    		</a>
+										</li>									 		
+                                    	<ul class="collapsible temp-hide">
+                      						{{#each children}}
+                                             	<li class="level-button"  style="line-height:30px;">
+									        		<a target-url="{{menuUrl}}">
+                                    				<img src="{{EmenuUrl menuIcon}}" style="width:19px;height:19px;margin-top:-4px;"/></i>
+                                    				<span>{{menuName}}</span>
+                                    				</a>
+												</li>
+									   		{{/each}}
+                    					</ul>
+                                          {{/each}}
+                  					</ul>
+                				</li>
+                                {{/each}}
+            				</ul>
+        			</li>
+            {{/each}}
+         </ul>
+    </script>
+    <!-- 左侧菜单模板end -->
+    <script type="text/javascript">
+    //定义主体部分全局属性
+    var C = $("#outer-main-box");
+    //添加项目根目录属性
+    var contextPath = "${req.contextPath}";
+    $(document).ready(function(){
+    	var welcomeBox = $(".welcome-box");
+    	//加载c部分
+    	function loadC(){
+    		if(location.hash){
+    			var begin = new Date().valueOf();
+	        	C.load(contextPath+location.hash.substring(1),function(){
+	        		//检测是否是登录页面，如果是登录页面跳转到login
+	        		if($("#pageName").val() === "loginPage"){
+	        			location.href=contextPath+"/login";
+	        		}
+	        	});
+	        //首页的时候，没有hash值，此时显示欢迎页面
+        	}else{
+        		C.html(welcomeBox.show());
+        	}
+    	}
+    	loadC();
+    	<!-- 获取左侧菜单数据 -->
+        var url = contextPath + "/getSession";
+        var params = "";
+      	//hashchange事件
+        $(window).on("hashchange",function(e){
+        	loadC();
+        }) 
+        //计算主体部分最小高度，106是头部和底部的高度之和
+        C.css("min-height",$(window).height()-55+"px");
+        $(".container").css("min-height",$(window).height()-55+"px");
+        $(".main-footer").parent().css("min-height","0px");
+        $(".zan-btn").css("top",(document.body.clientHeight-$(".zan-btn").outerHeight())/2+"px");
+        var isDis = false;
+        $(".zan-btn").click(function(){
+        	if(isDis){
+        		$(".main-sidebar").css("display","block");
+        		$(this).css("left","231px");
+        		$(".content-wrapper").css("margin-left","230px");
+        		$(this)[0].src = "./assets/img/right.gif";
+        		isDis = false;
+        	}else{
+        		$(".main-sidebar").css("display","none");
+        		$(this).css("left","0px");
+        		$(".content-wrapper").css("margin-left","0px");
+        		$(this)[0].src = "./assets/img/left.gif";
+        		isDis = true;
+        	}
+        	
+        })
+    	var href = location.href.substring(0,location.href.indexOf("#"))
+        Util.ajax.postJson(url, params, function(data, flag) {
+            if (flag && data.returnCode == "0") {
+                //渲染菜单数据
+                var source = $("#menu-template").html();
+                var templet = Handlebars.compile(source);
+                if (flag && data.returnCode == "0") {
+                    var htmlStr = templet(data.bean.PRIVILEGES);
+                    $("#menuTree").html(htmlStr);
+                    $(".level-button a").click(function(e){
+                    	//如果直接又点击了一次当前菜单，不会触发hashchange事件，此时手动执行一次load
+    	                if(location.hash === "#"+$(this).attr("target-url")){
+	    	                loadC();
+    	                }
+    	                location.href =href+"#"+$(this).attr("target-url");
+                    });
+                    //菜单点击后变色
+                    $(".menu-parent,.level-button").click(function(){
+                    	$(".menu-parent,.level-button").removeClass("menu-click");
+                    	$(this).addClass("menu-click");
+                    });
+                    
+                    //获取登录用户的名称
+                    $("#phoneNumber").val(data.bean.USER.phoneNumber);//用来回显用户修改个人信息时的手机号码
+                    $("#spanRealname").text(data.bean.USER.realName);
+                    $("#pRealname").text("欢迎，"+data.bean.USER.realName);
+                    $("#userId").val(data.bean.USER.id);
+                }
+            }
+        });
+    })
+    </script>
+        <script type="text/javascript">
+        var options = {
+        };
+        $(document).on('click', '.level-button', function(e) {
+            $(this).scojs_collapse();
+            return false;
+        });
+        
+        
+    	//修改密码时，validate验证，验证通过后调用保存方法 
+    	$("#editPasswordForm").validate({
+    	    submitHandler:function(form){
+    	    	editPassword();    	    	
+    	    }    
+    	});
+    	
+    	//修改密码
+    	$("#editPassBtn").click(function(){
+    		var form = $("#editPasswordForm");
+    		var phone = $("#phoneNumber").val();
+    		if (phone) {
+    			if(!(/^1[34578]\d{9}$/.test(phone))){ 
+	   		        alert("手机号码有误，请重填!");  
+	   		        $("#phoneNumber").focus();
+	   		        return false; 
+	   		    } 
+			}
+    		form.submit();
+    	}); 
+    	//失去焦点的时候判断 输入的密码是否正确
+    	$("#oldPassWord").blur(function(){
+    		var url = contextPath + "/system/manager/checkPassword";
+    		var params={};
+    		var oldPassWord=$("#oldPassWord").val();
+    		if(oldPassWord ==null || oldPassWord==''){
+    			return false;
+    		}
+    		params.passWord=oldPassWord;
+    		params.id=$("#userId").val();
+    		Util.ajax.postJsonSync(url, params, function(data, flag){
+    			if(flag){
+    				if(data.returnCode=="0"){
+                        if(data.bean.count=="0"){
+                        	alert("你输入的原密码有误，请重新输入");
+                        	$("#oldPassWord").val("").focus();
+                        }
+    				}
+    			}else{
+    					alert(data.returnMessage);
+    			}
+    		});
+    	});
+    	//修改密码
+    	function editPassword(){
+    		var newPassWord=$("#newPassWord").val();
+    		var confirmPassWord=$("#confirmPassWord").val();
+    		var phoneNumber = $("#phoneNumber").val();
+    		if(newPassWord != confirmPassWord ){
+    			alert("新密码和确认密码不相同，请重新输入");
+    			return false;
+    		}
+    		var url = contextPath + "/system/manager/editPassWord";
+    		var params = {};
+    		params.passWord=newPassWord;
+    		params.id=$("#userId").val();
+    		params.phoneNumber = phoneNumber;
+    		//异步请求修改密码信息
+    		Util.ajax.postJsonSync(url, params, function(data, flag){
+    			if(flag){
+    				if(data.returnCode=="0"){
+    	    	    	alert("恭喜您，修改密码成功");
+    					//alert(data.returnMessage);
+    					$("#myModal").modal('hide');
+    					//清空修改密码弹窗信息
+    					$("#editPassWordTable input").val("");
+    					window.location.href=contextPath+"/logout";
+    				}
+    			}else{
+    					alert(data.returnMessage);
+    			}
+    		});
+    	}
+    	
+    	//密码验证
+    	$("#newPassWord").blur(function(){
+    		var pass=$(this).val();
+    		if(!checkPass(pass)){
+    			$(this).val('').focus();
+    		}
+    	});
+    </script>
+</body>
+</html>

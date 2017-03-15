@@ -1,0 +1,211 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">素材管理</h4>
+        <form id="queryForm">
+			<div class="row query-box">
+				<div class="col-xs-5 box-sm">
+					链接名称：
+					<input class="large" type="text" value="" id="queryName" name="name" placeholder="请输入链接名称" />
+				</div>
+				<div class="col-xs-5 box-md">
+					创建起止时间： <input type="text" placeholder="开始时间" name="beginTime" onclick="laydate()" /> -
+					<input type="text" placeholder="结束时间" name="endTime" onclick="laydate()" />
+				</div>
+				<div class="col-xs-2 box-bt">
+					<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查 询"/>
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<span class="btn btn-primary" data-toggle="modal" data-target="#myModal">新增</span>
+            <span class="btn btn-primary" id="editWXMaterialBtn" data-toggle="modal" data-target="#myModal1">编辑</span>
+            <span class="btn btn-primary" id="delWXMaterialBtn">删除</span>
+		</div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            素材信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="wXMaterialListTable" class="table border-table table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addWXMaterialForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加素材</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+						<tr>
+							<td style="border: none;">
+								链接名称：
+								<div class="input-wrap">
+									<input type="text" id="name" name="name" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								外部链接：
+								<div class="input-wrap">
+									<input type="text" id="outerLink" name="outerLink" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								功能描述：
+								<div>
+									<textarea class="content" id="description" name="description" style="width:280px;height:10px;"></textarea>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								内部链接：
+								<div class="input-wrap">
+									<input type="text" id="innerLink" name="innerLink" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveWXMaterialBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editWXMaterialForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑素材</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table">
+						<tr>
+							<td style="border: none;">
+								链接名称：
+								<div class="input-wrap">
+									<input type="text" id="edit-name" name="name" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+                            	<tr>
+							<td style="border: none;">
+								外部链接：
+								<div class="input-wrap">
+									<input type="text" id="edit-outerLink" name="outerLink" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-materialId" name="materialId" value="" />
+						<tr>
+							<td style="border: none;">
+								功能描述：
+								<div>
+									<textarea class="content" id="edit-description" name="description" style="width:280px;height:10px;"></textarea>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								内部链接：
+								<div class="input-wrap">
+									<input type="text" id="edit-innerLink" name="innerLink" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						
+                            </table>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveWXMaterialBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="wXMaterial-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<tr>
+			<th>序号</th>
+			<th>MediaId</th>
+			<th>素材名称</th>
+			<th>创建人</th>
+			<th style="display:none">主键ID</th>
+			<th>分类</th>
+			<th>图片分组ID</th>
+			<th>本地资源URL</th>
+			<th>素材分类</th>
+			<th>标签</th>
+			<th>简介</th>
+			<th>创建时间</th>
+			
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{mediaId}}</td>
+			<td>{{name}}</td>
+			<td>{{createUser}}</td>
+			<td style="display:none">{{materialId}}</td>
+			<td>{{subType}}</td>
+			<td>{{groupId}}</td>
+			<td>{{localUrl}}</td>
+			<td>{{category}}</td>
+			<td>{{videoTags}}</td>
+			<td>{{videoInstru}}</td>
+			<td>{{createTime}}</td>
+			
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/weixin/material-list.js"></script>
+<!-- 引入公共底部     -->
+

@@ -1,0 +1,186 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">导航菜单管理</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div style="margin-top:-10px">
+                <span class="oper-bt-gray" data-toggle="modal" data-target="#myModal">新增</span>
+                <span class="oper-bt-gray" id="editNavigatorBtn" data-toggle="modal" data-target="#myModal1">编辑</span>
+                <span class="oper-bt-gray" id="delNavigatorBtn">删除</span>
+            </div>
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            导航菜单管理信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="navigatorListTable" class="table border-table table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addNavigatorForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加导航菜单</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+						<tr>
+							<td style="border: none;">
+								名称：
+								<div class="input-wrap">
+									<input type="text" id="name" name="name" value="" class="fluid-input" required="true" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								链接URL：
+								<div class="input-wrap">
+									<input type="text" id="url" name="url" value="" class="fluid-input" required="true" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								排序：
+								<div class="input-wrap">
+									<input type="text" id="sort" name="sort" value="" class="fluid-input" digits="true" required="true" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								图标：
+								<input type="button" class="btn btn-primary" style="margin: 20px 0 0 0;" id="uploadBtn" value="上传" />
+                                <input type="hidden" id="imagePath"  name="iconPath" value="" required="true" />
+								<img src="${req.contextPath}/assets/img/default.png" id="preview" style="width:240px; height:160px"/>
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveNavigatorBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editNavigatorForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑导航菜单</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                   <table class="wide-table table">
+						<tr>
+							<td style="border: none;">
+								<!-- 隐藏主键 -->
+								<input type="hidden" id="edit-navId" name="navId" value="" />
+								名称：
+								<div class="input-wrap">
+									<input type="text" id="edit-name" name="name" value="" class="fluid-input" required="true" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								链接URL：
+								<div class="input-wrap">
+									<input type="text" id="edit-url" name="url" value="" class="fluid-input" required="true" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								顺序：
+								<div class="input-wrap">
+									<input type="text" id="edit-sort" name="sort" value="" class="fluid-input" digits="true" required="true" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								图标：
+								<input type="button" class="btn btn-primary" style="margin: 20px 0 0 0;" id="edit-uploadBtn" value="上传" />
+                                <input type="hidden" id="edit-imagePath"  name="iconPath" value="" required="true" />
+								<img src="${req.contextPath}/$!{obj.imagePath}" id="edit-preview" onerror="this.src='${req.contextPath}/assets/img/no_pic.png'" style="width:240px; height:160px"/>
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveNavigatorBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="navigator-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<tr>
+			<th>序号</th>
+			<th>名称</th>
+			<th>链接URL</th>
+			<th>图标路径</th>
+			<th>顺序</th>
+			<th style="display:none">null</th>
+			<th>创建时间</th>
+			<th>创建人</th>
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{name}}</td>
+			<td>{{url}}</td>
+			<td>
+				<img src="${req.contextPath}/{{iconPath}}" onerror="this.src='${req.contextPath}/assets/img/no_pic.png'" style="width:70px; height:50px"/>
+			</td>
+			<td>{{sort}}</td>
+			<td style="display:none">{{navId}}</td>
+			<td>{{createTime}}</td>
+			<td>{{createUser}}</td>
+			<td style="display:none">{{iconPath}}</td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/weiweb/navigator/navigator-list.js"></script>
+

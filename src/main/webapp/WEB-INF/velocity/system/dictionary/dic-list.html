@@ -1,0 +1,141 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<div class="container">
+		<h4 class="main-title">数据字典</h4>
+			<div class="row query-box" style="padding-bottom: 12px;margin-bottom: 10px;">
+				<div class="col-xs-5 box-sm">
+					字典名称：
+					<input class="large" type="text" id="dicGroupName" name="dicGroupName" value="" placeholder="请输入名称" style="width: 200px;" />
+				</div>
+				<div class="col-xs-2 box-bt" style="width: 40%; float: right; margin-top: -11px;">
+					<input type="button" class="btn btn-primary" id="searchBtn" style="margin:0" id="querySubmit" value="查询">
+					<input type="button" value="新增" id="addBtn" class="btn btn-primary ml15" data-target="#myModal" >
+					<input type="button" value="编辑" id="editBtn" class="btn btn-primary ml10">
+					<input type="button" value="删除" id="delBtn" class="btn btn-primary ml10">
+				</div>
+			</div>
+		<div class="row">
+
+				
+		</div>
+		<div class="excel-wrap">
+			<!-- 隐藏选中的code -->
+			<input type="hidden" id="edit-code" value="" />
+			<!-- 隐藏选中的name -->
+			<input type="hidden" id="edit-name" value="" />
+			<table id="listTable" class="table table-hover table-striped clickable-table">
+				
+			</table>
+			<div class="page-box" style="width: 97%;margin:0 auto">
+				<input type="hidden" id="currPage" value="1" />
+                <span style="float:left" class="pagination" id="totalNum" ></span>
+                <ul style="float: right;" id="pagination"></ul>
+            </div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <form id="addForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加数据字典</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+                            <td style="border: none;">
+                                <span class="red">* </span>字典名称：
+                                <div class="input-wrap">
+                                    <input type="text" id="dicGroupName" name="dicGroupName" class="fluid-input" required="true" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: none;">
+                                <span class="red">* </span>字典编码：
+                                <div class="input-wrap">
+                                    <input type="text" id="dicGroupCode" name="dicGroupCode" class="fluid-input" required="true" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+            	<input type="button" class="btn" id="saveBtn" value="保存" />
+            	<input type="button" class="btn" data-dismiss="modal" value="取消" />
+            </div>
+        </div>
+    </div>
+  </form> 
+</div>
+
+<div class="modal fade" id="edit-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <form id="editForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑数据字典</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+                            <td style="border: none;">
+                                <span class="red">* </span>字典名称：
+                                <div class="input-wrap">
+                                	<!-- 隐藏数据字典组ID -->
+                                	<input type="hidden" id="edit-id" name="id" value="" />
+                                    <input type="text" id="edit-dicGroupName" name="dicGroupName" value="" class="fluid-input" required="true" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: none;">
+                                <span class="red">* </span>字典编码：
+                                <div class="input-wrap">
+                                    <input type="text" id="edit-dicGroupCode" name="dicGroupCode" value="" class="fluid-input" required="true" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+            	<input type="button" class="btn" id="edit-saveBtn" value="保存" />
+            	<input type="button" class="btn" data-dismiss="modal" value="取消" />
+            </div>
+        </div>
+    </div>
+  </form> 
+</div>
+
+<script id="list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th>字典名称</th>
+				<th>字典编码</th>
+				<th>操作</th>
+		  	</tr>
+		</thead>
+	  {{#each this}}
+		<tr data-id="{{id}}" data-code="{{dicGroupCode}}" data-name="{{dicGroupName}}" >
+			<td>{{ORACLESTART}}</td>
+			<td>{{dicGroupName}}</td>
+			<td>{{dicGroupCode}}</td>
+			<td>
+				<a href="javascript:" data-id="{{id}}" class="view">查看详情</a>
+			</td>
+		</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/system/dictionary/dic-list.js"></script>

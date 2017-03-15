@@ -1,0 +1,86 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">抽奖序列设置</h4>
+		<div class="row">
+            <span class="btn btn-primary" id="getSeries" style="margin-right: 30px">获取配置</span>
+            <span class="btn btn-primary" id="setSeries">设置配置</span>
+		</div>
+          <form id="addForm">
+		       <div class="row query-box" style="margin-bottom: 20px;">
+                    <table>
+                        <tr>
+                            <td>
+                               	配置项：
+                                <input type="text" id="seriesKey" name="seriesKey" required="true"   placeholder="配置项" />
+                             </td>
+                        </tr>
+                        <tr>
+                         	<td>
+                               	配置值：
+                                <input type="text" id="seriesValue" name="seriesValue" required="true"   placeholder="配置值" />
+                        	</td>
+                        </tr>
+                    </table>
+		       </div>
+		 </form>
+    </div>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript">
+	$(function() {
+		//设置配置信息
+		$("#setSeries").click(function(){
+			setSeries();
+		});
+		
+		//获取配置信息
+		$("#getSeries").click(function(){
+			getSeries();
+		});
+	});
+	
+	//设置序列信息
+	function setSeries(){
+		var url = contextPath + "/system/rediscache/setSeries";
+		var seriesKey = $("#seriesKey").val();
+		var seriesValue = $("#seriesValue").val();
+		var params = 'seriesKey='+seriesKey+'&seriesValue='+seriesValue;
+		//异步请求信息
+		Util.ajax.postJson(url, params, function(data, flag){
+			if(flag){
+				if(data.returnCode=="0"){
+					alert("设置配置信息操作成功!");
+				}else{
+					alert(data.returnMessage);
+				}
+			}
+		});
+	}
+	
+	//获取序列信息
+	function getSeries(){
+		var url = contextPath + "/system/rediscache/getSeries";
+		var seriesKey = $("#seriesKey").val();
+		var params = 'seriesKey='+seriesKey;
+		//异步请求信息
+		Util.ajax.postJson(url, params, function(data, flag){
+			if(flag){
+				if(data.returnCode=="0"){
+					$("#seriesValue").val(data.object);
+					alert("获取配置信息操作成功!");
+				}else{
+					alert(data.returnMessage);
+				}
+			}
+		});
+	}
+	
+</script>

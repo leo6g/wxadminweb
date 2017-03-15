@@ -1,0 +1,305 @@
+<link rel="stylesheet" href="${req.contextPath}/assets/css/msg-response.css"> 
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">关键词自动回复语管理</h4>
+        <form id="queryForm">
+			<div class="row query-box">
+				<div class="col-xs-5 box-sm">
+					关键词/规则：<input class="large" type="text" value="" id="queryKey" name="queryKey" placeholder="请输入关键词/规则" />
+				</div>
+				<div class="col-xs-2 box-bt">
+				</div>
+			</div>
+		</form>
+		<div class="row">
+                <span class="btn btn-primary" data-toggle="collapse"  data-parent=".content-wrapper" data-target="#addRule">+新增规则</span>
+            	<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查 询"/>
+				<input type="button" class="btn btn-default" style="margin:0 ;" id="resetBtn" value="重置"/>
+                <span id="showViewBtn" data-toggle="modal" data-target="#myModal2"></span>
+        </div>
+        <!-- 添加规则 -->
+		 <div  class="collapse rulecontent" id="addRule" tabindex="-1" style="background:#fff;width:83%;">
+		 <div class="addRuleStyle">
+			        <div class=" ruleHead">
+			        	<div class="contentarea">
+			                <b>*规则名</b>
+			                <input type="text" class="ruleName" style="width:180px;height:26px;border:1px solid #eeeeee;" placeholder="规则名最多60个字" required>
+			            </div>
+			            <div class="contentarea" style="margin-top:-5px">
+			                 <b>*关键词</b>
+							<span class="btn btn-primary addKey" data-toggle="modal"   data-target="#modalAddKey">添加关键字</span>
+			        	</div>
+				        <div id="addkeyList" class="keywordList">
+				            
+				        </div>
+			        </div>
+
+			        <div class=" rulecontentarea">
+			            <b>*回复</b>
+		            </div>
+		            <div class=" rulecontentarea">
+		            <a data-toggle="modal"  data-target="#modalTxtResp"><img src="${req.contextPath}/assets/img/bi.png" alt="" title="文字" onclick="getRespLoc();"></a>
+		            <a data-toggle="modal"  data-target="#myModalImage"><img src="${req.contextPath}/assets/img/tu.png" alt="" title="图片" onclick="getRespLoc();"></a>
+		            <a data-toggle="modal"  data-target="#myModalVoice"><img src="${req.contextPath}/assets/img/laba.png" alt="" title="音频"  onclick="getRespLoc();"></a>
+		            <a data-toggle="modal"  data-target="#myModalVideo"><img src="${req.contextPath}/assets/img/shipin.png" alt=""  title="视频"  onclick="getRespLoc();"></a>
+		            <a data-toggle="modal"  data-target="#myModalArticle"><img src="${req.contextPath}/assets/img/tuwen.png" alt=""  title="图文" onclick="getRespLoc();"></a>
+		            </div>
+		            <div class="resp  rulecontentarea">
+		            
+		            </div>
+		            <!-- <div style="padding:14px;padding-bottom:0;">
+		            <span>文字（0）图片（0）视频（0）图文（0）</span>
+		        	</div> -->
+		        	<button class="saveRule btn btn_primary" type="button" onclick="getSaveLoc();">保存</button> 
+		   </div>
+		 </div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div style="margin-top:10px;">
+                    <div class="info-item-box fl" style="width:85%;min-height: 515px;">
+                        <div class="info-item-title">
+                            		关键字自动回复规则列表
+                        </div>
+                        <div class="info-item-content">
+                            <table id="wXKeyRespListTable" class="table border-table table-hover table-striped align-center-table" style="width:96%">
+                            
+
+                            
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="thistotalNum" ></span>
+                                <ul style="float: right;" id="thispagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+     	<!-- 添加关键字 -->
+		<div class="modal fade" id="modalAddKey"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		                <h4 class="modal-title" id="myModalLabel">添加关键字</h4>
+		            </div>
+		            <div class="modal-body">
+		                <div class="info-item-content">
+		                    <table class="wide-table table">
+								<tr>
+									<td style="border: none;">
+									    <textarea  id="addKeywords" class="form-control" rows="6"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td style="border: none;">
+										<div id="keywordsxianshi">
+										
+										</div>
+										<h5 class="text-right"> <small>按回车键可添加多个关键字</small></h5>
+									</td>
+								</tr>
+								
+		                    </table>
+		                </div>
+		            </div>
+		            <div class="modal-footer">
+		                <span type="button" id="saveKeyBtn"  class="btn" >保存</span>
+		                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+        <!-- 编辑关键字/文字回复 -->
+		<div class="modal fade" id="modalEditKey"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		                <h4 class="modal-title" id="myModalLabel">编辑关键字</h4>
+		            </div>
+		            <div class="modal-body">
+		                <div class="info-item-content">
+		                    <table class="wide-table table">
+								<tr>
+									<td style="border: none;">
+									    <textarea  id="editKeyword" class="form-control" rows="6"></textarea>
+									</td>
+								</tr>
+		                    </table>
+		                </div>
+		            </div>
+		            <div class="modal-footer">
+		                <span type="button" id="EditKeyBtn"  class="btn" onclick="saveEditKey();">保存</span>
+		                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+        <!-- 文字回复 -->
+		<div class="modal fade" id="modalTxtResp"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		                <h4 class="modal-title" id="myModalLabel">添加回复文字</h4>
+		            </div>
+		            <div class="modal-body">
+		                <div class="info-item-content">
+		                    <table class="wide-table table">
+								<tr>
+									<td style="border: none;">
+										
+									    <textarea id="txtResp" class="form-control" rows="6"></textarea>
+									</td>
+								</tr>
+		                    </table>
+		                </div>
+		            </div>
+		            <div class="modal-footer">
+		                <span type="button" class="btn" id="saveTxtResp">保存</span>
+		                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+    </div>
+</div>
+
+ #parse("./weixin/autoRespSet/selectPic.html")
+  #parse("./weixin/autoRespSet/selectAudio.html")
+   #parse("./weixin/autoRespSet/selectVideo.html")
+    #parse("./weixin/autoRespSet/selectArticle.html")
+
+<!-- 规则列表模板 -->
+<script id="rule-list-template" type="text/x-handlebars-template">
+{{#each this}}
+ <div class="ruleDiv rulecontent" style="background-color: #f9f9f9;">
+	 <div style="margin-top:5px;margin-bottom:5px;">规则{{addOne @index}}:&nbsp;&nbsp;{{ruleName}}</div>
+	<div class="keywords_info keywords">
+		<strong class="keywords_info_title">关键字</strong>
+		<div class="keywords_info_detail">
+        	<ul class="overview_keywords_list">
+			{{#each keywords}}
+			
+				<li>
+						<em class="keywords_name">{{keyWord}}</em>
+				</li>
+			
+			{{/each}}
+			<ul>
+		</div>
+	</div>
+	<div class="keywords_info reply">
+	    <strong class="keywords_info_title">回复</strong>
+		<div class="keywords_info_detail">
+			<p class="reply_info">1条（{{txtNum}}条文字，{{imageNum}}条图片，{{voiceNum}}条音频，{{videoNum}}条视频，{{articleNum}}条图文）</p>
+		</div>
+	</div>
+	 <div style="margin-top:5px;margin-bottom:5px;">
+	        创建时间：{{createTime}}
+	</div>
+ </div>
+
+ <div class="collapse rulecontent" ruleid={{ruleId}} style="background:#fff;">
+		<div class=" ruleHead">
+						<div class="contentarea">
+                			<b >*规则名</b>
+							<input type="text" class="ruleName" value={{ruleName}} style="width:180px;border:1px solid #eeeeee;" required>
+							<p class="frm_tips">规则名最多60个字</p>
+						</div>
+				         <div class="contentarea" style="margin-top:-5px;">
+								<b>*关键词</b>
+								<span class="btn btn-primary addKey" data-toggle="modal" data-target="#modalAddKey">添加关键字</span>
+				        </div>
+					     <div class="keywordList">
+ 								{{#each keywords}}
+								<div class="key">
+								<span class="anniu glyphicon glyphicon-trash" onclick="delKey();"></span>
+								<span class="anniu addKeyEdit  glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modalEditKey"></span>
+								<span class="addKeyName">{{keyWord}}</span>
+								{{#equals isAllmatch 0}}	                               
+ 									<a class="pipei" value=0>未全匹配<a/>
+								{{/equals}}
+								{{#equals isAllmatch 1}}	                               
+ 									<a class="pipei" value="1">已全匹配</a>
+								{{/equals}}
+								</div>
+								{{/each}}
+			            </div>
+      	</div>
+
+        <div class=" rulecontentarea">
+            <b>*回复</b>
+        </div>
+        <div class="rulecontentarea">
+					<a data-toggle="modal"  data-target="#modalTxtResp"><img src="${req.contextPath}/assets/img/bi.png" alt="" title="文字" onclick="getRespLoc();"></a>
+		            <a data-toggle="modal"  data-target="#myModalImage"><img src="${req.contextPath}/assets/img/tu.png" alt=""  title="图片" onclick="getRespLoc();"></a>
+		            <a data-toggle="modal"  data-target="#myModalVoice"><img src="${req.contextPath}/assets/img/laba.png" alt=""  title="音频" onclick="getRespLoc();"></a>
+		            <a data-toggle="modal"  data-target="#myModalVideo"><img src="${req.contextPath}/assets/img/shipin.png" alt=""   title="视频" onclick="getRespLoc();"></a>
+		            <a data-toggle="modal"  data-target="#myModalArticle"><img src="${req.contextPath}/assets/img/tuwen.png" alt=""  title="图文"  onclick="getRespLoc();"></a>
+        </div>
+        <div class="resp rulecontentarea">
+			<div class='resparea'>
+			{{#equals responseType 'text'}}
+            	<span type="text">{{txtContent}}</span>
+				<span class='anniu glyphicon glyphicon-trash' onclick="delKey();"></span>
+				<span class="anniu TxtRespedit  glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modalEditKey"></span>
+            {{/equals}}
+			{{#equals responseType 'image'}}
+            	<img class="tuyiinshi" src="{{localUrl}}" alt="" style="height:180px;" type="image" mediaId="{{materialId}}"/>          
+                <span class='anniu glyphicon glyphicon-trash' onclick="delKey();"></span>
+            {{/equals}}
+			{{#equals responseType 'voice'}}
+				<audio  src="{{localUrl}}" controls="controls" class="showVoice" type="voice" mediaId="{{materialId}}" style="width:270px;height:130px;margin-top:10px;">
+                             Your browser does not support the audio element.
+                </audio>
+                <span class='anniu glyphicon glyphicon-trash' onclick="delKey();"></span>
+            {{/equals}}
+			{{#equals responseType 'video'}}
+				<video  src="{{localUrl}}" controls="controls" class="showVideo" type="video" mediaId="{{materialId}}" style="width:270px;height:130px;margin-top:10px;">
+                    Your browser does not support the video element.
+                 </video>
+                <span class='anniu glyphicon glyphicon-trash' onclick="delKey();"></span>
+            {{/equals}}
+			{{#equals responseType 'article'}}
+				<div style="display: flex;justify-content: space-between;flex-wrap: wrap;">                      
+ 						<div class="jiangbangititem" style="margin:0;" img="/wxadminweb/viewImage/viewImage?imgPath=material/{{bigArticle.localUrl}}" mediaId="{{materialId}}" digest="{{bigArticle.title}}" type="article">
+							<div>{{createTime}}</div>
+							<hr />
+							<div class="jiangbangthumbnails">
+								<img src="/wxadminweb/viewImage/viewImage?imgPath=material/{{bigArticle.localUrl}}" />
+								<a class="jiangbangauthor">{{bigArticle.title}}</a>
+							</div>
+							<hr />
+
+						{{#each normalArticles}}
+							<div class="jiangbangartical clear">
+								<p>{{title}}</p>
+								<img src="/wxadminweb/viewImage/viewImage?imgPath=material/{{localUrl}}" />
+							</div>
+						{{/each}}
+						</div>
+				<span class='anniu glyphicon glyphicon-trash' onclick="delKey();"></span>
+				</div>
+                
+            {{/equals}}
+           </div> 
+        </div>
+        <div style="padding:14px;padding-bottom:0;">
+            <b>回复</b><b>1条（{{txtNum}}条文字，{{imageNum}}条图片，{{voiceNum}}条音频，{{videoNum}}条视频，{{articleNum}}条图文）</b>
+        </div>
+        <button class="saveRule btn"  type="button" onclick="getSaveLoc();">保存</button>
+        <input type="button" class="delRule btn btn-default" value="删除">
+ </div>
+{{/each}}
+</script>
+
+<script type="text/javascript" charset="utf-8" src="${req.contextPath}/assets/js/weixin/keyword-response.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+
+
+

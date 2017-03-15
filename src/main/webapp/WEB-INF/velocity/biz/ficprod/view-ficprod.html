@@ -1,0 +1,125 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><i class="fa iconfont icon-zuojiantou-copy arrow-bt" id="returnBack"></i> 查看理财产品</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        基本信息
+                    </div>
+                    <div class="info-item-content">
+                        <table>
+                            <tr>
+                                <td class="t1">产品类型：</td>
+                                <td class="t2">$!{obj.type}</td>
+                                <td class="t1">信用卡名称：</td>
+                                <td class="t3">$!{obj.name}</td>
+                            </tr>
+                            <tr>
+                                <td class="t1">产品代码：</td>
+                                <td class="t2">$!{obj.prodCode}</td>
+                                <td class="t1">关联文章：</td>
+                                <td class="t3">$!{obj.articleName}</td>
+                            </tr>
+                            <tr id="lc">
+                                <td class="t1">币种：</td>
+                                <td class="t2">$!{obj.extStr1}</td>
+                                <td class="t1">风险等级：</td>
+                                <td class="t3">$!{obj.extStr2}</td>
+                            </tr>
+                            <tr id="bx">
+                                <td class="t1">投保年龄：</td>
+                                <td class="t2">$!{obj.extStr1}</td>
+                                <td class="t1">产品期限：</td>
+                                <td class="t3" id="bxqx">$!{obj.extStr2}</td>
+                                <input type="hidden" id="authState" name="authState" value="$!{obj.authState}"/>
+                            	<input type="hidden" id="fincId" name="fincId" value="$!{obj.fincId}"/>
+                            	<input type="hidden" id="role" value="$!{role}"/>
+                            	<input type="hidden" id="type" value="$!{obj.type}"/>
+                            	<input type="hidden" id="extStr2" value="$!{obj.extStr2}"/>
+                            </tr>
+                            <tr id="jj">
+                                <td class="t1">基金类型：</td>
+                                <td class="t2">$!{obj.subType}</td>
+                            </tr>
+                            <tr id="gjs">
+                                <td class="t1">贵金属类型：</td>
+                                <td class="t2">$!{obj.subType}</td>
+                                <td class="t1">图片：</td>
+                                <td class="t3"><img src="$!{obj.imagePath}" style="width:80px;height:80px;" alt="正在加载..." /></td>
+                            </tr>
+                            <tr id="gz">
+                                <td class="t1">国债产品类型：</td>
+                                <td class="t2">$!{obj.subType}</td>
+                                <td class="t1">年利率(%)：</td>
+                                <td class="t3">$!{obj.extStr1}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="info-item-content">
+                            <table id="bIZAuthInfoListTable" class="table border-table table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                	</div>
+                	<div class="info-item-content" id="bIZAuthInfoDiv" style="display:none;">
+                       	<form id="addBIZAuthInfoForm">
+                       		<table class="wide-table table">
+		                        <tr>
+		                        	<td style="border: none;">
+		                        		审核结果：
+										<div class="input-wrap" style="width:400px;">
+											<select name="operFlag" id="add-operFlag" class="fluid-input" style="width:400px;">
+												<option value="APPROVED">通过</option>
+		                                    	<option value="REJECTED">驳回</option>
+		                                    </select>
+										</div>
+		                        	</td>
+									<td style="border: none;">
+										审核意见：
+										<div>
+											<textarea id="add-comments" name="comments" style="width:400px;height:100px;"  placeholder="请输入审核意见..."></textarea>
+										</div>
+									</td>
+									<td style="border: none;">
+										<input type="hidden" id="add-prodId" name="prodId" value="$!{obj.fincId}"/>
+					                    <input type="hidden" id="add-type" name="type" value="FINANCE"/>
+									</td>
+								</tr>
+		                    </table>
+                       	</form>
+                	</div>
+                </div>
+                <center>
+	                <input type="button" class="btn btn-primary" id="okBtn" value="确定" style="display:none;"/>
+	                <input type="button" class="btn btn-primary" id="returnBtn" value="返 回"/>
+            	</center>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="bIZAuthInfo-list-template" type="text/x-handlebars-template">
+	<table class="wide-table">
+		<tr>
+			<th>序号</th>
+			<th>审核人</th>
+			<th>审核状态</th>
+			<th>审核意见</th>
+			<th>审核时间</th>
+		</tr>
+	  {{#each this}}
+		 <tr>
+			<td>{{ORACLESTART}}</td>
+            <td>{{checkName}}</td>
+			<td>{{transformat operFlag}}</td>
+            <td>{{comments}}</td>
+            <td>{{createTime}}</td>
+          </tr>
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/biz/ficprod/view-ficprod.js"></script>

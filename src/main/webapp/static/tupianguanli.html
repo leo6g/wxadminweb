@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>图片管理</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../assets/css/global.css">
+	</head>
+	<body>
+		<!-- 头部 开始 -->
+		<div class="globaltop-box ">
+			<div class="container clear">
+				<a href="#" class="logo fl"><img src="../assets/img/logo.png" alt=""></a>
+				<span class="left-txt fl">微信平台后台管理系统</span>
+				<span class="fr right-txt">当前用户：办公室张三</span>
+			</div>
+		</div>
+		<!-- 头部 结束 -->
+		<div class="container clear">
+			<!-- 左侧导航 -->
+			<div class="main-left">
+				<h4 class="lefttop-title">管理</h4>
+				<ul class="navbox">
+					<li>
+						<a class="outer-menu">素材管理</a>
+						<ol class="inner-menu">
+							<li class="current">
+								<a href="#">图文消息</a>
+							</li>
+							<li>
+								<a href="#">图片</a>
+							</li>
+							<li>
+								<a href="#">音频</a>
+							</li>
+							<li>
+								<a href="#">视频</a>
+							</li>  
+						</ol>
+					</li>
+					<li>
+						<a class="outer-menu">自动回复</a>
+						<ol class="inner-menu">
+							<li class="current">
+								<a href="#">被添加自动回复</a>
+							</li>
+							<li>
+								<a href="#">消息自动回复</a>
+							</li>
+							<li>
+								<a href="#">关键词自动回复</a>
+							</li>
+						</ol>
+					</li>
+					<li>
+						<a class="outer-menu">用户管理</a>
+					</li>
+				</ul>
+			</div>
+			<!-- 右侧内容 -->
+			<div>  
+				<div class="main-right">
+					<h4 class="rigttop-title">素材管理</h4>
+					<div class="right-topmenu1 clear">
+						<a href="#" class="current">微信图文</a>
+						<a href="#">微盟图文</a>
+						<a href="#">图片</a>
+						<a href="#">音频</a>
+						<a href="#">音频</a>
+					</div>
+					<!-- 右侧主体开始 -->
+		<div class="wqconttent-right">
+			<div style="width: 832px;border-right: 1px solid gainsboro;">
+				<div style="position: relative;padding-top: 13px;">
+					<span class="wqallimg">全部图片</span>
+					<span class="wqsearch">
+					<input style="height:37px" class="wqsearch-input" type="text" placeholder="图片名称" />
+					<img src="${req.contextPath}/assets/img/search.gif" alt="" />
+				</span>
+					<span style="margin-left: 70px;">
+					图片不超过2M
+		 		</span>
+				<span style="width: 19px;display: inline-block;box-sizing: border-box;">
+					<img style='width:20px' src="${req.contextPath}/assets/img/mmm.png" alt="" />
+				</span>
+				
+				<span style="position: relative;overflow: hidden;">
+					<button class="wqlocal"> <i style="font-size: 20px;font-style: normal;color: white;">+</i> 本地上传</button>
+					<input type="file" size="1" style="position: absolute;z-index: 100;  opacity: 0; top: -10px;left: 10px;height: 35px;width: 135px;display: inline-block; " />
+				</span>
+				
+				</div>
+				<div class="wqcheck-box ">
+					<input type="checkbox" style="display: inline-block;width: 20px;" />  全选								
+					<span class="wqyichfez">移除分组</span>
+					<span class="wqdel">删除</span>
+				</div>
+				<div class="wqimgbox">
+					<figure>
+						<img src="${req.contextPath}/assets/img/groupname.gif" alt="" />
+						<div style="height: 35px;line-height: 35px;padding-left: 10px;">
+							<input type="checkbox" style="display: inline-block;" name="" id="" value="" />
+							<span style="margin-left: 10px;">imgname</span>
+						</div>
+						<figcaption>
+							<span class="wqbianji">
+								<img src="${req.contextPath}/assets/img/bianji.gif" style="width: 55px;" alt="" />
+							</span>
+							<span class="popover-options wqfenzu wqspanbox" style="margin: 0;">
+								<a  href="#" type="button" class="btn btn-warning"
+					  				title="<span class='wqnowa'><input checked type='radio'  /><span>未分组</span></span>
+									<span class='wqnowa'><input  type='radio'  /><span>组1</span></span> <br />
+									<span class='wqnowa'><input type='radio'  /><span>组2</span></span>" data-container="body" data-toggle="popover" data-placement="top" data-content="
+									<button class='qd'>确定</button><button class='qx'>取消</button>">
+									<img src="${req.contextPath}/assets/img/name.gif" style="width: 60px; height: 32px;margin-top:-15px;border-right:1px solid gainsboro ; " alt="" />
+								</a>
+							</span>
+							<span class=" popover-options wqspanbox " style="margin: 0;">
+								<a  href="#" type="button" class="btn btn-warning"
+									style="background: red;"
+									title="<h5>确定删除图片吗？</h5>	 "
+							        data-container="body" data-toggle="popover" data-placement="top"  
+							        data-content="<button class='qd'>确定</button><button class='qx'>取消</button>">
+							       <img src="${req.contextPath}/assets/img/delete.gif" style="width: 60px; height: 32px;margin-top:-15px" alt="" />
+								</a>							
+						</span>
+						</figcaption>
+					</figure>
+				</div>
+			</div>
+			<div style="width: 172px;">
+				<div style="background-color: rgb(249,250,252);height: 40px;text-align: center;line-height: 40px;">全部图片</div>
+				<div style="height: 40px;text-align: center;line-height: 40px;">未分组</div>
+				<div class="popover-options" style="width: 116px;margin: 0 auto; height: 40px;text-align: background:rgb(249,250，252) center;line-height: 40px; border: 1px dashed gainsboro; ">
+					<!--新建分组-->
+					<a href="#" type="button" class="btn btn-warning" style="background-color: rgb(249,250,252) height: 80%;margin-top: 0px;" title="<h5>分组名称</h5><input type='text' class='wqaltinput' />" data-container="body" data-toggle="popover" data-placement="bottom" data-content="<button class='qd'>确定</button><button class='qx'>取消</button>">
+						<i style="color: rgb(46,143,110);font-style: normal;">+</i> 新建分组
+					</a>
+				</div>
+			</div>
+		</div>
+		<!-- 右侧主体结束 -->
+				</div>
+			</div>
+		</div>
+		<script src="../assets/js/jquery.js"></script>
+		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../assets/js/global.js"></script>
+		<script>
+			$(function() {
+				$(".popover-options a").popover({
+					html: true
+				});
+				$("body").on("click", ".qx", function() {
+					$(".popover").hide()
+				});
+				$("body").on("click", ".qd", function() {
+					$(".popover").hide()
+				})
+			})
+		</script>
+	</body>
+</html>

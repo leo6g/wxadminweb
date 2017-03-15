@@ -1,0 +1,68 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+
+			<div class="content-wrapper">
+				<div class="container">
+					<h4 class="main-title">微网站模块信息管理</h4>
+					<form id="queryForm">
+					<div class="row query-box">
+						<div class="col-xs-5 box-sm">
+							名称：
+							<input class="large" type="text" value="" id="queryName" name="name" placeholder="请输入名称" />
+						</div>
+						<div class="col-xs-2 box-bt">
+							<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查询"/>
+							<input type="button" class="btn btn-default" style="margin:0 0 0 10px;" id="resetBtn" value="重置"/>
+						</div>
+					</div>
+					</form>
+					<div class="row">
+						<input type="button" class="btn btn-primary ml15" id="addModules" value="添加"/>
+						<input type="button" class="btn btn-primary ml10" id="editModules" value="编辑"/>
+						<input type="button" class="btn btn-primary ml10" id="viewModules" value="查看"/>
+						<input type="button" class="btn btn-primary ml10" id="deleteModules" value="删除"/>
+						
+					</div>
+					<div class="excel-wrap">
+						<table class="clickable-table table table-hover" id="modulesTableList">
+							<tr>
+								<th>模块名称</th>
+								<th>级别</th>
+								<th>模块图标</th>
+								<th>是否叶子节点</th>
+								<th>关联文章</th>
+								<th>创建人</th>
+								<th>创建时间</th>
+							</tr>
+						<tbody id="wWModulesListTable">
+										
+						</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+<script id="wWModules-list-template" type="text/x-handlebars-template">
+	  {{#each this}}
+				<tr data-tt-id="{{moduleId}}" data-tt-parent-id="{{parentId}}">
+					<td style="text-align:left">{{name}}</td>
+					<td>{{levels}}</td>
+					<td><img src="{{iconPath}}" style="width: 50px;height: 50px;" alt=""></td>
+					<td>{{transformat leaf}}</td>
+					<td>{{title}}</td>
+					<td>{{createUser}}</td>
+					<td>{{createTime}}</td>
+					<td style="display:none">{{moduleId}}</td>
+					<td style="display:none">{{articleId}}</td>
+					
+				</tr> 
+	  {{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/lib/treetable/js/jquery.treetable.js"></script>
+<link rel="stylesheet" href="${req.contextPath}/assets/lib/treetable/css/jquery.treetable.css">
+<link rel="stylesheet" href="${req.contextPath}/assets/lib/treetable/css/jquery.treetable.theme.default.css?_v=1.0">
+<script src="${req.contextPath}/assets/js/weiweb/modules/modules-list.js"></script>
+<!-- 引入公共底部     -->

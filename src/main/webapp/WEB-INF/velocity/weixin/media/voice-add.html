@@ -1,0 +1,75 @@
+<!-- Content Wrapper. Contains page content -->
+<link rel="stylesheet" href="${req.contextPath}/assets/css/global.css"> 
+	<div class="content-wrapper">
+     <div class="zl_main" style="height:560px">
+     <form id="formdata">
+		    <h3 style="margin-top:15px;padding-left:30px;"><span class="title">上传音频</span></h3>
+		    <div style="margin-left:110px;width:700px;height:80px;background:#eaf5f1;">
+		        <audio src="/wxadminweb/viewVideo/viewVideo?videoPath=material/123.mp3" controls="controls" id="showVoice">
+                        Your browser does not support the audio element.
+                </audio>
+                <div class="input-wrap">
+                                    <input type="hidden" id="voicePath" name="localUrl" />
+                                    <span id="uploadIcon">
+                                    </span>
+                </div>
+                <input type="hidden" name="mediaId" id="mediaId"/>
+		    </div>
+		    <ul class="zl_list" style="height:260px">
+		        <li>
+		            <span class="title">标题</span>
+		            <input type="text" placeholder="标题" style="padding-left:30px;" name="name">
+		        </li>
+		        <li>
+		            <span class="title">分类</span>
+		            <select style="color:#acacac;width:200px;height:30px;padding-left:30px;" name="subType">
+		                <option value="1">财经</option>
+		                <option value="2">动漫</option>
+		                <option value="3">儿童</option>
+		                <option value="4">搞笑</option>
+		                <option value="5">健康</option>
+		                <option value="6">教育</option>
+		                <option value="7">军事</option>
+		                <option value="8">科技</option>
+		                <option value="9">历史</option>
+		                <option value="10">旅行</option>
+		                <option value="11">汽车</option>
+		                <option value="12">情感</option>
+		                <option value="13">体育</option>
+		                <option value="14">外语</option>
+		                <option value="15">文学</option>
+		                <option value="16">校园</option>
+		                <option value="17">音乐</option>
+		                <option value="18">影视</option>
+		                <option value="19">游戏</option>
+		                <option value="20">娱乐</option>
+		            </select>
+		        </li>
+		        <li>
+		            <span class="title" style="left:30px;top:395px;">语音内容</span>
+		     <span style="margin-left:15px;color:#8d8d8d">      
+		            格式支持mp3、wma、wav、amr，文件大小不超过2M	            
+             </span> 
+		        </li>
+		    </ul>
+		  </form>
+		   	<p ><input type="checkbox" checked="checked" style="width:15px;height:15px;border:1px solid #efefef;margin-left:350px;margin-top:20px;display:inline;">&nbsp;<span style="display:inline-block;vertical-align: top;margin-top:11px;line-height: 31px">我已阅读并同意《腾讯视频上传服务规则》</span></p>
+		    <p class="hold"><button style="width:110px;height:30px;background:#0ca670;color:#fff;font-size: 14px;outline:0;border:0;border-radius:3px;margin-left:-65px;margin-top:10px;" id="submitData">保存</button></p>
+
+		   </div>
+   </div>
+
+
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/weixin/media/voice-add.js"></script>
+

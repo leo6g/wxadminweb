@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="${req.contextPath}/assets/css/global.css"> 
+<script type="text/javascript" src="${req.contextPath}/assets/js/jquery.js"></script>
+
+        <!--  20170120:云璐 开始 功能：关注时回复 -->
+        <div class="content-wrapper">
+        <div class="main-right">
+        <h4 class="rigttop-title">回复内容设置</h4>
+        <div class="yunl-replaybox">
+        <form action="#" method="get" accept-charset="utf-8">
+            <div class="yunl-mb10">
+                <div class="clear yunl-mb10">
+                    <label class="yunl-label" for="">规则名：</label>
+                    <input class="yunl-input yunl-length3" type="text" name="" value="" placeholder="">
+                </div>
+                <div class="clear yunl-mb10">
+                    <label class="yunl-label" for="">国家：</label>
+                    <select class="yunl-input yunl-length7 yunl-mr20" name="">
+                        <option value="">1111</option>
+                    </select>
+                    <label class="yunl-label" for="">性别：</label>
+                    <select class="yunl-input yunl-length7 yunl-mr20" name="">
+                        <option value="">1111</option>
+                    </select>
+                </div>
+            </div>
+            <div class="yunl-mb10 yl-floor2">
+                <div class="yunlreplay-content-of1 clear yunl-mb10">
+                    <p class="current"><span class="yunluicon yunl-iconedit"></span>文字</p>
+                    <p><span class="yunluicon yunl-iconimg"></span>图片</p>
+                    <p><span class="yunluicon yunl-iconvoice"></span>音频</p>
+                    <p><span class="yunluicon yunl-iconvideo"></span>视频</p>
+                    <p><span class="yunluicon yunl-icontw"></span>图文消息</p>
+                </div>
+                <div class="yunlreplay-content-of2 clear">
+                    <section class="fl">
+                        <input class="inputfile" type="file" name="" value="" placeholder="">
+                        <p class="yunlicon-add">+</p>
+                        <p class="yunl-txt1">从素材库选择</p>
+                    </section>
+                    <section class="fr">
+                        <input class="inputfile" type="file" name="" value="" placeholder="">
+                        <p class="yunlicon-add">+</p>
+                        <p class="yunl-txt1" id="payAttentChangeText">新建文字</p>
+                    </section>
+                </div>
+                <div class="yunlreplay-content-of3 clear">
+                    <span class="yunluicon yunl-iconsmile"></span>
+                    <span class="yl-txt1">用户名称</span>
+                    <span class="yl-txt1">第100位粉丝</span>
+                    <span class="fr">还可以输入520字</span>
+                </div>
+            </div>
+            <input type="submit" class="yunlu-submitbtn1" name="" value="保存"/>
+        </form>
+        
+        </div>
+        </div>
+        </div>
+        <!--  20170120:云璐 结束 功能：关注时回复 -->
+        <script type="text/javascript">
+    $(function () {
+        // 切换文字，图片，图文，音频，视频上传
+        $(".yunlreplay-content-of1 p").on("click",function () {
+            var txtArr=["文字","图片","音频","视频","图文消息"];
+            var index=$(this).index();
+            $(this).addClass("current").siblings().removeClass("current");
+            $("#payAttentChangeText").html("新建"+txtArr[index]);
+        });
+    });
+</script>

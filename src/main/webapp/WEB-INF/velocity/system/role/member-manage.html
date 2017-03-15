@@ -1,0 +1,107 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<input type="hidden" id="roleId" value="$!{roleId}"/>
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><a href="javascript:history.go(-1)"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i></a> 管理成员</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        基本信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table">
+                            <tr>
+                                <td>角色名称：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-xingming-copy"></i>
+                                        <span id="roleName"></span>
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                </td>
+                                <td class="">角色编码：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <i class="iconfont icon-bianmaweihu"></i>
+                                        <span id="roleCode"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="info-item-box" id="choosen-user-box" style="margin-top:10px;display:none" >
+                    <div class="info-item-title">
+                        已选用户
+                    </div>
+                    <div class="info-item-content" id="userDiv">
+                    </div>
+                </div>
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width: 40%;min-height: 515px;">
+                        <div class="info-item-title">
+                            机构列表
+                        </div>
+                        <div class="info-item-content">
+                        	<!-- 机构树状结构数据 -->
+                            <div id="depart-tree" class="treeview"></div>
+                        </div>
+                    </div>
+                    <div class="info-item-box fr" style="width:58%;min-height: 515px;">
+                        <div class="info-item-title">
+                            用户列表
+                        </div>
+                        <div class="info-item-content">
+                            <table class="wide-table table table-hover border-table align-center-table">
+                                <tr>
+                                    <th>全选</th>
+                                    <th>用户名</th>
+                                    <th>真实姓名</th>
+                                </tr>                          
+							<tbody id="user-list-table">
+							
+							</tbody>
+							</table>
+							<div class="page-box" style="width: 97%;margin:0 auto">
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                    <input type="button" class="btn btn-primary" id="insertRoleUser" style="margin: 20px 0 0 0;" value="保存"/>
+                    <input type="button" class="btn btn-default" style="margin: 20px 0 0 20px;" onclick="C.load('${req.contextPath}/system/role/list')" value="取消"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-wrapper -->
+<script id="deplevel-list-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{id}}">{{levName}}</option>
+	  {{/each}}
+</script>
+<script id="user-list-template" type="text/x-handlebars-template">
+	  {{#each this}}
+                  <tr>
+                         <td>
+                         <input type="checkbox" class="userinfo" userName="{{userName}}" userId="{{userId}}">
+                         </td>
+                         <td>{{userName}}</td>
+                         <td>{{realName}}</td>
+                     </tr> 
+	  {{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/bootstrap/js/bootstrap-treeview.js"></script>
+<script src="${req.contextPath}/assets/js/system/role/member-manage.js"></script>
+<!-- 引入公共底部     -->

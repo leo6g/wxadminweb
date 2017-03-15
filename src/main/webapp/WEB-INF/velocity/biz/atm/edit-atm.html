@@ -1,0 +1,192 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <form id="editForm">
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><i class="fa iconfont icon-zuojiantou-copy arrow-bt" id="returnBack"></i> 修改ATM位置</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        基本信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table">
+                            <tr>
+                                <td>设备种类：
+                                    <br>
+                                    <!-- ID-隐藏域-->
+                                    <input type="hidden" id="atmId" name="atmId" value="$!{obj.atmId}" />
+                                    <div class="input-wrap">
+                                        <select id="atmType" name="type" class="" required="true" >
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                </td>
+                                <td class="">所在市：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <select id="cityList" name="netPointIdLev1" class="" required="true" >
+                                        	
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">一级支行：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <select id="townList" name="netPointIdLev2" class="" required="true" >
+                                        	
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                </td>
+                                <td class="">管辖网点：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <select id="countryList" name="netPointId" class="" required="true" >
+                                        	
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">地址类型：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <select id="atmAddrType" name="addrType" class="" required="true" >
+                                        	
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                </td>
+                                <td class="">安装地点：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <input type="text" id=address name="address" value="$!{obj.address}"  required="true" placeholder="请填写安装地点" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>经度：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <input type="text" id=longitude name="longitude" value="$!{obj.longitude}"  number="true" required="true" placeholder="请填写经度" />
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                </td>
+                                <td>维度：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <input type="text" id=latitude name="latitude" value="$!{obj.latitude}"  number="true" required="true" placeholder="请填写维度" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>联系电话：
+                                    <br>
+                                    <div class="input-wrap">
+                                        <input type="text" id=tactorPhone name="tactorPhone" value="$!{obj.tactorPhone}"  number="true" required="true" placeholder="请填写联系电话" />
+                                    </div>
+                                </td>
+                                <td class="t5">
+                                </td>
+                                <td>设备状态：
+                                    <br>
+                                    <select id="state" name="state" class="" required="true" >
+                                      	<option value="">请选择</option>
+                                      	<option value="0">正常</option>
+                                      	<option value="1">维修</option>
+                                      	<option value="-1">故障</option>
+                                    </select>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>ATM图片（建议图片大小:360px*200px）
+									<input type="button" class="btn btn-primary" style="margin: 20px 0 0 0;" id="uploadBtn" value="上传" />
+                                    <input type="hidden" id="imagePath"  name="imagePath" value="$!{obj.imagePath}" required="true" />
+                                </td>
+                                <td class="t5">
+                                </td>
+                                <td>
+									<img src="${req.contextPath}/$!{obj.imagePath}" id="preview" onerror="this.src='${req.contextPath}/assets/img/no_pic.png'" style="width:240px; height:160px"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-primary" style="margin: 20px 0 0 0;" id="saveBtn" value="保存" />
+                <input type="button" class="btn btn-default" style="margin: 20px 0 0 20px;" id="cancelBtn" value="取消" />
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+
+<!-- 设备种类模版 -->
+<script id="atmType-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{id}}">{{dicName}}</option>
+	  {{/each}}
+</script>
+
+<!-- 地址类型模版 -->
+<script id="atmAddrType-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{id}}">{{dicName}}</option>
+	  {{/each}}
+</script>
+
+<!-- 二分模版 -->
+<script id="city-list-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{newOrgId}}">{{city}}</option>
+	  {{/each}}
+</script>
+
+<!-- 一支模版 -->
+<script id="town-list-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{newOrgId}}">{{town}}</option>
+	  {{/each}}
+</script>
+
+<!-- 网点模版 -->
+<script id="country-list-template" type="text/x-handlebars-template">
+	  <option value="">请选择</option>	  
+	  {{#each this}}
+		<option value="{{newOrgId}}">{{orgShtName}}</option>
+	  {{/each}}
+</script>
+
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" >
+	var atmTmpObj = {};
+	//设备种类ID
+	atmTmpObj.type = "$!{obj.type}";
+	//地址类型ID
+	atmTmpObj.addrType = "$!{obj.addrType}";
+	//设备状态ID
+	atmTmpObj.state = "$!{obj.state}";
+	//所在市ID
+	atmTmpObj.city = "$!{obj.city}";
+	//一级支行ID
+	atmTmpObj.town = "$!{obj.town}";
+	//管辖网店ID
+	atmTmpObj.orgShtId = "$!{obj.orgShtId}";
+</script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/biz/atm/edit-atm.js"></script>

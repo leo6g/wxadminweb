@@ -1,0 +1,89 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><i class="fa iconfont icon-zuojiantou-copy arrow-bt" id="returnBack"></i> 查看用户信息</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        基本信息
+                    </div>
+                    <div class="info-item-content">
+                        <table>
+                            <tr>
+                                <td class="t1">用户名称：</td>
+                                <td class="t2">$!{manager.userName}</td>
+                                <td class="t1">有效开始时间：</td>
+                                <td class="t3">$!{manager.validBeginTime}</td>
+                            </tr>
+                            <tr>
+                                <td>创建时间：</td>
+                                <td>$!{manager.createTime}</td>
+                                <td>有效截止时间：</td>
+                                <td>$!{manager.validEndTime}</td>
+                            </tr>
+                            <tr>
+                                <td>最后编辑时间：</td>
+                                <td>$!{manager.updateTime}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="info-item-box" style="margin-top:20px;">
+                    <div class="info-item-title">
+                        属性信息
+                    </div>
+                    <div class="info-item-content">
+                        <table>
+                            <tr>
+                                <td class="t1">真实姓名：</td>
+                                <td class="t2">$!{manager.realName}</td>
+                                <td class="t1">性别：</td>
+                                <td>
+                                	#if ($!{manager.sex} == 0)
+									    	男
+									#elseif ($!{manager.sex} == 1)
+									    	女
+									#end  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>出生日期：</td>
+                                <td>$!{manager.birthday}</td>
+                                <td>邮箱地址：</td>
+                                <td>$!{manager.email}</td>
+                            </tr>
+                            <tr>
+                                <td>联系方式：</td>
+                                <td>$!{manager.telPhone}</td>
+                            </tr>
+                            <tr>
+                                <!-- <td>职位：</td>
+                                <td>$!{manager.positionName}</td> -->
+                                <td>部门：</td>
+                                <td>$!{manager.departName}</td>
+                            </tr>
+                            <tr>
+                                <td>用户手机号码：</td>
+                                <td>$!{manager.phoneNumber}</td>
+                                <td>微信昵称：</td>
+                                <td>$!{manager.openId}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="returnBtn" style="margin: 20px 0 0 0">
+                	返 回
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/system/manager/view-manager.js"></script>
+<!-- 引入公共底部     -->

@@ -1,0 +1,197 @@
+<link rel="stylesheet" href="${req.contextPath}/assets/css/global.css"> 
+<script type="text/javascript" src="${req.contextPath}/assets/js/jquery.js"></script>
+
+        <!--  20170120:王黎明 开始 功能：群发功能 -->
+        <div class="content-wrapper">
+        <div class="main-right">
+       <div class="gaoruxue-group">
+            <ul class="group-header">
+                <li class="gaoruxue-groupfont"><span>群发功能</span></li>
+                <li class="gaoruxue-new clear">
+                    <div class="gaonew-left">
+                        <span class="xinjian">新建群发消息</span>
+                        <span class="fasong">已发送</span>
+                         <span id="line"></span>
+                    </div>
+                    <div class="gaonew-right">
+                         群发消息规则说明
+                    </div>
+                </li>
+            </ul>
+            <!--群发对象选择框部分-->
+            <ul class="gaoruxue-model">
+                <li class="model-guiding">为了保障用户体验，微信公众平台严禁恶意营销以及诱导分享朋友圈，严禁发布色情低俗、暴力血腥、政治谣言等各类违反法律法规及相关政策规定，一旦发现，将严肃处理。
+                </li>
+                <li class="model-select clear">
+                    <div class="selcet-duixiang">
+                        <p>群发对象</p>
+                        <select name="" value="">
+                            <option value="">全部用户</option>
+                            <option value="">1</option>
+                            <option value="">1</option>
+                        </select>
+                     </div>
+                     <div class="selcet-duixiang">
+                        <p>群发对象</p>
+                        <select name="" value="">
+                            <option value="">全部用户</option>
+                            <option value="">1</option>
+                            <option value="">1</option>
+                        </select>
+                     </div>
+                     <div class="selcet-duixiang">
+                        <p>群发对象</p>
+                        <select name="" value="">
+                            <option value="">全部用户</option>
+                            <option value="">1</option>
+                            <option value="">1</option>
+                        </select>
+                     </div>
+                </li>
+                <li class="shangchuan">
+                    <div class="shangchang-sign">
+                    <span class="g-image " >
+                        <svg class="icon icon-massText" aria-hidden="true">
+                            <use xlink:href="#icon-tuwen20"></use>
+                        </svg>                      
+                    </span>
+
+                    <span>图文消息</span>
+                    <span  class="g-image">
+                        <svg class="icon icon-massText" aria-hidden="true">
+                            <use xlink:href="#icon-qianbi"></use>
+                        </svg>      
+                    </span>
+                    <span>文字</span>
+                    <span class="g-image">
+                        <svg class="icon icon-massText" aria-hidden="true">
+                            <use xlink:href="#icon-tupian"></use>
+                        </svg>      
+                    </span>
+                    <span >图片</span>
+                    <span  class="g-image">
+                        <svg class="icon icon-massText" aria-hidden="true">
+                            <use xlink:href="#icon-yinpin"></use>
+                        </svg>      
+                    </span>
+                    <span>音频</span>
+                    <span  class="g-image">
+                        <svg class="icon icon-massText" aria-hidden="true">
+                            <use xlink:href="#icon-shipin"></use>
+                        </svg>      
+                    </span>
+                    <span>视频</span> 
+                    </div>
+  					<div class="g-add clear">
+						<div class="gadd-left">
+							<p><span></span><span></span></p>
+							<p class="gadd-left-txt">从素材中选择</p>
+							<form action="" method="post">
+								<i> 
+									<span></span>
+									<button type="submit">提交</button>
+								</i>
+								<input type="file" name="" id="inMass1" value="" />
+
+								
+							</form>
+
+						</div>
+						<div class="gadd-right">
+							<p><span></span><span></span></p>
+
+							<p class="gadd-right-txt">新建图文消息</p>
+							<form action="" method="post">
+								<i>
+									<span></span>
+									<button type="submit">提交</button>
+								</i>
+								<input type="file" name="" id="inMass2" value="" />
+								
+							</form>
+
+						</div>
+					</div>
+                
+                </li>
+            </ul>
+            <!--上传部分-->
+            
+                
+    
+        </div>
+        <!--已发送部分开始-->
+        <div class="massTexting">
+            <div class="massTexting-top">
+                <select name="">
+                    <option value="">消息类型</option>
+                    <option value="">消息类型1</option>
+                    <option value="">消息类型2</option>                 
+                </select>
+                <p>发送状态</p>
+                <p>发送设置</p>
+            </div>
+            <div class="massTexting-top1">
+                <p>多图文（<span>3</span>）</p>
+                <p>发送状态</p>
+                <p>星期二 18:50</p>
+            </div>
+            <!--图文列表部分-->
+            <div class="massTexting-imageText">
+                <img src="${req.contextPath}/assets/img/u=141440285,3025185966&fm=23&gp=0.jpg" alt="" />
+                <div>
+                    <p>[图文3]你的名字</p>
+                    <p>删除</p>
+                    <p>全部用户</p>
+                    <div>
+                        <span>阅读 0</span>
+                        <span>点赞 0</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="massTexting-imageText">
+                <img src="${req.contextPath}/assets/img/u=141440285,3025185966&fm=23&gp=0.jpg" alt="" />
+                <div>
+                    <p>[图文3]你的名字</p>
+                    <p>删除</p>
+                    <p>全部用户</p>
+                    <div>
+                        <span>阅读 0</span>
+                        <span>点赞 0</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="massTexting-imageText">
+                <img src="${req.contextPath}/assets/img/u=141440285,3025185966&fm=23&gp=0.jpg" alt="" />
+                <div>
+                    <p>[图文3]你的名字</p>
+                    <p>删除</p>
+                    <p>全部用户</p>
+                    <div>
+                        <span>阅读 0</span>
+                        <span>点赞 0</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="massTexting-imageText">
+                <img src="${req.contextPath}/assets/img/u=141440285,3025185966&fm=23&gp=0.jpg" alt="" />
+                <div>
+                    <p>[图文3]你的名字</p>
+                    <p>删除</p>
+                    <p>全部用户</p>
+                    <div>
+                        <span>阅读 0</span>
+                        <span>点赞 0</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--已发送部分结束-->
+        </div>
+        </div>
+        <!--  20170120:王黎明 结束 功能：群发功能 -->
+ <script type="text/javascript" src="${req.contextPath}/assets/js/csstest/massfunction.js"></script>      

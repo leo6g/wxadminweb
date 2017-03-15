@@ -1,0 +1,35 @@
+<!--  本地修改 不要提交。。。。 -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<div class="container">
+		<h4 class="main-title">附近的ATM地图信息</h4>
+		<div class="row">		
+		</div>
+		<div class="excel-wrap">
+		  <div id="allmap" style="height:300px;width:100%;"></div>
+          <div id="r-result" style="width:100%;"></div>
+          <div id="atm-result">         
+            <h4 class="main-title">附近的ATM列表</h4>
+	        <table id="listTable" class="table table-hover clickable-table">
+			</table>
+		  </div>
+
+		</div>
+	</div>
+</div>
+
+<script id="list-template" type="text/x-handlebars-template">
+	<tbody>
+	  {{#each this}}
+          <tr>
+             <td>{{addOne @index}}</td>
+			<td>{{orgShtName}}{{address}}</td>
+			<td>{{tactorPhone}}</td>
+			<td><a href="javascript:void(0);" inde={{@index}} title={{orgShtName}} add={{address}} tel={{tactorPhone}} longitude={{longitude}} latitude={{latitude}} class="showAtmInfo">详情</a></td>
+		</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/biz/atm/atmn-list.js"></script>

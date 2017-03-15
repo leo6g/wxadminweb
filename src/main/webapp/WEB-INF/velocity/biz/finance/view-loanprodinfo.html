@@ -1,0 +1,108 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <form id="editWXCardInfoForm">
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i> 贷款产品信息管理</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        信用卡详情信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table">
+                            <tr>
+                                <td>名称：<input type="text" id="name" name="name" value="" readonly/>
+                                </td>
+                                <td>贷款类型：<input type="text" id=type name="type" value="" readonly/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>产品状态：<input type="text" id=state name="state" value="" style="width:100px;" readonly/>
+                                </td>
+                               <td>贷款用途：<input type="text" id=useage name="useage" value="" style="width:100px;" readonly/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>备注：
+                                    <div>
+										<textarea id="comments" name="comments" style="width:400px;height:200px;border: 0;" readonly></textarea>
+									</div>
+                                </td>
+                                 <td>贷款图样：<div id="preview" style="width:350px;height: 200px;background-color:lightgray;"/>
+            					</td>
+                            </tr>
+							<!-- 隐藏主键 -->
+							<input type="hidden" id="prodId" name="prodId" value="${prodId}" />
+							<input type="hidden" id="authState" name="authState" value="${authState}"/>
+							<input type="hidden" id="role" value="${role}"/>
+                        </table>
+                    </div>
+                    <div class="info-item-content">
+                            <table id="bIZAuthInfoListTable" class="table border-table table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                	</div>
+                	 <div class="info-item-content" id="bIZAuthInfoDiv" style="display:none;">
+                       	<form id="addBIZAuthInfoForm">
+                       		<table class="wide-table table">
+		                        <tr>
+		                        	<td style="border: none;">
+		                        		审核结果：
+										<div class="input-wrap" style="width:400px;">
+											<select name="operFlag" id="add-operFlag" class="fluid-input" style="width:400px;">
+												<option value="APPROVED">通过</option>
+		                                    	<option value="REJECTED">驳回</option>
+		                                    </select>
+										</div>
+		                        	</td>
+									<td style="border: none;">
+										审核意见：
+										<div>
+											<textarea id="add-comments" name="comments" style="width:400px;height:100px;"  placeholder="请输入审核意见..."></textarea>
+										</div>
+									</td>
+									<td style="border: none;">
+										<input type="hidden" id="add-prodId" name="prodId" value="${prodId}"/>
+					                    <input type="hidden" id="add-type" name="type" value="LOAN"/>
+									</td>
+								</tr>
+		                    </table>
+                       	</form>
+                	</div>
+                 <center>
+	                <input type="button" class="btn btn-primary" id="okBtn" value="确定" style="display:none;"/>
+	                <input type="button" class="btn btn-primary" id="backBtn" value="返回" />
+           		</center>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<script id="bIZAuthInfo-list-template" type="text/x-handlebars-template">
+	<table class="wide-table">
+		<tr>
+			<th>序号</th>
+			<th>审核人</th>
+			<th>审核状态</th>
+			<th>审核意见</th>
+			<th>审核时间</th>
+		</tr>
+	  {{#each this}}
+		 <tr>
+			<td>{{ORACLESTART}}</td>
+            <td>{{checkName}}</td>
+			<td>{{transformat operFlag}}</td>
+            <td>{{comments}}</td>
+            <td>{{createTime}}</td>
+          </tr>
+	  {{/each}}
+	</tbody>
+</script>
+
+<!-- /.content-wrapper -->
+<!-- 首先需要引入plupload的源代码 -->
+<script src="${req.contextPath}/assets/plupload/plupload.full.min.js"></script>
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/biz/finance/view-loanprodinfo.js"></script>

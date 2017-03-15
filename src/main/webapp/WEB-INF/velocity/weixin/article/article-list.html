@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="${req.contextPath}/assets/css/global.css"> 
+<link href="${req.contextPath}/assets/showLoading/css/showLoading.css" rel="stylesheet" media="screen" />  
+
+		<!-- 头部 结束 -->
+		<div class="content-wrapper">
+			<div class="main-right">
+				<!-- 右侧主体开始 -->
+				<div class="jiangbangimage-text">
+					<div class="jiangbangitsearch">
+						<input type="text" id="keywords" placeholder="标题/作者/摘要" />
+						<span class="jiangbangglass iconfont icon-sousuo" id="search-bt"></span>
+					</div>
+					<div class="jiangbangititle clear">
+						<!-- <div class="jiangbangtitle-left">
+							微信图文:5/5000
+							<span class="iconfont icon-jiugongge-copy" ></span>
+							<span class=" iconfont icon-duiqiduiqi2" ></span>
+						</div> -->
+						<a class="jiangbangtitle-right" href="javascript:void(0)" id="syncNews"  style="margin-left:10px">
+							<span class="jiangbangjiahao"></span> 同步图文消息
+						</a>
+						<a class="jiangbangtitle-right" href="javascript:void(0)" id="article-add-bt">
+							<span class="jiangbangjiahao"> + </span> 新建图文消息
+						</a>
+					</div>
+					<div class="jiangbangitlist">
+						
+						
+					</div>
+				</div>
+				
+				
+	<div class="page-box" style="width: 97%; margin: 0 auto">
+	<input type="hidden" id="currPage">
+		<span style="float: left" class="pagination" id="totalNum"></span>
+		<ul style="float: right;" id="pagination" class="pagination">
+			<li class="active"><a title="Current page is 1">1</a></li>
+			<li><a title="Go to next page">&gt;</a></li>
+			<li><a title="Go to last page">&gt;&gt;</a></li>
+		</ul>
+	</div>
+</div>
+
+<script id="article-list-template" type="text/x-handlebars-template">
+
+{{#each beans}}
+
+                       <div class="jiangbangititem">
+							<div>{{createTime}}</div>
+							<hr />
+							<div class="jiangbangthumbnails">
+								<img src="/wxadminweb/viewImage/viewImage?imgPath=material/{{bigArticle.localUrl}}" />
+								<a class="jiangbangauthor">{{bigArticle.title}}</a>
+							</div>
+							<hr />
+
+{{#each normalArticles}}
+							<div class="jiangbangartical clear">
+								<p>{{title}}</p>
+								<img src="/wxadminweb/viewImage/viewImage?imgPath=material/{{localUrl}}" />
+							</div>
+{{/each}}
+							<div class="jiangbangbtns clear popover-options">
+								<button class="jiangbangbtns-left iconfont icon-qianbi edit-btn"  data-materialId="{{materialId}}" data-mediaId="{{mediaId}}"></button>
+								<a class="del-btn jiangbangbtns-right iconfont icon-weibiaoti106" data-materialId="{{materialId}}" data-mediaId="{{mediaId}}" type="button" ></a>
+							</div>
+						</div>
+{{/each}}
+</script>
+<script type="text/javascript" src="${req.contextPath}/assets/showLoading/js/jquery.showLoading.js"></script>
+<script type="text/javascript"
+	src="${req.contextPath}/assets/js/weixin/article/article.js">

@@ -1,0 +1,185 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">文本消息管理</h4>
+        <form id="queryForm">
+			<div class="row query-box">
+				<div class="col-xs-5 box-sm">
+					模板名称：
+					<input class="large" type="text" value="" id="queryName" name="name" placeholder="请输入模板名称" style="width: 200px;"/>
+				</div>
+				<div class="col-xs-5 box-md">
+					创建起止时间： <input type="text" placeholder="开始时间" name="beginTime" onclick="laydate()" /> -
+					<input type="text" placeholder="结束时间" name="endTime" onclick="laydate()" />
+				</div>
+
+
+
+			</div>
+		</form>
+		<div class="row" >
+				<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查 询"/>
+			
+                <span class="btn btn-primary" data-toggle="modal" data-target="#myModal">新增</span>
+                <span class="btn btn-primary" id="editWXTextTemplatesBtn" data-toggle="modal" data-target="#myModal1">编辑</span>
+                <span class="btn btn-primary" id="delWXTextTemplatesBtn">删除</span>
+            </div>
+        <div class="excel-wrap" style="margin-bottom: 20px;"> 
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            文本消息管理信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="wXTextTemplatesListTable" class="table border-table align-center-table table-striped table-hover" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addWXTextTemplatesForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加文本消息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+							<td style="border: none;">
+								模板内容：
+								<div class="input-wrap">
+									<input type="text" id="content" name="content" value="" class="fluid-input" maxlength="66" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								模版名称：
+								<div class="input-wrap">
+									<input type="text" id="name" name="name" value="" class="fluid-input" maxlength="1300" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="display: none;">
+								创建人：
+								<div class="input-wrap">
+									<input type="text" id="createUser" name="createUser" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveWXTextTemplatesBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editWXTextTemplatesForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑文本消息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table">
+                            	<tr>
+							<td style="border: none;">
+								模板内容：
+								<div class="input-wrap">
+									<input type="text" id="edit-content" name="content" value="" class="fluid-input" maxlength="66" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								模版名称：
+								<div class="input-wrap">
+									<input type="text" id="edit-name" name="name" value="" class="fluid-input" maxlength="1300" required/>
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-textTempId" name="textTempId" value="" />
+						<tr>
+							<td style="display: none;">
+								创建人：
+								<div class="input-wrap">
+									<input type="text" id="edit-createUser" name="createUser" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						
+                            </table>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveWXTextTemplatesBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="wXTextTemplates-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th>模板内容</th>
+				<th>模版名称</th>
+				<th style="display:none">主键ID</th>
+				<th>创建时间</th>
+				<th>创建人</th>	
+			</tr>
+		</thead>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{content}}</td>
+			<td>{{name}}</td>
+			<td style="display:none">{{textTempId}}</td>
+			<td>{{createTime}}</td>
+			<td>{{createUser}}</td>
+			
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/weixin/texttemplates-list.js"></script>
+<!-- 引入公共底部     -->

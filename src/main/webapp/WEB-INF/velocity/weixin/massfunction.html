@@ -1,0 +1,108 @@
+<link rel="stylesheet" href="${req.contextPath}/assets/css/global.css"> 
+<link rel="stylesheet" href="${req.contextPath}/assets/css/msg-response.css">
+ #parse("./weixin/autoRespSet/selectPic.html")
+#parse("./weixin/autoRespSet/selectAudio.html")
+#parse("./weixin/autoRespSet/selectVideo.html")
+#parse("./weixin/autoRespSet/selectArticle.html")      
+        <!--  20170120:王黎明 开始 功能：群发功能 -->
+        <div class="content-wrapper">
+        <div class="main-right">
+       <div class="gaoruxue-group" style="height:900px;">
+            <ul class="group-header">
+                <li class="gaoruxue-groupfont"><span>群发功能</span></li>
+                <li class="gaoruxue-new clear">
+                    <div class="gaonew-left">
+                        <span class="xinjian">新建群发消息</span>
+                         <span id="line"></span>
+                    </div>
+                    <div class="gaonew-right">
+                         群发消息规则说明
+                    </div>
+                </li>
+            </ul>
+            <!--群发对象选择框部分-->
+            <ul class="gaoruxue-model">
+                <li class="model-guiding">为了保障用户体验，微信公众平台严禁恶意营销以及诱导分享朋友圈，严禁发布色情低俗、暴力血腥、政治谣言等各类违反法律法规及相关政策规定，一旦发现，将严肃处理。
+                </li>
+                <li class="model-select clear">
+                    <div class="selcet-duixiang">
+                        <p>群发对象</p>
+                        <select name="" onchange="selectType()">
+                            <option value="0">全部用户</option>
+                            <option value="1">按标签</option>
+                        </select>
+                         <select name=""  id="tagSelect" style="display:none;">
+                            
+                        </select>
+                     </div>
+                </li>
+                    			<aside class="aside">
+				<div class="asideNav">
+					<div>
+						<a id="textA">
+							<img src="${req.contextPath}/assets/img/bi.png" alt="" onclick="setType('text');"> 文字
+						</a>
+					</div>
+					<div>
+			            <a id="imgA" data-target="#myModalImage" msg="上传图片" fun="addImg();">
+			            	<img src="${req.contextPath}/assets/img/tu.png" alt="" > 图片
+			            </a>
+					</div>
+					<div>
+			            <a id="voiceA" data-target="#myModalVoice" msg="新建语音" fun="addVoice();">
+			            	<img src="${req.contextPath}/assets/img/laba.png" alt="" > 音频
+			            </a>
+					</div>
+					<div>
+			            <a id="videoA" data-target="#myModalVideo" msg="新建视频" fun="addVideo();">
+			            	<img src="${req.contextPath}/assets/img/shipin.png" alt="" > 视频
+			            </a>
+					</div>
+					<div>
+			            <a id="articleA" data-target="#myModalArticle" msg="新增图文" fun="addArticle();">
+			            	<img src="${req.contextPath}/assets/img/tuwen.png" alt="" > 图文消息
+			            </a>
+					</div>
+				</div>
+				<!-- 文字 -->
+				<div id="textDiv">
+					<div class="navContant" contenteditable="true" id="content"></div>
+				</div>
+				<!-- 图片音频图文 -->
+				<div id="otherDiv" style="display:none;">
+					<div class="navContant">
+						<div class="g-add clear">
+                        <div class="gadd-left">
+                            <p><span></span><span></span></p>
+                            <p class="gadd-left-txt" data-toggle="modal" id="showModal">从素材库中选择</p>
+                            <span class="switch"></span>
+                            <i></i>
+                        </div>
+                        <div class="gadd-right">
+                            <p><span></span><span></span></p>
+                            <p class="gadd-right-txt" id="uploadMsg">新建图文消息</p>
+                            <span class="switch"></span>
+                            <i></i>
+                        </div>
+                    </div>
+					</div>
+				</div>
+				<button type="button" class="button" style="float: right;" onclick="sendMessage()">群发</button>
+			</aside>
+            </ul>
+            <!--上传部分-->
+            
+                
+    
+        </div>
+        <!--已发送部分开始-->
+        <!--已发送部分结束-->
+        </div>
+        </div>
+        <!--  20170120:王黎明 结束 功能：群发功能 -->
+<script id="tagSelect-template" type="text/x-handlebars-template">
+{{#each this}}
+<option value="{{id}}">{{name}}</option>
+{{/each}}
+</script>
+ <script type="text/javascript" src="${req.contextPath}/assets/js/csstest/massfunction.js"></script>      

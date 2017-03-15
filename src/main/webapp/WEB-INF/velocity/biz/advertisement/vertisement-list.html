@@ -1,0 +1,252 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">文章植入广告管理管理</h4>
+        <form id="queryForm">
+			<div class="row query-box">
+						<div class="col-xs-5 box-sm">
+							厂商名称：<input class="large" type="text" value="" placeholder="请输入厂商名称" id="queryFirmName" name="firmName"/>
+						</div>
+						<div class="col-xs-5 box-md">
+							厂商电话： <input class="large" type="text" value="" placeholder="请输入厂商电话" id="queryFirmPhone"name="firmPhone"/>
+						</div>
+						<div class="col-xs-2 box-bt">
+
+
+						</div>
+			</div>
+			</form>
+			<div class="row">
+						<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查 询"/>
+				
+						<input type="button" class="btn btn-primary ml10" data-toggle="modal" data-target="#myModal" value="添加"/>
+						<input type="button" class="btn btn-primary ml10" id="editAdvertisementBtn" data-toggle="modal" data-target="#myModal1" value="编辑"/>
+						<input type="button" class="btn btn-primary ml10" id="delAdvertisementBtn" value="删除"/>
+					    <input type="reset" class="btn btn-default clear-margin ml10" id="" value="重置"/>
+						
+			</div>
+           <div class="excel-wrap">
+                            <table id="advertisementListTable"  class="clickable-table table table-hover table-striped">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+            </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addAdvertisementForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加文章植入广告管理</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table" id="addAdvertisementTable">
+                        <tr>
+							<td style="border: none;">
+								广告链接：
+								<div class="input-wrap">
+									<input type="text" id="url" name="url" value="" class="fluid-input" required="true"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								广告标题：
+								<div class="input-wrap">
+									<input type="text" id="name" name="name" value="" class="fluid-input" required="true"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								投放开始日期：
+								<div class="input-wrap">
+									<input type="text" id="startDate" name="startDate" value="" class="fluid-input" onclick="laydate()"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								投放结束日期：
+								<div class="input-wrap">
+									<input type="text" id="endDate" name="endDate" value="" class="fluid-input" onclick="laydate()"/>
+								</div>
+							</td>
+						</tr>
+
+						<tr>
+							<td style="border: none;">
+								广告厂商电话：
+								<div class="input-wrap">
+									<input type="text" id="firmPhone" name="firmPhone" value="" class="fluid-input" required="true"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								广告厂商名称：
+								<div class="input-wrap">
+									<input type="text" id="firmName" name="firmName" value="" class="fluid-input" required="true"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								广告图片：
+                                        	<img src="${req.contextPath}/assets/img/default.png" id="add-picIcon" style="width:240px; height:160px"/>
+	                                        <input type="hidden" id="add-imgPath" name="imgPath" />
+	                                        <span id="add-uploadIcon">
+	                                        </span>
+							</td>
+						</tr>
+						
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn" id="saveAdvertisementBtn" value="保存"/>
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editAdvertisementForm">
+  <!-- 隐藏主键 -->
+  <input type="hidden" id="edit-adverId" name="adverId" value="" />
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑文章植入广告管理</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table" id="editAdvertisementTable">
+                            	<tr>
+							<td style="border: none;">
+								广告链接：
+								<div class="input-wrap">
+									<input type="text" id="edit-url" name="url" value="" class="fluid-input" required="true"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								广告标题：
+								<div class="input-wrap">
+									<input type="text" id="edit-name" name="name" value="" class="fluid-input" required="true"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								投放开始日期：
+								<div class="input-wrap">
+									<input type="text" id="edit-startDate" name="startDate" value="" class="fluid-input" onclick="laydate()"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								投放结束日期：
+								<div class="input-wrap">
+									<input type="text" id="edit-endDate" name="endDate" value="" class="fluid-input" onclick="laydate()"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								广告厂商电话：
+								<div class="input-wrap">
+									<input type="text" id="edit-firmPhone" name="firmPhone" value="" class="fluid-input" required="true"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								广告厂商名称：
+								<div class="input-wrap">
+									<input type="text" id="edit-firmName" name="firmName" value="" class="fluid-input" required="true"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								广告图片：
+                                        	<img src="${req.contextPath}/assets/img/default.png" id="edit-picIcon" style="width:240px; height:160px"/>
+	                                        <input type="hidden" id="edit-imgPath" name="imgPath" />
+	                                        <span id="edit-uploadIcon">
+	                                        </span>
+							</td>
+						</tr>
+						
+                            </table>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn" id="edit-saveAdvertisementBtn" value="保存"/>
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="advertisement-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th>广告链接</th>
+				<th>广告标题</th>
+				<th style="display:none">ADVER_ID</th>
+				<th>投放结束日期</th>
+				<th>投放开始日期</th>
+				<th>广告厂商电话</th>
+				<th>广告厂商名称</th>
+	            <th>广告图片</th>
+				<th>创建人</th>
+				<th>创建时间</th>
+				
+			</tr>
+		</thead>
+		
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td style="display:none">{{adverId}}</td>
+			<td>{{url}}</td>
+			<td>{{name}}</td>
+			<td>{{endDate}}</td>
+			<td>{{startDate}}</td>
+			<td>{{firmPhone}}</td>
+			<td>{{firmName}}</td>
+            <td><img src="{{imgPath}}" style="width:100px;height: 70px;"></td>
+			<td>{{createUser}}</td>
+			<td>{{createTime}}</td>
+			
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/biz/advertisement/vertisement-list.js"></script>
+

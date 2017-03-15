@@ -1,0 +1,331 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">客户权益管理</h4>
+         <form id="queryForm">
+			<div class="row query-box">
+				<!-- <div class="col-xs-5 box-sm">
+					查询条件
+				</div> -->
+				<div class="col-xs-2 box-bt">
+					<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查 询" />
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<span class="btn btn-primary" data-toggle="modal" id="addUserRightsInfoBtn" data-target="#myModal">新增</span>
+            <span class="btn btn-primary" id="editUserRightsInfoBtn" data-toggle="modal" data-target="#myModal1">编辑</span>
+            <span class="btn btn-primary" id="delUserRightsInfoBtn">删除</span>
+		</div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            客户权益信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="userRightsInfoListTable" class="table border-table table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addUserRightsInfoForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加客户权益</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+							<td style="border: none;">
+								客户等级：
+								<div class="input-wrap">
+									<!-- <input type="text" id="customerLevel" name="customerLevel" value="" class="fluid-input" /> -->
+									<select id="customerLevel" name="customerLevel">
+										<option value="00">借记卡普通级</option>
+										<option value="01">借记卡金卡级</option>
+										<option value="02">借记卡白金级</option>
+										<option value="03">借记卡钻石级</option>
+										<option value="10">信用卡金卡级</option>
+										<option value="11">信用卡白金级</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								代驾：
+								<div class="input-wrap">
+									<input type="text" id="daiJia" name="daiJia" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								机场贵宾：
+								<div class="input-wrap">
+									<input type="text" id="guiBin" name="guiBin" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								滴滴：
+								<div class="input-wrap">
+									<input type="text" id="diDi" name="diDi" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								机场接送：
+								<div class="input-wrap">
+									<input type="text" id="jiChang" name="jiChang" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<!-- <tr>
+							<td style="border: none;">
+								微信用户ID：
+								<div class="input-wrap">
+									<input type="text" id="wxUserId" name="wxUserId" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr> 
+						<tr>
+							<td style="border: none;">
+								剩余次数：
+								<div class="input-wrap">
+									<input type="text" id="remainCnt" name="remainCnt" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								使用次数：
+								<div class="input-wrap">
+									<input type="text" id="usedCnt" name="usedCnt" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								初始次数：
+								<div class="input-wrap">
+									<input type="text" id="initCnt" name="initCnt" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								服务代码：
+								<div class="input-wrap">
+									<input type="text" id="serviceCode" name="serviceCode" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								创建人：
+								<div class="input-wrap">
+									<input type="text" id="createUser" name="createUser" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr> -->
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveUserRightsInfoBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editUserRightsInfoForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑客户权益</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table">
+						<!-- 隐藏主键 -->
+					<input type="hidden" id="edit-id" name="id" value="" />
+                       <tr>
+							<td style="border: none;">
+								客户等级：
+								<div class="input-wrap">
+									<select id="customerLevel" name="customerLevel">
+										<option value="00">借记卡普通级</option>
+										<option value="01">借记卡金卡级</option>
+										<option value="02">借记卡白金级</option>
+										<option value="03">借记卡钻石级</option>
+										<option value="10">信用卡金卡级</option>
+										<option value="11">信用卡白金级</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								代驾：
+								<div class="input-wrap">
+									<input type="text" id="daiJia" name="daiJia" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								机场贵宾：
+								<div class="input-wrap">
+									<input type="text" id="guiBin" name="guiBin" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								滴滴：
+								<div class="input-wrap">
+									<input type="text" id="diDi" name="diDi" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								机场接送：
+								<div class="input-wrap">
+									<input type="text" id="jiChang" name="jiChang" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>     
+                       
+                        <!-- <tr>
+							<td style="border: none;">
+								客户等级：
+								<div class="input-wrap">
+									<input type="text" id="edit-customerLevel" name="customerLevel" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								微信用户ID：
+								<div class="input-wrap">
+									<input type="text" id="edit-wxUserId" name="wxUserId" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								剩余次数：
+								<div class="input-wrap">
+									<input type="text" id="edit-remainCnt" name="remainCnt" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								使用次数：
+								<div class="input-wrap">
+									<input type="text" id="edit-usedCnt" name="usedCnt" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								初始次数：
+								<div class="input-wrap">
+									<input type="text" id="edit-initCnt" name="initCnt" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								服务代码：
+								<div class="input-wrap">
+									<input type="text" id="edit-serviceCode" name="serviceCode" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								创建人：
+								<div class="input-wrap">
+									<input type="text" id="edit-createUser" name="createUser" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr> -->
+						
+                            </table>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveUserRightsInfoBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="userRightsInfo-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<tr>
+			<th>序号</th>
+			<th>客户等级</th>
+			<th>微信用户</th>
+			<th style="display:none">主键</th>
+			<th>剩余次数</th>
+			<th>使用次数</th>
+			<th>初始次数</th>
+			<th>服务代码</th>
+			<th>创建时间</th>
+			<th>创建人</th>
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{customerLevel}}</td>
+			<td>{{name}}</td>
+			<td style="display:none">{{id}}</td>
+			<td>{{remainCnt}}</td>
+			<td>{{usedCnt}}</td>
+			<td>{{initCnt}}</td>
+			<td>{{serviceCode}}</td>
+			<td>{{createTime}}</td>
+			<td>{{createUser}}</td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/weixin/userrightsinfo-list.js"></script>
+

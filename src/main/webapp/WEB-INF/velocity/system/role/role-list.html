@@ -1,0 +1,152 @@
+<!-- Content Wrapper. Contains page content -->
+			<div class="content-wrapper">
+				<div class="container">
+					<h4 class="main-title">角色列表</h4>
+					<form id="queryForm">
+					<div class="row query-box">
+						<div class="col-xs-5 box-sm">
+							角色名称：
+							<input class="large" type="text" value="" name="roleName" placeholder="请输入角色名称" style="width: 200px;"/>
+						</div>
+						<div class="col-xs-5 box-md">
+							创建起止时间： <input type="text" placeholder="开始时间" name="beginTime" onclick="laydate()" /> -
+							<input type="text" placeholder="结束时间" name="endTime" onclick="laydate()" />
+						</div>
+						<div class="col-xs-2 box-bt">
+
+
+						</div>
+					</div>
+					</form>
+					<div class="row" >
+						<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查询"/>
+						<input type="button" class="btn btn-primary ml15" data-toggle="modal" data-target="#myModal" value="添加" style="margin-left: 10px;"/>	
+						<input type="button" class="btn btn-primary ml10" id="initRoleInfo" value="编辑"/>
+						<input type="button" class="btn btn-primary ml10" id="deleteRoleInfo" value="删除"/>						
+						<input type="reset" class="btn btn-default clear-margin ml10" id="" value="重置"/>
+					</div>
+					<div class="excel-wrap">
+						<table class="clickable-table table table-striped table-hover" id="roleTableList">
+						<thead style="background-color: #dcdcdc;">
+							<tr>
+								<th>序号</th>
+								<th>角色名称</th>
+								<th>角色编码</th>
+								<th>创建时间</th>
+								<th>最后编辑时间</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+							<tbody id="role-list-table">
+							
+							</tbody>
+							</table>
+							<div class="page-box" style="width: 97%;margin:0 auto">
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+					</div>
+				</div>
+			</div>
+			<!-- 新增页面 -->
+			  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <form id="addRoleForm">  
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			                <h4 class="modal-title" id="myModalLabel">添加角色信息</h4>
+			            </div>
+			            <div class="modal-body">
+			                <div class="info-item-content">
+			                    <table class="wide-table table" id="addRoleTable">
+			                        <tr>
+			                                    <td style="border: none;">
+			                                        <span class="red">* </span>角色名称：
+			                                        <div class="input-wrap">
+			                                            <input  name="roleName" type="text" class="fluid-input" required="true" />
+			                                        </div>
+			                                    </td>
+			                                </tr>
+			                                <tr>
+			                                    <td style="border: none;">
+			                                        <span class="red">* </span>角色编码：
+			                                        <div class="input-wrap">
+			                                            <input  name="roleCode" type="text" class="fluid-input" required="true" />
+			                                        </div>
+			                                    </td>
+			                                </tr>
+			                    </table>
+			                </div>
+			            </div>
+			            <div class="modal-footer">
+			                <input type="button" class="btn btn-primary" id="saveRoleBtn" value="保存"/>
+			                <input type="button" class="btn btn-default" data-dismiss="modal" value="取消"/>
+			            </div>
+			        </div>
+			    </div>
+			  </form>
+			</div>
+			
+			<!-- 编辑角色 -->
+			<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <form id="editRoleForm"> 
+			    <input id="roleId" type="hidden" name="id"/> 
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			                <h4 class="modal-title" id="myModalLabel">编辑角色信息</h4>
+			            </div>
+			            <div class="modal-body">
+			                <div class="info-item-content">
+			                    <table class="wide-table table" id="editRoleTable">
+			                        <tr>
+			                                    <td style="border: none;">
+			                                        <span class="red">* </span>角色名称：
+			                                        <div class="input-wrap">
+			                                            <input id="roleName" name="roleName" type="text" class="fluid-input" required="true" />
+			                                        </div>
+			                                    </td>
+			                                </tr>
+			                                <tr>
+			                                    <td style="border: none;">
+			                                        <span class="red">* </span>角色编码：
+			                                        <div class="input-wrap">
+			                                            <input id="roleCode" name="roleCode" type="text" class="fluid-input" required="true" />
+			                                        </div>
+			                                    </td>
+			                                </tr>
+			                    </table>
+			                </div>
+			            </div>
+			            <div class="modal-footer">
+			                <input type="button" class="btn btn-primary" id="editRoleBtn" value="保存"/>
+			                <input type="button" class="btn btn-default" data-dismiss="modal" value="取消"/>
+			            </div>
+			        </div>
+			    </div>
+			  </form>
+			</div>
+			
+<script id="role-list-template" type="text/x-handlebars-template">
+	  {{#each this}}
+              <tr>
+								<td>{{addOne @index}}</td>
+                                <td style="display:none">{{id}}</td>
+								<td>{{roleName}}</td>
+								<td>{{roleCode}}</td>
+								<td>{{createTime}}</td>
+					            <td>{{updateTime}}</td>
+								<td>
+									<a href="javascript:void(0)" onclick=C.load("${req.contextPath}/system/role/edit?id={{id}}")>编辑权限</a>
+									<a href="javascript:void(0)" onclick=C.load("${req.contextPath}/system/role/manage?id={{id}}")>管理成员</a>
+								</td>
+				</tr>
+
+
+	  {{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/system/role/role-list.js"></script>

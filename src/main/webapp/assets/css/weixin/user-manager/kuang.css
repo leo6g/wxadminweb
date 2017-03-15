@@ -1,0 +1,136 @@
+.out01 {
+	margin: 100px;
+	width: 300px;
+	/*height: 183px;*/
+	border: 1px solid #E0E3E8;
+	position: relative;
+	background: #FEFFFF;
+	padding: 0px 30px;
+}
+
+.out01 .demo {
+	/*background: red;*/
+	text-align: center;
+	padding-top: 25px;
+	padding-bottom: 13px;
+	line-height: 25px;
+	/*border-bottom: 1px solid #E0E3E8;*/
+}
+
+.out01 .circle {
+	display: block;
+	width: 0px;
+	height: 0;
+	border: 23px solid transparent;
+	border-bottom: 26px solid #E0E3E8;
+	position: absolute;
+	top: -48px;
+	left: 158px
+}
+
+.out01 .circle:before {
+	content: '';
+	width: 0;
+	height: 0;
+	border: 23px solid transparent;
+	border-bottom: 26px solid #FEFFFF;
+	position: absolute;
+	top: -21px;
+	left: -23px
+}
+
+.btn-btn {
+	text-align: center;
+	padding: 20px 0px;
+}
+
+.btn-btn  input {
+	border-style: none;
+	width: 65px;
+	height: 25px;
+	color: white;
+	margin-top: 13px;
+}
+
+.btn-btn  input:nth-child(1) {
+	background: #2E8F6E;
+}
+
+.btn-btn  input:nth-child(2) {
+	margin-left: 14px;
+	border: 1px solid #E0E3E8;
+	background: white;
+	color: #2E2E38;
+}
+
+.btn3 {
+	border-style: none;
+	width: 244px;
+	height: 35px;
+	text-indent: 15px;
+	border: 1px solid #E0E3E8;
+	outline: none;
+}
+
+.friends {
+	padding-left: 30px;
+	margin-top: 15px;
+	margin-bottom: 22px;
+}
+
+.friends input {
+	border-style: none;
+	width: 15px;
+	height: 15px;
+	border: 1px solid #E0E3E8;
+	position: relative;
+	top: 3px;
+}
+
+.new {
+	padding-left: 30px;
+	color: #2E8F6E;
+	font-weight: bold;
+}
+
+.btn {
+	margin-top: 25px;
+	padding-bottom: 20px;
+	border-top: 1px solid #E0E3E8;
+}
+
+.alert-beizhu, .alert-biaoqian, .alert-blackname, .alert-staruser,
+	.alert-addblackname, .alert-staruser1 {
+	position: absolute;
+	display: none;
+}
+
+.alert-beizhu {
+	left: 664px;
+	z-index:100000;
+}
+
+.alert-biaoqian {
+	top: 117px;
+	left: 696px;
+}
+.alert-bjbiaoqian {
+	top: 117px;
+	left: 815px;
+}
+.alert-blackname {
+	top: 160px;
+	left: -80px;
+}
+
+.alert-staruser {
+	top: 234px;
+	left: 142px;
+}
+
+.alert-addblackname {
+	top: 234px;
+	left: 253px;
+	display: none;
+	color: #67686C;
+}

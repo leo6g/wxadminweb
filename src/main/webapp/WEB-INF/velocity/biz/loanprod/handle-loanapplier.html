@@ -1,0 +1,184 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">贷款申办信息处理</h4>
+        <form id="queryForm">
+			<div class="row query-box" style="margin-bottom: 10px;">
+                <div class="col-xs-5 box-sm">
+					姓&nbsp;&nbsp;&nbsp;名：
+					<input class="large" type="text" value="" placeholder="请输入姓名" id="queryName" name="name"/>
+				</div>
+				<div class="col-xs-5 box-md">
+					申请时间： <input type="text" placeholder="开始时间" name="beginTime" onclick="laydate()"/> -
+					<input type="text" placeholder="结束时间" name="endTime" onclick="laydate()"/>
+				</div>
+				<div class="col-xs-5 box-sm" style="margin-top: 20px;" >
+					手机号：
+					<input class="large" type="text" value="" placeholder="请输入手机号码" id="queryCellNumber" name="cellNumber"/>
+				</div>
+				<div class="col-xs-2 box-bt" style="margin-top: 20px; margin-left: 12px;" >
+					<input type="button" class="btn btn-primary" style="margin:0;height:26px; line-height: 24px;" id="querySubmit" value="查 询" />
+				    <input type="reset" class="btn btn-default clear-margin ml10" id="" value="重置" style="height:26px; line-height: 24px;"/>
+				    <input type="button" class="btn btn-primary" id="exportBtn" value="导出"/>
+				</div>
+			</div>
+			</form>
+            <div class="row" >
+					<div style="margin-top:-5px">
+		                <span class="oper-bt-gray" data-toggle="modal" id="orderBtn" data-target="#myModal" style="display: none;">调配</span>
+		                <span class="oper-bt-gray" id="handleBtn" data-toggle="modal" data-target="#myModal1" style="display: none;">处理</span>
+		                <span class="oper-bt-gray" id="exportBtn" style="display: none;">导出</span>
+		            </div>					
+			</div>
+			<div class="excel-wrap">
+				<table class="clickable-table table table-striped table-hover" id="cardApplierListTable">
+				</table>
+				<!-- 隐藏信息 -->
+				<input type="hidden" id="departCode" value="$!{departCode}"/>
+				<input type="hidden" id="roleCode" value="$!{roleCode}"/>
+				<div id="data">
+					<input type="hidden" id="edit-applierId" value=""/>
+					<input type="hidden" id="edit-taskerId" value=""/>
+					<input type="hidden" id="edit-realName" value=""/>
+					<input type="hidden" id="edit-processResult" value=""/>
+				</div>
+				<div class="page-box" style="width: 97%;margin:0 auto">
+                    <span style="float:left" class="pagination" id="totalNum" ></span>
+                    <ul style="float: right;" id="pagination"></ul>
+                </div>
+			</div>
+		</div>
+	</div>
+    
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addCardApplierForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">调配客户经理</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                     <div class="info-item-content">
+	                     <div class="excel-wrap">
+							<table class="clickable-table table table-hover" id="orderUserListTable">
+							</table>
+						 </div>
+	                </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveOrderBtn">调配</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editCardApplierForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">处理结果</h4>
+            </div>
+            <div class="modal-body">
+                   <table class="wide-table table">
+                       <tr>
+                       	<td style="border: none;">
+                       		处理结果：
+							<div class="input-wrap" style="width:400px;">
+								<select name="processResult" id="processResult" style="width:400px;">
+									<option value="success">申办成功</option>
+                                   	<option value="fail">申办失败</option>
+                                   </select>
+							</div>
+                       	</td>
+                       	</tr>
+                       	<tr>
+						<td style="border: none;">
+							处理说明：
+							<div>
+								<textarea id="processRemark" style="width:400px;height:100px;"  placeholder="请输入处理结果原因..."></textarea>
+							</div>
+						</td>
+					</tr>
+                   </table>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn" id="savehandleBtn" value="确定"/>
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="cardApplier-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th>姓名</th>
+				<th style="display:none">APPLIER_ID</th>
+				<th>申请网点</th>
+				<th>申请时间</th>
+				<th>手机号码</th>
+				<th>贷款产品</th>
+				<th>贷款用途</th>
+				<th>贷款金额</th>
+				<th>接收人</th>
+				<th>处理状态</th>
+				<th>处理结果</th>
+			</thead>
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{name}}</td>
+			<td style="display:none">{{applierId}}</td>
+			<td>{{departName}}</td>
+			<td>{{applyTime}}</td>
+			<td>{{cellNumber}}</td>
+			<td>{{loanName}}</td>
+			<td>{{useage}}</td>
+			<td>{{loanAmount}}</td>
+			<td>{{realName}}</td>
+			<td>{{tranState processState}}</td>
+			<td>{{tranResult processResult}}</td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- 调配模板 -->
+<script id="order-user-template" type="text/x-handlebars-template">
+	<tbody>
+		<tr>
+			<th>序号</th>
+			<th>机构名</th>
+			<th>姓名</th>
+			<th style="display:none">userId</th>
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{addOne @index}}</td>
+			<td>{{departName}}</td>
+			<td>{{realName}}</td>
+			<td style="display:none">{{userId}}</td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/biz/loanprod/handle-loanapplier.js"></script>
+

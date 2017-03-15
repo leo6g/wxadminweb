@@ -1,0 +1,79 @@
+<link rel="stylesheet" href="${req.contextPath}/assets/css/msg-response.css">
+#parse("./weixin/autoRespSet/selectPic.html")
+#parse("./weixin/autoRespSet/selectAudio.html")
+#parse("./weixin/autoRespSet/selectVideo.html")
+#parse("./weixin/autoRespSet/selectArticle.html")
+<div class="content-wrapper" style="background: #fff;">
+	<div class="container">
+		<div class="main-right">
+			<h4 class="main-title">消息自动回复</h4>
+			<div class="row query-box" style="padding:0;"></div>
+			<aside class="aside">
+				<div class="asideNav">
+					<div>
+						<a id="textA">
+							<img src="${req.contextPath}/assets/img/bi.png" alt=""> 文字
+						</a>
+					</div>
+					<div>
+			            <a id="imgA" data-target="#myModalImage" msg="上传图片" fun="addImg();">
+			            	<img src="${req.contextPath}/assets/img/tu.png" alt="" > 图片
+			            </a>
+					</div>
+					<div>
+			            <a id="voiceA" data-target="#myModalVoice" msg="新建语音" fun="addVoice();">
+			            	<img src="${req.contextPath}/assets/img/laba.png" alt="" > 音频
+			            </a>
+					</div>
+					<div>
+			            <a id="videoA" data-target="#myModalVideo" msg="新建视频" fun="addVideo();">
+			            	<img src="${req.contextPath}/assets/img/shipin.png" alt="" > 视频
+			            </a>
+					</div>
+					<div>
+			            <a id="articleA" data-target="#myModalArticle" msg="新增图文" fun="addArticle();">
+			            	<img src="${req.contextPath}/assets/img/tuwen.png" alt="" > 图文消息
+			            </a>
+					</div>
+				</div>
+				<!-- 文字 -->
+				<div id="textDiv">
+					<div class="navContant" contenteditable="true" id="contentDiv"></div>
+					<!-- <div class="textArea">
+						<span class="face"></span>
+						<div>还可以输入520字</div>
+					</div> -->
+				</div>
+				<!-- 图片音频图文 -->
+				<div id="otherDiv" style="display:none;">
+					<div class="navContant">
+						<div class="g-add clear">
+                        <div class="gadd-left">
+                            <p><span></span><span></span></p>
+                            <p class="gadd-left-txt" data-toggle="modal" id="showModal">从素材库中选择</p>
+                            <span class="switch"></span>
+                            <i></i>
+                        </div>
+                        <div class="gadd-right">
+                            <p><span></span><span></span></p>
+                            <p class="gadd-right-txt" id="uploadMsg">新建图文消息</p>
+                            <span class="switch"></span>
+                            <i></i>
+                        </div>
+                    </div>
+					</div>
+				</div>
+				<div style="text-align:center;">
+					<button type="button" class="button" id="saveBtn">保存</button>
+					<button type="button" class="button2" id="deleteBtn">删除自动回复</button>
+				</div>
+			</aside>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="${req.contextPath}/assets/js/global.js"></script>
+<script type="text/javascript">
+	var info = $respInfo;
+</script>
+<script type="text/javascript" src="${req.contextPath}/assets/js/weixin/msg-response.js"></script>
+

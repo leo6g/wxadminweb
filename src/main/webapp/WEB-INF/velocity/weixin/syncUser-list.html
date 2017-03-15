@@ -1,0 +1,93 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">同步用户管理</h4>
+        <form id="queryForm">
+			<div class="row query-box">
+				<div class="col-xs-5 box-sm" style=" width: 30%;">
+					<span style="">昵&nbsp;&nbsp;&nbsp;称：</span>
+					<input class="large" type="text" value="" id="queryNickName" name="nickName" placeholder="请输入昵称"  style="width: 230px;" />
+				</div>
+				<div class="col-xs-5 box-sm" style="width: 30%;">
+					<span >姓名：</span>
+					<input class="large" type="text" value="" id="queryName" name="name" placeholder="请输入姓名" style="width: 230px;" />
+				</div>
+				<div class="col-xs-5 box-sm" style="width: 30%;">
+					<span >手机号码：</span>
+					<input class="large" type="text" value="" id="queryPhoneNumber" name="phoneNumber" placeholder="请输入手机号码"  style="width: 210px;"/>
+				</div>
+
+			</div>
+		</form>
+		<div class="row" >
+		<div class="col-xs-5 box-sm">
+
+			</div >	
+				<input type="button" class="btn btn-primary" style="vertical-align: bottom; height:28px;margin-left:-34.5%;-moz-margin-start: -31.6%;  " id="querySubmit" value="查 询"/>
+			
+                <span class="oper-bt-gray" id="syncWXUser" style="height: 28px; border-width: 0;">同步微信用户</span>
+           
+		</div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            关注用户信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="wXUserListTable" class="table border-table table-hover table-striped align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="wXUser-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+	            <th></th>
+				<th>昵称</th>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>分组名称</th>
+				<th style="display:none">主键ID</th>
+				<th>手机号码</th>
+				<th>关注时间</th>		
+			</tr>
+		</thead>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+            <td><input type="checkbox" name="selectUser"  value="{{openId}}"/></td>
+			<td>{{nickName}}</td>
+			<td>{{name}}</td>
+			<td>{{gender}}</td>
+			<td>{{groupName}}</td>
+			<td style="display:none">{{wxUserId}}</td>
+			<td>{{phoneNumber}}</td>
+			<td>{{subscribeTime}}</td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/weixin/syncUser-list.js"></script>
+<!-- 引入公共底部     -->
+

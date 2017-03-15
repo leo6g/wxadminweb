@@ -1,0 +1,46 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<input type="hidden" value="$!{articleId}" id="articleId"/>
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><a href="javascript:history.go(-1)"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i></a>微网站文章信息管理</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        查看微网站文章信息
+                    </div>
+                    <div class="info-item-content">
+                        <table>
+                            <tr>
+                                <td class="t1">文章标题：</td>
+                                <td class="t2" id="title"></td>
+                                <td class="t1">阅读次数：</td>
+                                <td id="viewTimes"></td>
+                            </tr>
+                            <tr>
+                                <td>创建人：</td>
+                                <td id="createUser"></td>
+                                <td>创建时间：</td>
+                                <td id="createTime"></td>
+                            </tr>
+                            <tr>
+                                <td>文章内容：</td>
+                                <td id="content"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-primary" style="margin: 20px 0 0 0" onclick="C.load('${req.contextPath}/weiweb/article/list')" value="返 回"/>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-wrapper -->
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/weiweb/article/view-study-article.js"></script>
+<!-- 引入公共底部     -->

@@ -1,0 +1,185 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">特惠商户申请信息处理</h4>
+         <form id="queryForm">
+			<div class="row query-box" >
+				<div class="col-xs-5 box-sm">
+					商&nbsp;户&nbsp;名&nbsp;称：
+					<input type="text" id="queryShopName" name="shopName" value="" class="large" placeholder="请输入商户名称" style="width: 200px !important;"/>
+				</div> 
+				<div class="col-xs-5 box-sm" style="margin-left: 25px;">
+					申请人名称：
+					<input class="large" type="text" value="" id="queryApplierName" name="applierName" placeholder="请输入申请人名称"style="width: 215px !important;	" />
+				</div>
+				<div class="row" style="height: 45px;"></div>
+				<div class="col-xs-5 box-sm">
+					申请人电话：
+					<input type="text" id="queryApplierPhone" name="applierPhone" value="" class="large" placeholder="请输入申请人电话" style="width: 200px !important;	"/>
+				</div>
+				<div class="col-xs-2 box-bt" style="margin-left: 40px; width:50%; margin-top: -15px; vertical-align: bottom;">
+
+				</div>
+			</div>
+		</form>
+		 
+		<div class="row" style="margin-top: 10px;">
+			<div>
+			<span class="oper-bt-gray" style="height: 26px;line-height: 24px;margin-right:18px;display: none;" data-toggle="modal" id="orderBtn" data-target="#myModal">调配</span>
+		    <span class="oper-bt-gray" style="height: 26px;line-height: 24px;margin-right:18px;display: none;" id="handleBtn" data-toggle="modal" data-target="#myModal1">处理</span>
+			<input type="button" class="btn btn-primary" style="height: 26px;line-height: 24px;margin:0" id="querySubmit" value="查 询" />
+		  	<span class="oper-bt-gray" id="exportBtn" style="height: 26px;line-height: 24px; ">导出</span>	
+		  	<input type="reset" class="btn btn-default clear-margin ml10" value="重置" style="height: 26px;line-height: 24px;"/>
+			</div>
+		</div>
+		
+        <div class="excel-wrap">
+                            <table id="merchApplierListTable" class="table border-table table-hover table-striped align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+							<!-- 隐藏信息 -->
+							<input type="hidden" id="departCode" value="$!{departCode}"/>
+							<input type="hidden" id="roleCode" value="$!{roleCode}"/>
+							<div id="data">
+								<input type="hidden" id="edit-id" value=""/>
+								<input type="hidden" id="edit-taskerId" value=""/>
+								<input type="hidden" id="edit-realName" value=""/>
+								<input type="hidden" id="edit-processResult" value=""/>
+							</div>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+
+                           </div>
+                </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">调配任务接收人</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                     <div class="info-item-content">
+	                     <div class="excel-wrap">
+							<table class="clickable-table table table-hover" id="orderUserListTable">
+							</table>
+						 </div>
+	                </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveOrderBtn">调配</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">处理结果</h4>
+            </div>
+            <div class="modal-body">
+                   <table class="wide-table table">
+                       <tr>
+                       	<td style="border: none;">
+                       		处理结果：
+							<div class="input-wrap" style="width:400px;">
+								<select name="processResult" id="processResult" style="width:400px;">
+									<option value="success">申办成功</option>
+                                   	<option value="fail">申办失败</option>
+                                </select>
+							</div>
+                       	</td>
+                       	</tr>
+                       	<tr>
+						<td style="border: none;">
+							处理说明：
+							<div>
+								<textarea id="processRemark" style="width:400px;height:100px;"  placeholder="请输入处理结果原因..."></textarea>
+							</div>
+						</td>
+					</tr>
+                   </table>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn" id="savehandleBtn" value="确定"/>
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="merchApplier-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th>申请人名称</th>
+				<th>商户名称</th>
+				<th style="display:none">id</th>
+				<th>申请网点</th>
+				<th>处理状态</th>
+				<th>申请商户类型</th>
+				<th>申请人手机号码</th>
+				<th>创建时间</th>
+				<th>接收人</th>
+				<th>处理结果</th>
+				<th style="display:none">处理备注</th>
+			</tr>
+		</thead>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{applierName}}</td>
+			<td>{{shopName}}</td>
+			<td style="display:none">{{id}}</td>
+			<td>{{departName}}</td>
+			<td>{{tranState processState}}</td>
+			<td>{{merchType}}</td>
+			<td>{{applierPhone}}</td>
+			<td>{{createTime}}</td>
+			<td>{{realName}}</td>
+			<td>{{tranResult processResult}}</td>
+			<td style="display:none">{{procRemark}}</td>
+
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- 调配模板 -->
+<script id="order-user-template" type="text/x-handlebars-template">
+	<tbody>
+		<tr>
+			<th>序号</th>
+			<th>机构名</th>
+			<th>姓名</th>
+			<th style="display:none">userId</th>
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{addOne @index}}</td>
+			<td>{{departName}}</td>
+			<td>{{realName}}</td>
+			<td style="display:none">{{userId}}</td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/biz/merchapplier/handle-merchapplier.js"></script>
+

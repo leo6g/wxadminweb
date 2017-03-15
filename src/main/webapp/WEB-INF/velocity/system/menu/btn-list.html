@@ -1,0 +1,72 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<input type="hidden" value="$!{menuId}" id="menuId"/>
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><a href="javascript:history.go(-1)"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i></a> 按钮信息</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        基本信息
+                    </div>
+                    <div class="info-item-content">
+                        <div class="base-info-box" id="menuName">
+                          
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <input type="button" class="btn btn-primary" id="goAddBtnInfo" value="+ 添 加"/>
+					<input type="button" class="btn btn-primary ml10" id="goUpdateButtonInfo" value="编辑"/>
+					<input type="button" class="btn btn-primary ml10" id="deleteBtnInfo" value="删除"/>		
+						
+                </div>
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        按钮信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="clickable-table wide-table table table-hover border-table align-center-table" id="btnTableList">
+                            <tr>
+                                <th>序号</th>
+                                <th>按钮名称</th>
+                                <th>按钮编码</th>
+                                <th>按钮URL</th>
+                                <th>图标</th>
+                                <th>创建日期</th>
+                                <th>最后修改时间</th>
+                            </tr>
+                            <tbody id="btn-list-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-primary" style="margin: 20px 0 0 0" onclick="C.load('${req.contextPath}/system/menu/list')" value="返 回"/>
+                  
+               
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-wrapper -->
+<script id="btn-list-template" type="text/x-handlebars-template">
+	  {{#each this}}
+				<tr>
+					<td>{{addOne @index}}</td>
+                    <td style="display:none">{{id}}</td>
+					<td>{{butName}}</td>
+					<td>{{butCode}}</td>
+                    <td>{{url}}</td>
+					<td><img src="{{EbtnUrl butIcon}}" class="folder02" alt=""></td>
+					<td>{{createTime}}</td>
+					<td>{{updateTime}}</td>               
+				</tr> 
+	  {{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/system/menu/btn-list.js"></script>
+<!-- 引入公共底部     -->

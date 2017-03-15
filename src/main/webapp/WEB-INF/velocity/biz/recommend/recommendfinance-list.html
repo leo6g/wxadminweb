@@ -1,0 +1,240 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<style>
+		.checkboxs input{
+			display:inline-block;
+		}
+	</style>
+    <div class="container">
+        <h4 class="main-title">文章推荐管理</h4>
+         <form id="queryForm">
+			<div class="row query-box">
+				<!-- <div class="col-xs-5 box-sm">
+					查询条件
+				</div> -->
+				<div class="col-xs-4">
+					标题：
+					<input class="large" type="text" value="" placeholder="请输入标题" id="queryTitle" name="title"/>
+				</div>
+				<div class="col-xs-4">
+					推荐等级：
+					<input class="large" type="text" value="" placeholder="请输入推荐等级" id="queryLevels" name="levels"/>
+				</div>
+				<div class="col-xs-2">
+					<input type="button" class="btn btn-primary" style="margin: 0" id="querySubmit" value="查 询" />
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<span class="btn btn-primary" id="addRecommendFinanceBtn" data-toggle="modal" data-target="#myModal">新增</span>
+            <span class="btn btn-primary" id="editRecommendFinanceBtn" data-toggle="modal" data-target="#myModal1">编辑</span>
+            <span class="btn btn-primary" id="delRecommendFinanceBtn">删除</span>
+		</div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            文章推荐信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="recommendFinanceListTable" class="table border-table table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addRecommendFinanceForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加文章推荐</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                    	<tr>
+							<td style="border: none;">
+								图文素材：
+								<a style="cursor: pointer;color: #ccc" data-toggle="modal"  data-target="#myModalArticle">选择素材</a>
+								<input type="text" id="articleId" name="articleId" value="" class="fluid-input" />
+								<!-- <div class="input-wrap">
+									<input type="text" id="articleId" name="articleId" value="" class="fluid-input" />
+								</div> -->
+							</td>
+						</tr>
+                        <tr>
+							<td class="checkboxs" style="border: none;">
+								推荐等级：
+								    <br/>&nbsp;信用卡：
+									金卡级<input type="checkbox" id="levels1" name="levels" value="10" />
+									白金级<input type="checkbox" id="levels2" name="levels" value="11" />
+									<br/>&nbsp;借记卡：
+									普通级<input type="checkbox" id="levels3" name="levels" value="01" />
+									金卡级<input type="checkbox" id="levels4" name="levels" value="02" />
+									白金级<input type="checkbox" id="levels5" name="levels" value="03" />
+									钻石级<input type="checkbox" id="levels6" name="levels" value="04" />
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								是否热门：
+								<div class="input-wrap" style="width: 70px">
+									<select id="isHot" name="isHot">
+										<option value="0">是</option>
+										<option value="1">否</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+						<!-- <tr>
+							<td style="border: none;">
+								创建人：
+								<div class="input-wrap">
+									<input type="text" id="createUser" name="createUser" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr> -->
+						<tr>
+							<td style="border: none;">
+								热门图标路径：
+								<!-- <div class="input-wrap">
+									<input type="text" id="hotImgPath" name="hotImgPath" value="" class="fluid-input" />
+								</div> -->
+								<img src="${req.contextPath}/assets/img/default.png" id="picIcon"style="width: 80px; height: 80px;"/>
+                                <input type="hidden" id="hotImgPath" name="hotImgPath" />
+                                <span id="uploadIcon">
+                                </span>
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveRecommendFinanceBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editRecommendFinanceForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑文章推荐</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                       <table class="wide-table table">
+                       <!-- 隐藏主键 -->
+					   <input type="hidden" id="edit-id" name="id" value="" />
+                       <tr>
+							<td style="border: none;">
+								图文素材：
+								<a style="cursor: pointer;color: #ccc" data-toggle="modal"  data-target="#myModalArticle">选择素材</a>
+								<input type="text" id="edit-articleId" name="articleId" value="" class="fluid-input" />
+							</td>
+						</tr>
+                        <tr>
+							<td class="checkboxs" style="border: none;">
+								推荐等级：
+								    <br/>&nbsp;信用卡：
+									金卡级<input type="checkbox" id="edit-levels1" name="levels" value="10" />
+									白金级<input type="checkbox" id="edit-levels2" name="levels" value="11" />
+									<br/>&nbsp;借记卡：
+									普通级<input type="checkbox" id="edit-levels3" name="levels" value="01" />
+									金卡级<input type="checkbox" id="edit-levels4" name="levels" value="02" />
+									白金级<input type="checkbox" id="edit-levels5" name="levels" value="03" />
+									钻石级<input type="checkbox" id="edit-levels6" name="levels" value="04" /> 
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								是否热门：
+								<div class="input-wrap" style="width: 70px">
+									<select id="edit-isHot" name="isHot">
+										<option value="0">是</option>
+										<option value="1">否</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								热门图标路径：
+								<img src="${req.contextPath}/assets/img/default.png" id="edit-picIcon"style="width: 80px; height: 80px;"/>
+                                <input type="hidden" id="edit-hotImgPath" name="hotImgPath" />
+                                <span id="edit-uploadIcon">
+                                </span>
+							</td>
+						</tr>
+                  </table>
+               </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveRecommendFinanceBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+#parse("./weixin/autoRespSet/selectArticle2.html")
+
+<script id="recommendFinance-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<tr>
+			<th>序号</th>
+			<th style="display:none">主键ID</th>
+			<th style="display:none">文章ID</th>
+			<th style="display:none">创建人</th>
+			<th>标题</th>
+			<th>封面图片</th>
+			<th>推荐等级</th>
+			<th>是否热门</th>
+			<th>热门图标</th>
+			<th>创建时间</th>
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td style="vertical-align:middle">{{ORACLESTART}}</td>
+			<td style="display:none">{{id}}</td>
+			<td style="display:none">{{articleId}}</td>
+			<td style="display:none">{{createUser}}</td>
+        	<td style="vertical-align:middle">{{title}}</td>
+        	<td width="120px" height="120px"><img src="{{localUrl}}" alt="" width="120px" height="120px"></td>
+			<td style="vertical-align:middle">{{levels}}</td>
+			<td style="vertical-align:middle">{{tranHot isHot}}</td>
+			<td width="120px" height="120px"><img src="{{hotImgPath}}" alt="" width="120px" height="120px"></td>
+			<td style="vertical-align:middle">{{createTime}}</td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/biz/recommend/recommendfinance-list.js"></script>

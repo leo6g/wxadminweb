@@ -1,0 +1,203 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">微信客服管理管理</h4>
+         <form id="queryForm">
+			<div class="row query-box">
+				<div class="col-xs-5 box-sm">
+							客服昵称：<input class="large" type="text" value="" placeholder="请输入客服昵称" id="queryNickName" name="nickName"/>
+						</div>
+						<div class="col-xs-5 box-md">
+							客服账号： <input class="large" type="text" value="" placeholder="请输入客服账号" id="queryAccount" name="account"/>
+						</div>
+				<!--<div class="col-xs-2 box-bt">
+
+
+				</div>-->
+			</div>
+		</form>
+		<div class="row">
+			<input type="button" class="btn btn-primary" style="margin-right: 10px;" id="querySubmit" value="查 询" />
+			<span class="btn btn-primary" data-toggle="modal" data-target="#myModal"  style="margin-right: 10px;">新增</span>
+            <span class="btn btn-primary" id="editCustomAccountBtn" data-toggle="modal" data-target="#myModal1"  style="margin-right: 10px;">编辑</span>
+            <span class="btn btn-primary" id="delCustomAccountBtn" >删除</span>
+			<input type="reset" class="btn btn-default clear-margin ml10" id="" value="重置"/>        
+		</div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            微信客服管理信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="customAccountListTable" class="table border-table table-hover table-striped align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addCustomAccountForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加微信客服管理</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+							<td style="border: none;">
+								客服昵称：
+								<div class="input-wrap">
+									<input type="text" id="nickName" name="nickName" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								客服账号：
+								<div class="input-wrap">
+									<input type="text" id="account" name="account" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								密码：
+								<div class="input-wrap">
+									<input type="text" id="pwd" name="pwd" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								客服头像：
+<!-- 								<div class="input-wrap"> -->
+<!-- 									<input type="text" id="headImg" name="headImg" value="" class="fluid-input" /> -->
+<!-- 								</div> -->
+											<img src="${req.contextPath}/assets/img/default.png" id="add-picIcon" style="width:280px; height:160px"/>
+	                                        <input type="hidden" id="add-imgPath" name="headImg" />
+	                                        <span id="add-uploadIcon"></span>
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveCustomAccountBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editCustomAccountForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑微信客服管理</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table">
+                            	<tr>
+							<td style="border: none;">
+								客服昵称：
+								<div class="input-wrap">
+									<input type="text" id="edit-nickName" name="nickName" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								客服账号：
+								<div class="input-wrap">
+									<input type="text" id="edit-account" name="account" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-id" name="id" value="" />
+						<tr>
+							<td style="border: none;">
+								客服头像：
+								<div class="input-wrap">
+									<input type="text" id="edit-headImg" name="headImg" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								密码：
+								<div class="input-wrap">
+									<input type="text" id="edit-pwd" name="pwd" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						
+                            </table>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveCustomAccountBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="customAccount-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th>客服昵称</th>
+				<th>客服账号</th>
+				<th style="display:none">ID</th>
+				<th>客服头像</th>
+				<th>密码</th>
+				
+			</tr>
+		</thead>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{nickName}}</td>
+			<td>{{account}}</td>
+			<td style="display:none">{{id}}</td>
+			<td>{{headImg}}</td>
+			<td>{{pwd}}</td>
+			
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/weixin/stomaccount-list.js"></script>
+

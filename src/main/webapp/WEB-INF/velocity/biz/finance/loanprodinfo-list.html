@@ -1,0 +1,305 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">微信贷款信息管理</h4>
+         <form id="queryForm">
+			<div class="row query-box">
+				<div class="col-xs-5 box-sm">
+					名称：
+					<input class="large" type="text" value="" id="queryName" name="name" placeholder="请输入名称" />
+				</div>
+				<div class="col-xs-5 box-md">
+					创建起止时间： <input type="text" placeholder="开始时间" name="beginTime" onclick="laydate()" /> -
+					<input type="text" placeholder="结束时间" name="endTime" onclick="laydate()" />
+				</div>
+				<div class="col-xs-2 box-bt">
+					<input type="button" class="btn btn-primary" style="margin:0" id="querySubmit" value="查 询"/>
+				</div>
+			</div>
+		</form>
+		<div class="row">
+                <span class="oper-bt-gray" id="addWXLoanProdInfoBtn" data-toggle="modal" data-target="#myModal" style="display:none;">新增</span>
+                <span class="oper-bt-gray" id="editWXLoanProdInfoBtn" data-toggle="modal" data-target="#myModal1" style="display:none;">编辑</span>
+                <span class="oper-bt-gray" id="viewLoanProdInfoBtn" style="display:none;">详情</span>
+                <span class="oper-bt-gray" id="delWXLoanProdInfoBtn" style="display:none;">删除</span>
+        </div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            微信贷款信息信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="wXLoanProdInfoListTable" class="table border-table table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                             <!-- 隐藏角色 -->
+                            <input type="hidden" id="role" value="${role}"/>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addWXLoanProdInfoForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加微信贷款信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+							<td style="border: none;">
+								名称：
+								<div class="input-wrap">
+									<input type="text" id="name" name="name" value="" class="fluid-input" maxlength="20" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								贷款类型：
+								<div class="input-wrap">
+									<input type="text" id="type" name="type" value="" class="fluid-input" maxlength="10" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								产品状态：
+								<div class="input-wrap">
+									<select name="state" id="state" class="fluid-input" onchange="javascript:getSelect(this.value);">
+										<option value="onSale">上架</option>
+										<option value="offSale">下架</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								图片路径：
+								<div class="input-wrap">
+									<input type="text" id="imagePath" name="imagePath" value="" class="fluid-input"/>
+								</div>
+								<div class="info-item-box fl" id="preview" style="width:350px;min-height: 200px;margin-left:23px;margin-top:5px;background-color:lightgray;">
+            					</div>
+            					<ul id="file-list">
+            					</ul> 
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								贷款用途：
+								<div class="input-wrap">
+									<input type="text" id="useage" name="useage" value="" class="fluid-input" maxlength="10" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="display: none;">
+								创建人：
+								<div class="input-wrap">
+									<input type="text" id="createUser" name="createUser" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								备注：
+								<div class="input-wrap">
+									<input type="text" id="comments" name="comments" value="" class="fluid-input" maxlength="66" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+									<input type="hidden" id="authState" name="authState" value=""/>
+									<input type="hidden" id="role" value="${role}"/>
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <span type="button" class="btn" style="width: 120px" id="saveWXLoanProdInfoBtn">确认并提交审核</span>
+                <span type="button" class="btn" style="width: 120px" id="saveDraftWXLoanProdInfoBtn">保存草稿</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editWXLoanProdInfoForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑微信贷款信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                            <table class="wide-table table">
+                            	<tr>
+							<td style="border: none;">
+								名称：
+								<div class="input-wrap">
+									<input type="text" id="edit-name" name="name" value="" class="fluid-input" maxlength="20" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								贷款类型：
+								<div class="input-wrap">
+									<input type="text" id="edit-type" name="type" value="" class="fluid-input" maxlength="10" />
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-prodId" name="prodId" value="" />
+						<tr>
+							<td style="border: none;">
+								产品状态：
+								<div class="input-wrap">
+									<select name="state" id="edit-state" class="fluid-input" onchange="javascript:getSelect(this.value);">
+										<option value="onSale">上架</option>
+                                    	<option value="offSale">下架</option>
+                                    </select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								审核状态：
+								<div class="input-wrap">
+									<select name="authState" id="edit-authState" class="fluid-input">
+										<option value="DRAFT">草稿</option>
+                                    	<option value="1-WAITING">提交审核</option>
+                                    </select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								图片路径：
+								<div class="input-wrap">
+									<input type="text" id="edit-imagePath" name="imagePath" value="" class="fluid-input"/>
+									<input type="hidden" id="oldImagePath" >
+								</div>
+								<div class="info-item-box fl" id="edit-preview" style="width:350px;min-height: 200px;margin-left:23px;margin-top:5px;background-color:lightgray;">
+            					</div>
+            					<ul id="file-list">
+            					</ul>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								贷款用途：
+								<div class="input-wrap">
+									<input type="text" id="edit-useage" name="useage" value="" class="fluid-input" maxlength="10" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								备注：
+								<div class="input-wrap">
+									<input type="text" id="edit-comments" name="comments" value="" class="fluid-input" maxlength="66" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+									<input type="hidden" id="view-authState" value="" />
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveWXLoanProdInfoBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="wXLoanProdInfo-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<tr>
+			<th>序号</th>
+			<th>名称</th>
+			<th>贷款类型</th>
+			<th>创建时间</th>
+			<th style="display:none">主键ID</th>
+			<th>产品状态</th>
+			<th>审核状态</th>
+			<th>图片路径</th>
+			<th>贷款用途</th>
+			<th>创建人</th>
+			<th>备注</th>
+			<th style="display:none"></th>
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{name}}</td>
+			<td>{{type}}</td>
+			<td>{{createTime}}</td>
+			<td style="display:none">{{prodId}}</td>
+			<td>{{state}}</td>
+			<td>{{authState}}</td>
+			<td><img src="{{imagePath}}" style="width:100px;height: 70px;" alt="正在加载..."></td>
+			<td>{{useage}}</td>
+			<td>{{createUser}}</td>
+			<td>{{comments}}</td>
+			<td style="display:none">{{viewState}}</td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<style>
+		body,p,div{ padding: 0; margin: 0;}
+		.wraper{ padding: 30px 0;}
+		.btn-wraper{ text-align: center;}
+		.btn-wraper input{ margin: 0 10px;}
+		#file-list{ width: 350px; margin: 20px auto;}
+		#file-list li{ margin-bottom: 10px;}
+		.file-name{ line-height: 30px;}
+		.progress{ height: 4px; font-size: 0; line-height: 4px; background: orange; width: 0;}
+		.tip1{text-align: center; font-size:14px; padding-top:10px;}
+	    .tip2{text-align: center; font-size:12px; padding-top:10px; color:#b00}
+	    .catalogue{ position: fixed; _position:absolute; _width:200px; left: 0; top: 0; border: 1px solid #ccc;padding: 10px; background: #eee}
+	    .catalogue a{ line-height: 30px; color: #0c0}
+	    .catalogue li{ padding: 0; margin: 0; list-style: none;}
+    </style>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 首先需要引入plupload的源代码 -->
+<script src="${req.contextPath}/assets/plupload/plupload.full.min.js"></script>
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/biz/finance/loanprodinfo-list.js"></script>
+<!-- 引入公共底部     -->
+
+

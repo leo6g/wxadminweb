@@ -1,0 +1,149 @@
+
+<!-- 从素材库选择图片Modal -->
+<div style="z-index:1100" class="modal fade" id="myModalImage"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:900px">
+		<div class="modal-content">
+			<div class="modal-header">
+                <button type="button" class="close" onclick="imgHide();"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">选择图片</h4>
+            </div>
+            <div class="modal-body">
+            	<div class="wqconttent-right">
+					<div style="width: 25%;">
+						<div style="background-color: rgb(249,250,252);height: 40px;text-align: center;line-height: 40px;">全部图片</div>
+						<div id="groupList"> 
+									  					 
+						</div>
+					</div>
+					<div style="width: 75%;border-left: 1px solid gainsboro;">
+						<div class="wqimgbox"  id="imageTable">
+						
+						</div>
+						<div class="page-box" style="width: 97%; margin: 0 auto">
+							<input type="hidden" id="image-currPage">
+							<span style="float: left" class="pagination" id="image-totalNum"></span>
+							<ul style="float: right;" id="image-pagination" class="pagination">
+								<li class="active"><a title="Current page is 1">1</a></li>
+								<li><a title="Go to next page">&gt;</a></li>
+								<li><a title="Go to last page">&gt;&gt;</a></li>
+							</ul>
+						</div>
+					</div>
+            	</div>
+			</div>
+			<div class="modal-footer">
+                <span type="button" class="btn" id="saveImgResp">保存</span>
+                <span type="button" class="btn" onclick="imgHide();">取消</span>
+            </div>
+		</div>
+	</div>	
+</div>
+<!-- 回复图片时的分组列表 -->
+<script id="group-list-template" type="text/x-handlebars-template">
+	  {{#each this}}
+		<div style="height: 40px;text-align: center;line-height: 40px;"><a href="javascript:void(0)" class="showGroupInfo" groupId="{{groupId}}" countImage={{countImage}}>{{groupName}}（{{countImage}}）</a></div>
+	  {{/each}}
+</script>
+<!-- 回复图片时初始化图片列表 -->
+<script id="image-list-template"  type="text/x-handlebars-template">
+  {{#each this}}
+	<figure onclick="selectThePlatform(this);">
+        <img src="{{localUrl}}" alt="" />
+		<div style="height: 35px;line-height: 35px;padding-left: 10px;">
+			<input type="radio" style="display: inline-block;" name="imgcheck" id="" value="" materialId="{{materialId}}" mediaId="{{mediaId}}" imgUrl = "{{localUrl}}" imgName="{{name}}"/>
+			<span style="margin-left: 1px;width: 147px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;display: inline-block;height: 26px;">{{name}}</span>
+		</div>
+	</figure>
+ {{/each}}
+</script>
+<script type="text/javascript">
+//获取图片分组信息带数量
+function queryImgGroup(){
+	var url = contextPath + "/wx/mtrlimggroup/getListInfoById";
+	var params = "";
+	//异步请求所有信息数据
+	Util.ajax.postJson(url, params, function(data, flag){
+		var source = $("#group-list-template").html();
+		var templet = Handlebars.compile(source);
+		if(flag && data.returnCode=="0"){
+			//渲染数据
+			var htmlStr = templet(data.beans);
+			$("#groupList").html(htmlStr);
+		}
+	});
+}
+//查询分组下的图片
+$("body").on("click", ".showGroupInfo", function() {
+	if($(this).attr("countImage")==0){
+		$("#imageTable").html(null);
+	}
+	else{
+		groupId=$(this).attr("groupId");
+		initimageInfo(0,12,groupId);
+	}
+})
+//初始化图片列表信息
+function initimageInfo(currentPage, limit,groupId){
+	if(typeof currentPage == "undefined"){
+		currentPage = 1;
+	}
+	if(typeof limit == "undefined"){
+		limit = 12;
+	}
+	if(typeof groupId=="undefined"){
+		groupId='';
+	}
+	var url = contextPath + "/wx/image/getList";
+	//var params = $("#queryForm").serialize();
+	var params ="&pageNumber="+currentPage+"&limit=12"+"&groupId="+groupId;
+	//异步请求图片列表数据
+	Util.ajax.postJson(url, params, function(data, flag){
+		var source = $("#image-list-template").html();
+		var templet = Handlebars.compile(source);
+		if(flag && data.returnCode=="0"){
+			//渲染列表数据
+			var htmlStr = templet(data.beans);
+			$("#imageTable").html(htmlStr);
+			//初始化分页数据(当前页码，总数，回调查询函数)
+			initPaginator(currentPage, data.bean.count, initimageInfo, "image-pagination", "image-totalNum", "image-currPage");
+
+		}
+	});
+}
+//选择一条图片回复信息
+$("body").on('click','#saveImgResp',function(){
+	$("input[name='imgcheck']").each(function(){
+		if($(this).prop("checked")){
+			$(this).siblings().attr('checked',false);
+			materialId=$(this).attr("materialId");
+		}
+	});
+});
+
+function imgHide(){
+	$("input[name='imgcheck']:checked").each(function(){
+		$(this).prop("checked",false);		
+	});
+	$("#myModalImage").modal("hide");
+}
+
+$("#saveImgResp").click(function(){
+	$("#myModalImage").modal("hide");
+});
+
+//跳转
+function addImg() {
+	C.load(contextPath+'/wx/image/list');
+}
+function selectThePlatform(obj)
+{
+ var  radio = $(obj).find("input[type=radio]");
+             flag  = radio.is(":checked");
+    if( !flag ){
+        radio.prop("checked",true);   
+    }
+
+}
+</script>
+
+

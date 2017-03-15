@@ -1,0 +1,88 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<input type="hidden" value="$!{menuId}" id="menuId"/>
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><a href="javascript:C.load('${req.contextPath}/system/menu/list')"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i></a>查看菜单信息</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        基本信息
+                    </div>
+                    <div class="info-item-content">
+                        <table>
+                            <tr>
+                                <td class="t1">菜单名称：</td>
+                                <td class="t2" id="menuName"></td>
+                                <td class="t1">菜单URL：</td>
+                                <td class="t3" id="menuUrl"></td>
+                            </tr>
+                            <tr>
+                                <td>菜单图标：</td>
+                                <td id="menuIcon"></td>
+                                <td>菜单顺序：</td>
+                                <td id="menuOrder"></td>
+                            </tr>
+                            <tr>
+                                <td>菜单类型：</td>
+                                <td id="menuType"></td>
+                                <td>菜单等级：</td>
+                                <td id="menuLevel"></td>
+                            </tr>
+                            <tr>
+                                <td>父级菜单：</td>
+                                <td id="parentName"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="info-item-box" style="margin-top:20px;">
+                    <div class="info-item-title">
+                        按钮信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table table table-hover border-table align-center-table">
+                            <tr>
+                                <th>序号</th>
+                                <th>按钮名称</th>
+                                <th>按钮编码</th>
+                                <th>按钮URL</th>
+                                <th>图标</th>
+                                <th>创建日期</th>
+                                <th>最后修改时间</th>
+                            </tr>
+                            <tbody id="btn-list-table">
+                            </tbody>
+                            
+                        </table>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-primary" style="margin: 20px 0 0 0" onclick="C.load('${req.contextPath}/system/menu/list')" value="返 回"/>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-wrapper -->
+<script id="btn-list-template" type="text/x-handlebars-template">
+	  {{#each this}}
+				<tr>
+					<td>{{addOne @index}}</td>
+					<td>{{butName}}</td>
+					<td>{{butCode}}</td>
+                    <td>{{url}}</td>
+					<td><img src="{{butIcon}}" class="folder02" alt=""></td>
+					<td>{{createTime}}</td>
+					<td>{{updateTime}}</td>
+				</tr> 
+	  {{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/system/menu/view-menu.js"></script>
+<!-- 引入公共底部     -->

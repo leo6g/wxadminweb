@@ -1,0 +1,132 @@
+<link rel="stylesheet" href="${req.contextPath}/assets/css/global.css"> 
+<!-- 选择图文Modal-->
+<div style="z-index:1100" class="modal fade" id="myModalArticle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" onclick="articleHide();">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">请选择图文</h4>
+				<div class="jiangbangitsearch">
+					<input type="text" id="keywords" placeholder="标题/作者/摘要" />
+					<span class="jiangbangglass iconfont icon-sousuo" id="search-bt"></span>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="info-item-content">
+					<div class="jiangbangitlist"></div>
+					<!-- 隐藏角色 -->
+					<input type="hidden" id="role" value="$!{role}" />
+					<div class="page-box" style="width: 97%; margin: 0 auto">
+						<input type="hidden" id="article-currPage">
+						<span style="float: left" class="pagination" id="article-totalNum"></span>
+						<ul style="float: right;" id="article-pagination" class="pagination">
+							<li class="active"><a title="Current page is 1">1</a></li>
+							<li><a title="Go to next page">&gt;</a></li>
+							<li><a title="Go to last page">&gt;&gt;</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+                <span type="button" class="btn" id="saveArticleResp">保存</span>
+                <span type="button" class="btn" onclick="articleHide();">取消</span>
+            </div>
+		</div>
+	</div>
+</div>
+<!-- 图文列表 -->
+<script id="article-list-template" type="text/x-handlebars-template">
+{{#each beans}}
+
+                       <div class="jiangbangititem" onclick="selected(this);" img="/wxadminweb/viewImage/viewImage?imgPath=material/{{bigArticle.localUrl}}" digest={{bigArticle.title}} mediaId={{mediaId}}>
+							<div>{{createTime}}</div>
+							<hr />
+							<div class="jiangbangthumbnails">
+								<img src="/wxadminweb/viewImage/viewImage?imgPath=material/{{bigArticle.localUrl}}" />
+								<a class="jiangbangauthor">{{bigArticle.title}}</a>
+							</div>
+							<hr />
+
+{{#each normalArticles}}
+							<div class="jiangbangartical clear">
+								<p>{{title}}</p>
+								<img src="/wxadminweb/viewImage/viewImage?imgPath=material/{{localUrl}}" />
+							</div>
+{{/each}}
+						</div>
+{{/each}}
+</script>
+
+
+
+<script type="text/javascript">
+    queryArticleList(1,10);
+	//初始化微信文章内容列表信息
+	function queryArticleList(currentPage, limit) {
+		var param = {
+		    	"pageNumber": currentPage||1,	//页码(必需)
+		    	"limit": limit||global_limit||10,		//每页显示数量(必需)
+		    	"keyword":$("#keywords").val()		//标题|作者|摘要(需)
+		   	};
+		var tpl = $("#article-list-template").html();
+		var handler = Handlebars.compile(tpl);
+		$.post(contextPath+"/wx/artmtl/getList",param,function(data){
+			if(data && data.returnCode === "0"){
+				//velocity和handlebars有一定冲突（velocity中不能用@first），因此将第一条图文和后面的图文拿出来放到新的容器
+				var articles = [];
+				$(data.beans).each(function(i,e){
+					var normalArticles = [];
+					$(e.articles).each(function(index,ele){
+						if(index === 0){
+							//假设一个图文有四篇文章，这里是第一篇，也就是缩略图比较大的那个
+							e.bigArticle = ele;
+						}else{
+							normalArticles.push(ele);
+						}
+					});
+					e.normalArticles = normalArticles;
+					data.beans[i] = e;
+				});
+				var html = handler(data);
+				$(".jiangbangitlist").html(html);
+				initPaginator(currentPage, data.bean.count, queryArticleList, "article-pagination", "article-totalNum", "article-currPage");
+				
+				//编辑事件
+				$(".edit-btn").click(function(){
+					var materialId = $(this).attr("data-materialId");
+					var mediaId = $(this).attr("data-mediaId");
+					editObj(materialId,mediaId);
+				})
+				//点击删除按钮事件
+				$(".del-btn").click(function(){
+					var materialId = $(this).attr("data-materialId");
+					var mediaId = $(this).attr("data-mediaId");
+					delObj(materialId, mediaId);
+				});
+				
+			}
+		},"json");
+	}
+	
+	//点击搜索按钮
+	$("#search-bt").click(function(){
+		 queryArticleList(1,10);
+	});
+	
+	$("#saveArticleResp").click(function() {
+		$("#myModalArticle").modal("hide");
+	});
+	//添加图文页面
+	function addArticle() {
+		C.load(contextPath + '/wx/artmtl/add');
+	};
+	function articleHide(){
+		$(".selected").removeClass("selected");
+		$("#myModalArticle").modal("hide");
+	}
+	
+</script>
+
+

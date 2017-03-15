@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		@@include('../../assets/tpl/css.tpl')
+	</head>
+
+			@@include('../../assets/tpl/header.tpl')
+			@@include('../../assets/tpl/aside.tpl')
+
+			<!-- Content Wrapper. Contains page content -->
+			<div class="content-wrapper">
+				<div class="container">
+					<h4 class="main-title">角色列表</h4>
+					<div class="row query-box">
+						<div class="col-xs-5 box-sm">
+							角色名称：
+							<input class="large" type="text" value="" placeholder="请输入角色名称" />
+						</div>
+						<div class="col-xs-5 box-md">
+							创建起止时间： <input type="text" placeholder="开始时间" onclick="laydate()" /> -
+							<input type="text" placeholder="结束时间" onclick="laydate()" />
+						</div>
+						<div class="col-xs-2 box-bt">
+							<span class="query-bt">查 询</span>
+						</div>
+					</div>
+					<div class="row">
+						<span class="query-bt-green" onclick="javascript:location.href='add.html'">
+							+ 添 加
+						</span>
+					</div>
+					<div class="excel-wrap">
+						<table class="table table-hover">
+							<tr>
+								<th>序号</th>
+								<th>角色名称</th>
+								<th>角色编码</th>
+								<th>创建时间</th>
+								<th>最后编辑时间</th>
+								<th>操作</th>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>普通用户</td>
+								<td>pt</td>
+								<td>2016-08-02</td>
+								<td>2016-08-02</td>
+								<td>
+									<a href="edit.html">编辑</a>
+									<a href="memberManage.html">管理成员</a>
+									<a href="javascript:;">删除</a>
+								</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>普通用户</td>
+								<td>pt</td>
+								<td>2016-08-02</td>
+								<td>2016-08-02</td>
+								<td>
+									<a href="view.html">编辑</a>
+									<a href="edit.html">管理成员</a>
+									<a href="javascript:;">删除</a>
+								</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>普通用户</td>
+								<td>pt</td>
+								<td>2016-08-02</td>
+								<td>2016-08-02</td>
+								<td>
+									<a href="view.html">编辑</a>
+									<a href="edit.html">管理成员</a>
+									<a href="javascript:;">删除</a>
+								</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>普通用户</td>
+								<td>pt</td>
+								<td>2016-08-02</td>
+								<td>2016-08-02</td>
+								<td>
+									<a href="view.html">编辑</a>
+									<a href="edit.html">管理成员</a>
+									<a href="javascript:;">删除</a>
+								</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>普通用户</td>
+								<td>pt</td>
+								<td>2016-08-02</td>
+								<td>2016-08-02</td>
+								<td>
+									<a href="view.html">编辑</a>
+									<a href="edit.html">管理成员</a>
+									<a href="javascript:;">删除</a>
+								</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>普通用户</td>
+								<td>pt</td>
+								<td>2016-08-02</td>
+								<td>2016-08-02</td>
+								<td>
+									<a href="view.html">编辑</a>
+									<a href="edit.html">管理成员</a>
+									<a href="javascript:;">删除</a>
+								</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>普通用户</td>
+								<td>pt</td>
+								<td>2016-08-02</td>
+								<td>2016-08-02</td>
+								<td>
+									<a href="view.html">编辑</a>
+									<a href="edit.html">管理成员</a>
+									<a href="javascript:;">删除</a>
+								</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>普通用户</td>
+								<td>pt</td>
+								<td>2016-08-02</td>
+								<td>2016-08-02</td>
+								<td>
+									<a href="view.html">编辑</a>
+									<a href="edit.html">管理成员</a>
+									<a href="javascript:;">删除</a>
+								</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>普通用户</td>
+								<td>pt</td>
+								<td>2016-08-02</td>
+								<td>2016-08-02</td>
+								<td>
+									<a href="view.html">编辑</a>
+									<a href="edit.html">管理成员</a>
+									<a href="javascript:;">删除</a>
+								</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>普通用户</td>
+								<td>pt</td>
+								<td>2016-08-02</td>
+								<td>2016-08-02</td>
+								<td>
+									<a href="view.html">编辑</a>
+									<a href="edit.html">管理成员</a>
+									<a href="javascript:;">删除</a>
+								</td>
+							</tr>
+						</table>
+						<div class="page-box">
+							<span style="float:left" class="pagination">共1500条记录</span>
+							<ul class="pagination" style="float: right;">
+								<li class="previous"><a href="#"><<</a></li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li class="next"><a href="#">>></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.content-wrapper -->
+			@@include('../../assets/tpl/footer.tpl')
+		</div>
+		@@include('../../assets/tpl/js.tpl')
+		<script type="text/javascript" src="../../assets/lib/laydate/laydate.js"></script>
+	</body>
+</html>

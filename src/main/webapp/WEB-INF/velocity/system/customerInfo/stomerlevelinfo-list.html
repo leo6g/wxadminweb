@@ -1,0 +1,291 @@
+<!-- Content Wrapper. Contains page content -->
+<style>
+.model-tb-padding tr td{
+	padding:10px !important;
+}
+</style>
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">邮储个金部客户等级信息管理</h4>
+         <form id="queryForm">
+			<div class="row query-box">
+				<div class="col-xs-5 box-sm">
+					客户名称：<input class="large" type="text" value="" placeholder="请输入客户姓名" id="customerName" name="customerName"/>
+				</div>
+				<div class="col-xs-5 box-sm">
+					客户电话：<input class="large" type="text" value="" placeholder="请输入客户电话" id="phoneNumber" name="phoneNumber"/>
+				</div>
+				<div class="col-xs-2 box-bt">
+
+
+				</div>
+			</div>
+		</form>
+		<div class="row" >
+			<input type="button" class="btn btn-primary" style="margin-right:10px;" id="querySubmit" value="查 询" />
+			<span class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-right:10px;">新增</span>
+            <span class="btn btn-primary" id="editCustomerLevelInfoBtn" data-toggle="modal" data-target="#myModal1" style="margin-right:10px;">编辑</span>
+            <span class="btn btn-primary" id="delCustomerLevelInfoBtn" >删除</span>
+			<input type="button" class="btn btn-primary ml10" data-toggle="modal" data-target="#myModal3" value="导入"/>
+			<input type="button" class="btn btn-default clear-margin ml10" id="queryReset" value="重 置"/>
+			
+		</div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            邮储个金部客户等级信息信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="customerLevelInfoListTable" class="table border-table table-hover table-striped align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addCustomerLevelInfoForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加邮储个金部客户等级信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table model-tb-padding">
+                        <!-- <tr>
+							<td style="border: none;">
+								卡种级别(00为普通级，01为金卡级，02为白金级，03为钻石级。)：
+								<div class="input-wrap">
+									<input type="text" id="levelName" name="levelName" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr> -->
+						<input type="hidden" id="levelName" name="levelName"/>
+						<tr>
+							<td style="border: none;">
+								电话：
+								<div class="input-wrap">
+									<input type="text" id="phoneNumber" name="phoneNumber" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								客户级别：
+								<div class="input-wrap" style="border: none;">
+									持卡类型：
+									<select id="cardType" name="cardType"  style="width:35%;border:1px solid #eeeeee;"  required="true" >   
+								        <option value="">---请选择---</option>   
+								        <option value="normalCard">借记卡</option>
+								        <option value="creditCard">信用卡</option>
+									</select>
+									持卡级别：
+									<select id="customerLevel" name="customerLevel"  style="width:35%;border:1px solid #eeeeee;"  required="true" >   
+									</select>
+								</div>
+								<!-- <div class="input-wrap">
+									<input type="text" id="customerLevel" name="customerLevel" value="" class="fluid-input" required/>
+								</div> -->
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								客户姓名：
+								<div class="input-wrap">
+									<input type="text" id="customerName" name="customerName" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								客户经理姓名：
+								<div class="input-wrap">
+									<input type="text" id="managerName" name="managerName" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								客户经理电话：
+								<div class="input-wrap">
+									<input type="text" id="managerPhone" name="managerPhone" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveCustomerLevelInfoBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editCustomerLevelInfoForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑邮储个金部客户等级信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                   <table class="wide-table table model-tb-padding">
+                            <!-- 	<tr>
+							<td style="border: none;">
+								卡种级别(00为普通级，01为金卡级，02为白金级，03为钻石级。)：
+								<div class="input-wrap">
+									<input type="text" id="edit-levelName" name="levelName" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr> -->
+						<input type="hidden" id="edit-levelName" name="levelName"/>
+						<tr>
+							<td style="border: none;">
+								电话：
+								<div class="input-wrap">
+									<input type="text" id="edit-phoneNumber" name="phoneNumber" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-id" name="id" value="" />
+						<tr>
+							<td style="border: none;">
+								客户级别：
+								<div class="input-wrap" style="border: none;">
+									持卡类型：
+									<select id="edit-cardType" name="cardType"  style="width:35%;border:1px solid #eeeeee;"  required="true" >   
+								        <option value="">---请选择---</option>   
+								        <option value="normalCard">借记卡</option>
+								        <option value="creditCard">信用卡</option>
+									</select>
+									持卡级别：
+									<select id="edit-customerLevel" name="customerLevel"  style="width:35%;border:1px solid #eeeeee;"  required="true" >   
+									</select>
+									<!-- <input type="text" id="edit-customerLevel" name="customerLevel" value="" class="fluid-input" required/> -->
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								客户名称：
+								<div class="input-wrap">
+									<input type="text" id="edit-customerName" name="customerName" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								客户经理姓名：
+								<div class="input-wrap">
+									<input type="text" id="edit-managerName" name="managerName" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								客户经理电话：
+								<div class="input-wrap">
+									<input type="text" id="edit-managerPhone" name="managerPhone" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+                   </table>
+               </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveCustomerLevelInfoBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+<div class="modal fade" id="myModal3"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">导入邮储个金部客户信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                    	<tr>
+                            <tr>
+                                <td>
+									<input type="button" class="btn btn-primary" style="margin: 20px 0 0 0;" id="uploadBtn" value="上传" />
+                                    <input type="text" id="filePath"  name="filePath" value=""/>
+                                </td>
+                            </tr>
+						</tr>		
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn"  data-dismiss="modal" value="取消"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="customerLevelInfo-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th>客户名称</th>
+				<th style="display:none">卡种级别</th>
+				<th>电话</th>
+				<th style="display:none">null</th>
+				<th>客户级别</th>
+				<th style="display:none">卡类型</th>
+				<th>客户经理名称</th>
+				<th>客户经理电话</th>
+			</tr>
+		</thead>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{customerName}}</td>
+			<td style="display:none">{{levelName}}</td>
+			<td>{{phoneNumber}}</td>
+			<td style="display:none">{{id}}</td>
+			<td>{{transform customerLevel}}</td>
+			<td style="display:none">{{cardType}}</td>
+			<td>{{managerName}}</td>
+			<td>{{managerPhone}}</td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/swfupload/1.0.0/2.5/swfupload.queue.js"></script>
+<script type="text/javascript" src="${req.contextPath}/assets/common/upload.js"></script>
+<script src="${req.contextPath}/assets/js/system/customerInfo/stomerlevelinfo-list.js"></script>

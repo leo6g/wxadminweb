@@ -1,0 +1,178 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">职位管理</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div style="margin-top:-10px">
+            	<input type="button" class="btn btn-primary ml15" data-toggle="modal" data-target="#myModal" value="新增" />
+            	<input type="button" class="btn btn-primary ml10" id="edit-savePosBtn" value="保存" />
+            	<input type="button" class="btn btn-primary ml10" id="delPosBtn" value="删除" />
+            </div>
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width: 40%;min-height: 410px;">
+                        <div class="info-item-title">
+                            职位信息
+                        </div>
+                        <div class="info-item-content excel-wrap">
+                            <table id="posListTable" class="table clickable-table border-table table-hover table-striped align-center-table" style="width:96%">
+                                <!-- 
+                                <tr>
+                                    <th>序号</th>
+                                    <th>职位名称</th>
+                                    <th>职位编码</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>管理员</td>
+                                    <td>ADMIN</td>
+                                </tr>
+                                 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto">
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                  <form id="editPosForm">
+                    <div class="info-item-box fr" style="width:58%;min-height: 410px;">
+                        <div class="info-item-title">
+                            编辑信息
+                        </div>
+                        <div class="info-item-content">
+                            <table class="wide-table table">
+                                <tr>
+                                    <td style="border: none;">
+                                    	<!-- 职位ID隐藏域 -->
+	                                	<input type="hidden" id="edit-id" name="id" value="" />
+                                        <span class="red">* </span>职位名称：
+                                        <div class="input-wrap">
+                                            <input type="text" id="edit-pozName" name="pozName" value="" class="fluid-input" required="true" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;">
+                                        <span class="red">* </span>职位编码：
+                                        <div class="input-wrap">
+                                            <input type="text" id="edit-pozCode" name="pozCode" value="" class="fluid-input" required="true" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;">
+                                        顺序：
+                                        <div class="input-wrap">
+                                            <input type="text" id="edit-pozOrder" name="pozOrder" value="" class="fluid-input" digits="true" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;">
+                                        描述：
+                                        <textarea  id="edit-descn" name="descn" class="textarea fluid-input"></textarea>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                  </form>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addPosForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加组织机构</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+                        <tr>
+                            <td style="border: none;">
+                                <span class="red">* </span>职位名称：
+                                <div class="input-wrap">
+                                    <input type="text" id="pozName" name="pozName"  value="" class="fluid-input"  required="true" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: none;">
+                                <span class="red">* </span>职位编码：
+                                <div class="input-wrap">
+                                    <input type="text" id="pozCode" name="pozCode" value="" class="fluid-input" required="true" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: none;">
+                                顺序：
+                                <div class="input-wrap">
+                                    <input type="text" id="pozOrder" name="pozOrder" value="" class="fluid-input" digits="true" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: none;">
+         	描述：
+                                <div class="input-wrap" style="height: auto;border: none;">
+	                                <textarea  id="descn" name="descn" class="textarea fluid-input"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+            	<input type="button" class="btn btn-primary" id="savePosBtn" value="保存" />
+            	<input type="button" class="btn btn-default" data-dismiss="modal" value="取消" />
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="position-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th>职位名称</th>
+				<th>职位编码</th>
+			</tr>
+		</thead>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td style="display:none">{{id}}</td>
+			<td style="display:none">{{descn}}</td>
+			<td style="display:none">{{pozOrder}}</td>
+        	<td>{{pozName}}</td>
+        	<td>{{pozCode}}</td>
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/system/position/position-list.js"></script>
+<!-- 引入公共底部     -->
+

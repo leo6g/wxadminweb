@@ -1,0 +1,34 @@
+<!-- 引入公共JS文件  -->
+<script src="${req.contextPath}/assets/lib/jquery/jquery.min.js"></script>
+<script src="${req.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
+<script src="${req.contextPath}/assets/lib/handlebars/handlebars-v3.0.3.js"></script>
+<script src="${req.contextPath}/assets/lib/jqvalidate/jquery.validate.js"></script>
+<script src="${req.contextPath}/assets/lib/paginator/bootstrap-paginator.js"></script>
+<script src="${req.contextPath}/assets/common/common.js"></script>
+<script src="${req.contextPath}/assets/bootstrap/js/sco.modal.js"></script>
+<script src="${req.contextPath}/assets/bootstrap/js/sco.confirm.js"></script>
+<script src="${req.contextPath}/assets/bootstrap/js/sco.message.js"></script>
+<script src="${req.contextPath}/assets/bootstrap/js/sco.collapse.js"></script>
+<script src="${req.contextPath}/assets/common/public.js"></script>
+<script src="${req.contextPath}/assets/common/strong-table.js"></script>
+<script src="${req.contextPath}/assets/common/clickme.js"></script>
+<script src="${req.contextPath}/assets/lib/laydate/laydate.js"></script>
+
+<!-- 获取左侧菜单数据 -->
+<script type="text/javascript">
+	var contextPath = "/wxadminweb";
+	var date = new Date();
+	var url = contextPath + "/getSession?random="+date.getTime();
+	var params = "";
+	Util.ajax.postJson(url, params, function(data, flag){
+		if(flag && data.returnCode=="0"){
+			//渲染菜单数据
+			var source = $("#menu-template").html();
+			var templet = Handlebars.compile(source);
+			if(flag && data.returnCode=="0"){
+				var htmlStr = templet(data.bean.PRIVILEGES);
+				$("#menuTree").html(htmlStr);
+			}
+		}
+	});
+</script>

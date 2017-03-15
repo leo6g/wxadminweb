@@ -1,0 +1,63 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<input type="hidden" value="$!{moduleId}" id="moduleId"/>
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><a href="javascript:history.go(-1)"><i class="fa iconfont icon-zuojiantou-copy arrow-bt"></i></a>微网站模块信息管理</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        查看模块信息
+                    </div>
+                    <div class="info-item-content">
+                        <table>
+                            <tr>
+                                <td class="t1">模块名称：</td>
+                                <td class="t2" id="name"></td>
+                                <td class="t1">级别：</td>
+                                <td id="levels"></td>
+                            </tr>
+                            <tr>
+                                <td>是否叶子节点：</td>
+                                <td id="leaf"></td>
+                                <td>父级模块：</td>
+                                <td id="parentName"></td>
+                            </tr>
+                            <tr>
+                                <td>模块图标：</td>
+                                <td id="iconPath"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="info-item-box" style="margin-top:20px;" id="articleDiv" style="display:none;">
+                    <div class="info-item-title">
+                        关联文章信息
+                    </div>
+                    <div class="info-item-content">
+                        <table class="wide-table table table-hover border-table align-center-table">
+                            <tr>
+                                <th>文章标题</th>
+                                <th>文章内容</th>
+                            </tr>
+                            <tr>
+								<td id="show-title"></td>
+								<td id="show-content"></td>
+							</tr> 
+                        </table>
+                    </div>
+                </div>
+                <input type="button" class="btn btn-primary" style="margin: 20px 0 0 0" onclick="C.load('${req.contextPath}/weiweb/modules/list')" value="返 回"/>
+             </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-wrapper -->
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/weiweb/modules/view-modules.js"></script>
+<!-- 引入公共底部     -->

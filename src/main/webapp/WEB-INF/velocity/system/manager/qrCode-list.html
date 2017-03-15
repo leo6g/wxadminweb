@@ -1,0 +1,41 @@
+<!-- 引入公共头部    ***********************start**************************** -->
+<!-- 引入公共头部    ***********************end**************************** -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<div class="container">
+		<h4 class="main-title">用户列表</h4>
+		<form id="searchForm">
+			<input type="hidden"  id="edit-id" name="id" value="$!{id}" />
+			<div class="row query-box" style="padding-bottom:20px;margin-bottom: 10px;">
+				<div class="col-xs-5 box-sm">
+					用户帐号：
+					<input class="large" type="text" id="userName" name="userName" value="$!{userName}" placeholder="请输入用户名称" style="width: 200px;"/>
+				</div>
+				<div class="col-xs-2 box-bt">
+					<input type="button" class="btn btn-primary clear-margin mb15" id="searchBtn" value="生成二维码" />
+				</div>
+			</div>
+		</form>
+		<div class="row">
+		</div>
+		<div class="excel-wrap">
+			<!-- 隐藏选中的ID -->
+			<input type="hidden" id="edit-id" name="id" value="" />
+			<table id="listTable" class="table table-hover clickable-table">
+			<tr>
+			<td><img id="qrCode" src="$!{codeImg}"></td>
+			</tr>
+			</table>
+			<div class="page-box" style="width: 97%;margin:0 auto">
+				<input type="hidden" id="currPage" value="1" />
+                <span style="float:left" class="pagination" id="totalNum" ></span>
+                <ul style="float: right;" id="pagination"></ul>
+            </div>
+		</div>
+	</div>
+</div>
+<!-- /.content-wrapper -->
+<!-- 引入公共JS资源文件  -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/system/manager/qrCode-list.js"></script>
+<!-- 引入公共底部     -->

@@ -1,0 +1,100 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <i></i>
+        <h4 class="main-title"><i class="fa iconfont icon-zuojiantou-copy arrow-bt" id="returnBack"></i> 查看微信模板内容</h4>
+        <div class="row query-box" style="margin-bottom: 20px;">
+            <div class="info-wrap">
+                <div class="info-item-box">
+                    <div class="info-item-title">
+                        基本信息
+                    </div>
+                    <div class="info-item-content">
+                        <table>
+                        	<tr>
+                                <td class="t1">文章名称：</td>
+                                <td class="t2" id="name"></td>
+                                <td class="t1">文章类型：</td>
+                                <td id="type"></td>
+                            </tr>
+                            <tr>
+                                <td class="t1">期数：</td>
+                                <td class="t2" id="weeklyNumber"></td>
+                                <td class="t1">发送状态：</td>
+                                <td id="sendState"></td>
+                            </tr>
+                            <tr>
+                                <td>发布日期：</td>
+                                <td id="publishDate"></td>
+                            </tr>
+                            <!-- 隐藏主键 -->
+							<input type="hidden" id="newsTempId" name="newsTempId" value="$!{newsTempId}" />
+							<input type="hidden" id="authState" name="authState" value="$!{authState}"/>
+							<input type="hidden" id="role" value="$!{role}"/>
+                        </table>
+                    </div>
+                    <div class="info-item-content">
+                            <table id="bIZAuthInfoListTable" class="table border-table table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                	</div>
+                	<div class="info-item-content" id="bIZAuthInfoDiv" style="display:none;">
+                       	<form id="addBIZAuthInfoForm">
+                       		<table class="wide-table table">
+		                        <tr>
+		                        	<td style="border: none;">
+		                        		审核结果：
+										<div class="input-wrap" style="width:400px;">
+											<select name="operFlag" id="add-operFlag" class="fluid-input" style="width:400px;">
+												<option value="APPROVED">通过</option>
+		                                    	<option value="REJECTED">驳回</option>
+		                                    </select>
+										</div>
+		                        	</td>
+									<td style="border: none;">
+										审核意见：
+										<div>
+											<textarea id="add-comments" name="comments" style="width:400px;height:100px;"  placeholder="请输入审核意见..."></textarea>
+										</div>
+									</td>
+									<td style="border: none;">
+										<input type="hidden" id="add-prodId" name="prodId" value="$!{newsTempId}"/>
+					                    <input type="hidden" id="add-type" name="type" value="TEMP"/>
+									</td>
+								</tr>
+		                    </table>
+                       	</form>
+                	</div>
+                </div>
+                <center>
+	                <input type="button" class="btn btn-primary" id="okBtn" value="确定" style="display:none;"/>
+	                <input type="button" class="btn btn-primary" id="returnBtn" value="返 回"/>
+            	</center>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="bIZAuthInfo-list-template" type="text/x-handlebars-template">
+	<table class="wide-table">
+		<tr>
+			<th>序号</th>
+			<th>审核人</th>
+			<th>审核状态</th>
+			<th>审核意见</th>
+			<th>审核时间</th>
+		</tr>
+	  {{#each this}}
+		 <tr>
+			<td>{{ORACLESTART}}</td>
+            <td>{{checkName}}</td>
+			<td>{{transformat operFlag}}</td>
+            <td>{{comments}}</td>
+            <td>{{createTime}}</td>
+          </tr>
+	  {{/each}}
+	</tbody>
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/weixin/look-article.js"></script>

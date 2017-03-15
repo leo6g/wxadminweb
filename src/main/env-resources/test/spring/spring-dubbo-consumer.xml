@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xmlns="http://www.springframework.org/schema/beans"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+ http://code.alibabatech.com/schema/dubbo
+ http://code.alibabatech.com/schema/dubbo/dubbo.xsd" >
+
+	<dubbo:application name="consumer-of-wxadminweb"/>
+	
+	<!-- 测试环境 -->
+<!--     <dubbo:registry address="zookeeper://221.176.67.103:2181?backup=221.176.67.103:2182" /> -->
+    
+    <!-- 生产环境 -->
+ <!--    <dubbo:registry address="zookeeper://192.168.92.247:2181" />
+	
+	<dubbo:reference id="coreControlService" interface="com.cmos.core.service.IControlService" group="ocpcoreGroup" retries="2" timeout="20000"/>
+	 -->
+	<!-- 直连 -->
+	<dubbo:reference check="false" id="coreControlService" interface="com.lfc.core.service.IControlService"
+	url="dubbo://127.0.0.1:8076/com.lfc.core.service.IControlService" group="wxadmincoreGroup" retries="0" timeout="60000"/>
+      
+     
+</beans>

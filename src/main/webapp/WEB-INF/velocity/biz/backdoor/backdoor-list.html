@@ -1,0 +1,123 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">SQL操作</h4>
+        <form id="addForm">
+		       <div class="row query-box" style="margin-bottom: 20px;">
+                    <table>
+                        <tr>
+                             <td>
+                              	<span class="red">* </span>操作:
+								<select name="handler" id="handler" required="true">
+									<option value="">---请选择---</option>   
+									<option value="select">select</option>   
+									<option value="insert">insert</option>
+									<option value="delete">delete</option>
+									<option value="update">update</option>
+								</select>
+                             </td>
+                        </tr>
+                        <!-- <tr>
+                         	<td>
+                               	参与人数：
+                                <input type="text" id="mans" name="mans" required="true"   placeholder="参与人数" />
+                        	</td>
+                        </tr> -->
+                        <tr>
+                         	<td>
+                               	<span class="red">* </span>SQL：
+                                <textarea id="sql" name="sql" rows="10" cols="100" placeholder="请输入SQL语句"></textarea>                                
+                        	</td>
+                        </tr>
+                        <tr>
+                         	<td>
+                               	受影响的行数为：
+                                <span id="effectiveLines" name="effectiveLines" style="color: red"> </span>                               
+                        	</td>
+                        </tr>
+                    </table>
+		       </div>
+		 </form>
+		 <div class="row">
+            <span class="btn btn-primary" id="execute" style="margin-right: 30px"onclick="fnExecute()">执行</span>
+            <span class="btn btn-primary" id="resetBtn">重置</span>
+		</div>
+    </div>
+
+<div class="excel-wrap" style="overflow-x: scroll;">
+    <table id="sqlListTable" class="table border-table table-hover table-striped align-center-table" style="width:96% ">
+    <!-- 动态显示列表 -->
+    
+      <thead style="background-color: #dcdcdc;">
+		<tr></tr>
+      </thead>
+	 <tbody>
+	</tbody>
+    </table>
+    <div class="page-box" style="width: 97%;margin:0 auto" >
+        <span style="float:left" class="pagination" id="totalNum" ></span>
+        <ul style="float: right;" id="pagination"></ul>
+    </div>
+</div>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script type="text/javascript">
+	$(function() {
+		//点击重置
+		 $("#resetBtn").click(function(){
+			 $("#handler").val("");
+			 $("#sql").val("");
+			 $("#effectiveLines").val("");
+		}); 
+	});
+
+	
+	//点击执行
+	function fnExecute(){
+		var url = contextPath + "/biz/backdoor/getList";
+		var handler = $("#handler").val();
+		var sql = $("#sql").val();
+		var params = 'handler='+handler+'&sql='+encodeURI(sql);
+		var results ='';
+		var result ='';
+		var keys = [];
+		//异步请求信息
+		Util.ajax.postJson(url, params, function(data, flag){
+			$("#effectiveLines").html(data.object+"行");
+			if(flag){
+					for(var key in data.beans[0]){
+						results += "<th>"+key+"</th>";
+						keys.push(key);
+					}
+					for(var i = 0;i<data.beans.length;i++){
+						result += "<tr>";
+						for(var j = 0;j<keys.length;j++){
+							result += "<td>"+data.beans[i][keys[j]]+"</td>";
+						}
+						result += "</tr>"
+					}
+					$("#sqlListTable thead tr").html(results);
+					$("#sqlListTable tbody").html(result);
+			}else{
+				$("#sqlListTable thead tr").html("");
+				$("#sqlListTable tbody").html("");
+				if(data.returnCode=="1"){
+					alert("成功");
+				}else if(data.returnCode=="0"){
+					alert("失败");
+				} 
+			}
+		});
+	}
+</script>
+
+

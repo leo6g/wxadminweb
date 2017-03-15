@@ -1,0 +1,240 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="container">
+        <h4 class="main-title">存贷款利率信息管理</h4>
+         <form id="queryForm">
+			<div class="row query-box">
+				<div class="col-xs-5 box-sm">
+					类型：
+					<select id="queryType" name="type"  style="width:60% ; height: 27px;">   
+								        <option value="">---请选择---</option>   
+								        <option value="loan" style="color:black;">贷款</option>   
+								        <option value="deposit" style="color:black;">存款</option>
+					</select>
+				</div>
+				<div class="col-xs-5 box-md">
+					子类型：
+					<select id="querySubType" name="subType" style="width:60% ; height: 27px;" onchange="changeColor()">   
+					</select>
+				</div>
+				<div class="col-xs-2 box-bt">
+
+
+				</div>
+			</div>
+		</form>
+		<div class="row" style="height:54px; margin-top: -3px;">
+			<input type="button" class="btn btn-primary clear-margin mb15" style="margin-top: 14px; margin-right: 10px;" id="querySubmit" value="查 询"/>
+			<span class="btn btn-primary" data-toggle="modal" data-target="#myModal" style=" margin-right: 10px;">新增</span>
+            <span class="btn btn-primary" id="editBIZInterestRateBtn" data-toggle="modal" data-target="#myModal1"  style=" margin-right: 10px;">编辑</span>
+            <span class="btn btn-primary" id="delBIZInterestRateBtn" 	>删除</span>
+			<input type="reset" class="btn btn-primary clear-margin ml10 mb15" id="resetBtn" value="重置" style="margin-top: 14px;"/>
+		</div>
+        <div class="excel-wrap" style="margin-bottom: 20px;">
+            <div id="demo"></div>
+            <div class="info-wrap">
+                <div style="margin-top: 10px;">
+                    <div class="info-item-box fl" style="width:100%;min-height: 515px;">
+                        <div class="info-item-title">
+                            存贷款利率信息
+                        </div>
+                        <div class="info-item-content">
+                            <table id="bIZInterestRateListTable" class="table border-table table-striped table-hover align-center-table" style="width:96%">
+                            <!-- 动态显示列表 -->
+                            </table>
+                            <div class="page-box" style="width: 97%;margin:0 auto" >
+                                <span style="float:left" class="pagination" id="totalNum" ></span>
+                                <ul style="float: right;" id="pagination"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="addBIZInterestRateForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加存贷款利率信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+						<tr>
+							<td style="border: none;">
+								类型：
+								<div class="input-wrap">
+									<select id="type" name="type"  class="fluid-input" required>   
+								        <option value="">---请选择---</option>   
+								        <option value="loan" style="color:black;">贷款</option>   
+								        <option value="deposit" style="color:black;">存款</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								子类型：
+								<div class="input-wrap">
+									<select id="subType" name="subType" class="fluid-input" required></select>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								存贷款期限(月)：
+								<div class="input-wrap">
+									<input type="text" id="period" name="period" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								利率(%)：
+								<div class="input-wrap">
+									<input type="text" id="rate" name="rate" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								存贷款期限中文描述：
+								<div class="input-wrap">
+									<input type="text" id="periodCn" name="periodCn" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="saveBIZInterestRateBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form id="editBIZInterestRateForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑存贷款利率信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="info-item-content">
+                    <table class="wide-table table">
+						<tr>
+							<td style="border: none;">
+								类型：
+								<div class="input-wrap">
+									<select id="edit-type" name="type" class="fluid-input" required>   
+								        <option value="">---请选择---</option>   
+								        <option value="loan">贷款</option>   
+								        <option value="deposit">存款</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+                        <tr>
+							<td style="border: none;">
+								子类型：
+								<div class="input-wrap">
+									<select id="edit-subType" name="subType" class="fluid-input" required></select>
+									<!-- <input type="text" id="edit-subType" name="subType" value="" class="fluid-input" /> -->
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								存贷款期限(月)：
+								<div class="input-wrap">
+									<input type="text" id="edit-period" name="period" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								利率(%)：
+								<div class="input-wrap">
+									<input type="text" id="edit-rate" name="rate" value="" class="fluid-input" required/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="border: none;">
+								存贷款期限中文描述：
+								<div class="input-wrap">
+									<input type="text" id="edit-periodCn" name="periodCn" value="" class="fluid-input" />
+								</div>
+							</td>
+						</tr>
+						<!-- 隐藏主键 -->
+						<input type="hidden" id="edit-rateId" name="rateId" value="" />
+						
+                	</table>
+                 </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" id="edit-saveBIZInterestRateBtn">保存</span>
+                <span type="button" class="btn"  data-dismiss="modal">取消</span>
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<!-- 公共提示弹窗 -->
+<div id="alert-info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="alert-info-content" ></div>
+  </div>
+</div>
+
+<script id="bIZInterestRate-list-template" type="text/x-handlebars-template">
+	<tbody>
+		<thead style="background-color: #dcdcdc;">
+			<tr>
+				<th>序号</th>
+				<th>类型</th>
+				<th>子类型</th>
+				<th>存贷款期限(月)</th>
+				<th>利率(%)</th>
+				<th>存贷款期限中文描述</th>
+				<th>创建时间</th>
+				<th style="display:none">null</th>
+			</thead>
+		</tr>
+	  {{#each this}}
+		<tr>
+        	<td>{{ORACLESTART}}</td>
+			<td>{{transformat type}}</td>
+			<td style="display:none">{{subType}}</td>
+			<td>{{subTypeName}}</td>
+			<td>{{period}}</td>
+			<td>{{rate}}</td>
+			<td>{{periodCn}}</td>
+			<td>{{createTime}}</td>
+			<td style="display:none">{{rateId}}</td>
+			
+    	</tr> 
+	  {{/each}}
+	</tbody>
+</script>
+<script id="subType-template" type="text/x-handlebars-template">
+	<option value = "">---请选择---</option>
+	{{#each this}}
+		<option value = {{subType}}>{{subTypeName}}</option>
+	{{/each}}
+</script>
+<!-- /.content-wrapper -->
+<!-- 功能模块JS文件  -->
+<script src="${req.contextPath}/assets/js/biz/interestrate/interestrate-list.js"></script>
+
+

@@ -1,0 +1,430 @@
+/*用户管理部分*/
+
+html,
+body {
+	background: white;
+	font-family: "微软雅黑";
+}
+input {
+	font-family: "微软雅黑" !important;
+}
+html,
+body,
+div,
+img {
+	margin: 0;
+	padding: 0;
+}
+
+img {
+	border: 0;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+input {
+	outline: none;
+}
+
+.clear:after {
+	content: " ";
+	clear: both;
+	visibility: hidden;
+	display: block;
+}
+
+/* .user {
+	width: 1035px;
+} */
+
+
+/*用户管理上部公共部分*/
+
+.user-sign {
+	width: 100%;
+	font-weight: bold;
+	/*background: red;*/
+}
+
+
+/*用户管理字体*/
+
+.user-sign li:nth-child(1) {
+	padding: 15px 0px;
+	/* padding-left: 30px; */
+	font-size: 16px;
+}
+
+
+/*已关注和黑名单字体部分*/
+
+.user-sign li:nth-child(2) {
+	padding-bottom: 13px;
+	border-bottom: 1px solid #E0E3E8;
+	position: relative;
+}
+
+.user-sign li:nth-child(2) span {
+	padding: 0px 37px;
+	font-size: 14px;
+	padding-bottom: 13px;
+}
+
+.user-sign li:nth-child(2) .line {
+	position: absolute;
+	left: 0;
+	top: 16px;
+	padding: 0px 60px;
+	padding-bottom: 13px;
+	border-bottom: 4px solid #2E8F6E;
+}
+
+
+/*用户昵称*/
+
+.user-sign .userSign-name {
+	width: 920px;
+	padding: 15px 0px;
+}
+
+.userSign-name .username-left {
+	float: left;
+}
+
+.username-left input,
+.username-left span {
+	float: left;
+}
+
+.username-left input {
+	border-style: none;
+	text-indent: 15px;
+	width: 358px;
+	height: 35px;
+	border: 1px solid #E0E3E8;
+	font-size: 14px;
+}
+
+.username-left span {
+	display: block;
+	width: 37px;
+	height: 33px;
+	text-align: center;
+	line-height: 33px;
+	border: 1px solid #E0E3E8;
+	border-left: 0px;
+	cursor: pointer;
+}
+
+.iconfont {
+	font-size: 37px!important;
+	color: #E0E3E8;
+}
+
+.username-right {
+	float: right;
+	margin-right: 4px;
+	display: block;
+	height: 35px;
+	width: 85px;
+	background: #2E8F6E;
+	text-align: center;
+	line-height: 35px;
+	border-radius: 6%;
+	color: white;
+}
+.username-right2 {
+	float: right;
+	margin-right: 4px;
+	display: block;
+	height: 35px;
+	width: 85px;
+	background: #2E8F6E;
+	text-align: center;
+	line-height: 35px;
+	border-radius: 6%;
+	color: white;
+}
+.username-delete {
+	float: right;
+	margin-right: 4px;
+	display: block;
+	height: 35px;
+	width: 85px;
+	background: #ff0000;
+	text-align: center;
+	line-height: 35px;
+	border-radius: 6%;
+	color: white;
+}
+.username-update {
+	float: right;
+	margin-right: 4px;
+	display: block;
+	height: 35px;
+	width: 85px;
+	background: #008040;
+	text-align: center;
+	line-height: 35px;
+	border-radius: 6%;
+	color: white;
+}
+
+/*整合部分*/
+
+.user-management-user {
+	width: 958px;
+	margin: 0 16px;
+	height: 590px;
+	margin-left: 40px;
+	border-top: 1px solid #E0E3E8;
+}
+
+.user-left {
+	width: 77%;
+	float: left;
+	border-bottom: 1px solid #E0E3E8;
+}
+
+.user-right {
+	width: 19%;
+	border: 1px solid #E0E3E8;
+	float: left;
+	border-top-width: 0;
+}
+
+.user-left,
+.user-right {
+	height: 470px;
+}
+
+.user-left>div>p,
+.user-left>div>div>input,
+.user-list-l>p,
+.user-list-r,
+.user-right>p {
+	font-size: 16px;
+	color: #2E2E38;
+}
+
+.user-left div p {
+	height: 44px;
+	line-height: 44px;
+	margin: 0;
+}
+.user-management-user .user-left{
+	border-left: 1px solid #E0E3E8;
+}
+.user-left .user-all div {
+	height: 56px !important;
+	width: inherit;
+	border-bottom: 1px solid #E0E3E8;
+	background: #F9FAFC;
+}
+
+.user-left div p,
+.user-left div div input:first-child {
+	margin-left: 16px;
+}
+
+.user-left div div input:first-child {
+	margin-right: 10px;
+}
+
+.user-left .user-all div input {
+	margin-top: 15px;
+	vertical-align: middle;
+	line-height: 26px;
+	height: 26px;
+}
+
+.label-label {
+	padding: 0 18px ;
+	margin-left: 23px;
+
+}
+.label-black {
+	padding: 0 18px ;
+	margin-left: 23px;
+
+}
+.label-label,.blacklist,.label-black{
+	background: #E7E6EB;
+	border: 1px solid #E0E3E8;
+}
+.blacklist {
+	padding: 0 10px !important;
+	margin-left: 20px;
+
+	
+}
+input[type="checkbox"]{
+
+}
+.user-list {
+	height: 68px;
+	border-bottom: 1px solid #E0E3E8;
+	position: relative;
+	display:inline;
+}
+
+.user-list div {
+	padding-top: 7px;
+	position: relative;
+}
+.user-list div span:last-child{
+	color:#9090a5;
+}
+.user-list div img {
+	width: 54px;
+	height: 54px;
+	vertical-align: top;
+}
+
+.user-list div span {
+	display: block;
+	position: absolute;
+	left: 122px;
+	top: 10px;
+}
+
+.user-list div span:last-of-type {
+	top: 40px;
+}
+
+.user-left .user-list p {
+	margin-left: 620px;
+	margin-top: -43px;
+	height: 30px;
+	width: 94px;
+	border: 1px solid #E0E3E8;
+	line-height: 30px;
+	text-align: center;
+}
+
+.user-right p {
+	margin: 0;
+	height: 42px;
+	line-height: 42px;
+	text-indent: 50px;
+	border-bottom: 1px solid #E0E3E8;
+}
+
+.user-right {
+	border-bottom: 0px solid #E0E3E8;
+}
+.selected{
+	background: #F9FAFC;
+}
+.user-black-list {
+	display: none;
+}
+.checkbox{
+	position: relative;
+	top: 8px;
+	display: inline-block;
+}
+
+/*是否移除黑名单*/
+
+.remove-blacklist {
+	padding-left: 0px;
+	width: 635px;
+	height: 248px;
+	border: 1px solid #E0E3E8;
+	font-size:16px ;
+	position: absolute;
+	left:390px;
+	background: white;
+	display: none;
+	z-index: 9999;
+}
+
+.remove-blacklist img {
+	height: 248px;
+	width: 248px;
+	float: left;
+}
+
+.remove-blacklist .remove-blacklist-txt {
+	width: 350px;
+	float: left;
+	margin-left: 17px;
+	border-bottom: 1px solid #E0E3E8;
+}
+
+.remove-blacklist-person {
+	font-size: 20px;
+	width: 217px;
+	margin-top: 30px;
+	display: inline-block;
+}
+
+.remove-blacklist-btn {
+	display: inline-block;
+	width: 122px;
+	height: 28px;
+	border: 1px solid #E0E3E8;
+	line-height: 28px;
+	text-align: center;
+}
+
+.remove-data {
+	padding-top: 5px;
+	padding-right: 20px;
+	float: right;
+}
+
+.remove-info p span em {
+	font-style: normal;
+}
+.modif-remark{
+	position: absolute;
+	left: -5px;
+	cursor: pointer;
+}
+.alert-blackname1{
+	display: block;
+	z-index: 1000000;
+	position: absolute;
+}
+.user-management-user {
+	padding: 0;
+}
+.disableBtn {
+	color:#9090a5 !important;
+}
+.mask {
+	position: absolute;
+	top: 0px;
+	filter: alpha(opacity = 60);
+	background-color: #777;
+	z-index: 1002;
+	left: 0px;
+	opacity: 0.5;
+	-moz-opacity: 0.5;
+	display: none;
+}
+.dialog { 
+	text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+    background-color: #fff;
+    border: 5px solid rgba(0,0,0, 0.4);
+    height: 30px;
+    left: 50%;
+    margin: -30px 0 0 -30px;
+    padding: 1px;
+    position: fixed !important;
+    position: absolute;
+    top: 50%;
+    width: 200px;
+    z-index: 5;
+    border-radius: 5px;
+} 
